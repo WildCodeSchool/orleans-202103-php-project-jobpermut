@@ -1,6 +1,21 @@
 @import 'variables.scss';
+@import '~bootstrap/scss/bootstrap';
+
+@font-face{
+    font-family: 'Croogla';
+    src: url(../fonts/Croogla4F.ttf);
+}
 
 body {
-    background-color: $wild-color;
-    color: $light;
+    background-color: $light;
+    color: $dark;
+    font-family: 'roboto';
+}
+
+h1, h2, h3 {
+    font-family: 'Croogla';
+}
+
+p {
+    font-size: $font-size-p;
 }
