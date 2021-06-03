@@ -2,23 +2,19 @@
 @import "~bootstrap/scss/bootstrap";
 
 .jumbo_header{
-background-color : $light;
-background-image: url('../images/logo_header.png');
-height: 50vh;
-background-repeat: no-repeat;
-background-position: center; 
-text-align: center;
-}
-
-.lead_header{
-    font-size: 3em;
+    background-color : $light;
+    background-image: url('../images/logo_header.png');
+    height: 50vh;
+    background-repeat: no-repeat;
+    background-position: center; 
+    text-align: center;
 }
 
 .jumbo_banner{
     background-color : $dark;
 }
-.logo_banner{
-    background-color : $dark;
-    display: flex;
-    justify-content: space-around;
+
+.logo_banner img{
+    padding: 1em;
+    margin: 2em;
 }
