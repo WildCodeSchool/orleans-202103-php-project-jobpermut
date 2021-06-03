@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 $height: 100px;
 $font-size-navbar: 1.3em;
@@ -14,10 +14,12 @@ $font-size-navbar: 1.3em;
 
     .navbar-toggler {
         border: none;
-
-        &:default {
-            box-shadow: none;
-        }
     }
 
+    .navbar-toggler:focus,
+    .navbar-toggler:active,
+    .navbar-toggler-icon:focus {
+        outline: none;
+        box-shadow: none;
+    }
 }
