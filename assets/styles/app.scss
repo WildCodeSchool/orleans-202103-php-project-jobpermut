@@ -1,19 +1,21 @@
-@import 'variables.scss';
-@import '~bootstrap/scss/bootstrap';
+@import "variables";
+@import "~bootstrap/scss/bootstrap";
 
-@font-face{
-    font-family: 'Croogla';
-    src: url(../fonts/Croogla4F.ttf);
+@font-face {
+    font-family: "Croogla";
+    src: url('../fonts/Croogla4F.ttf');
 }
 
 body {
     background-color: $light;
     color: $dark;
-    font-family: 'roboto';
+    font-family: "roboto";
 }
 
-h1, h2, h3 {
-    font-family: 'Croogla';
+h1,
+h2,
+h3 {
+    font-family: "Croogla";
 }
 
 p {
