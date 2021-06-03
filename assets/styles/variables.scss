@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Croogla';
+    src: url('../fonts/Croogla4F.ttf');
+}
+
 $primary: #00636f;
 $secondary: #ced3d1;
 $success: #6faf7a;
@@ -9,3 +14,7 @@ $dark: #1b2630;
 $white: #ffffff;
 
 $font-size-p: 1em;
+
+$title-font: 'Croogla';
+$font-p: 'roboto';
+
