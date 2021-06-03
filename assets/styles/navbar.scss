@@ -1,0 +1,14 @@
+@import "variables.scss";
+
+$height: 100px;
+$font-size-navbar: 1.3em;
+
+.navbar {
+    font-size: $font-size-navbar;
+    height: $height;
+    background-color: white !important;
+    font-family: "Croogla";
+    .container-fluid {
+        height: $height;
+    }
+}
