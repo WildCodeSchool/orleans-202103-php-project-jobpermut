@@ -1,0 +1,15 @@
+@import 'variables';
+
+$height: 100px;
+$font-size-navbar: 1.3em;
+
+.navbar {
+    font-family: $title-font;
+    font-size: $font-size-navbar;
+    height: $height;
+
+    .container-fluid {
+        height: $height;
+    }
+
+}
