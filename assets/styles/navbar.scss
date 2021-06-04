@@ -14,11 +14,13 @@
 
     .navbar-toggler {
         border: 0;
+
         &:focus,
         &:active,
         .navbar-toggler-icon {
             box-shadow: none;
             outline: none;
+
             &:focus {
                 box-shadow: none;
                 outline: none;
@@ -33,6 +35,7 @@
 
     a {
         transition: .5s ease-out;
+
         &:hover {
             color: $warning;
             filter: brightness(0%);
