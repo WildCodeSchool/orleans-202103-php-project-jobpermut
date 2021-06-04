@@ -1,10 +1,21 @@
 @import 'variables';
 
 footer {
+    font-family: $font-p;
+    font-size: $font-size-p;
+
     a {
         text-decoration: none;
         &:hover {
             text-decoration: underline;
         }
+    }
+
+    .fab {
+        color : $secondary;
+        background-color: $primary;
+        border-radius: 50% 50%;
+
+        padding:  3px;
     }
 }
