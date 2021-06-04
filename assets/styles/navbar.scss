@@ -1,9 +1,9 @@
 @import "variables";
 
-$height: 100px;
-$font-size-navbar: 1.3em;
-
 .navbar {
+    $height: 100px;
+    $font-size-navbar: 1.3em;
+
     font-family: $title-font;
     font-size: $font-size-navbar;
 
@@ -21,5 +21,19 @@ $font-size-navbar: 1.3em;
     .navbar-toggler-icon:focus {
         outline: none;
         box-shadow: none;
+    }
+
+    .fa-bars {
+        color: $primary;
+        font-size: 40px;
+    }
+
+    a {
+        transition: all 0.5s ease-out;
+        &:hover {
+            color: $warning;
+            filter: brightness(0%);
+            transition: all 0.5s ease-out;
+        }
     }
 }
