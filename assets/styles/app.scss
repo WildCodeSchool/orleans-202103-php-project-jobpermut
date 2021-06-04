@@ -1,6 +1,18 @@
-@import 'variables.scss';
+@import 'variables';
+@import '~bootstrap/scss/bootstrap';
 
 body {
-    background-color: $wild-color;
-    color: $light;
+    background-color: $light;
+    color: $dark;
+    font-family: $font-p;
+}
+
+h1,
+h2,
+h3 {
+    font-family: $title-font;
+}
+
+p {
+    font-size: $font-size-p;
 }
