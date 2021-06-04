@@ -3,7 +3,8 @@
 
 header {
     img {
-        width: 700px;
+        $width: 700px;
+        width: $width;
     }
 
     .banner-icons {
@@ -12,12 +13,10 @@ header {
 
         .card-banner {
             $width: 300px;
-
             width: $width;
 
             .title-icons {
                 $font-size: 1.1em;
-
                 font-weight: bold;
                 font-family: $font-p;
                 font-size: $font-size;
@@ -25,13 +24,11 @@ header {
 
             i {
                 $font-size: 3em;
-
                 font-size: $font-size;
             }
 
             .txt-banner {
                 $font-weight: 300;
-
                 font-weight: $font-weight;
             }
         }
