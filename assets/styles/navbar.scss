@@ -29,17 +29,20 @@
     }
 
     .fa-bars {
+        $font-size: 40px;
         color: $primary;
-        font-size: 40px;
+        font-size: $font-size;
     }
 
     a {
-        transition: .5s ease-out;
+        $duration: .5s;
+        transition: $duration ease-out;
 
         &:hover {
+            $brightness: 0%;
             color: $warning;
-            filter: brightness(0%);
-            transition: .5s ease-out;
+            filter: brightness($brightness);
+            transition: $duration ease-out;
         }
     }
 }
