@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .navbar {
     $height: 100px;
@@ -13,14 +13,17 @@
     }
 
     .navbar-toggler {
-        border: none;
-    }
-
-    .navbar-toggler:focus,
-    .navbar-toggler:active,
-    .navbar-toggler-icon:focus {
-        outline: none;
-        box-shadow: none;
+        border: 0;
+        &:focus,
+        &:active,
+        .navbar-toggler-icon {
+            box-shadow: none;
+            outline: none;
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        }
     }
 
     .fa-bars {
@@ -29,11 +32,11 @@
     }
 
     a {
-        transition: all 0.5s ease-out;
+        transition: .5s ease-out;
         &:hover {
             color: $warning;
             filter: brightness(0%);
-            transition: all 0.5s ease-out;
+            transition: .5s ease-out;
         }
     }
 }
