@@ -1,28 +1,28 @@
-@import 'variables.scss';
+@import "variables.scss";
 @import "~bootstrap/scss/bootstrap";
 
-$background_size:70%;
+$background_size: 70%;
 $header_height: 50vh;
 $header_width: 100%;
 $spacing_logo: 1em;
 $logo_height: 20vh;
 
-.jumbo_header{
-    background-color : $light;
-    background-image: url('../images/logo_header.png');
+.jumbo_header {
+    background-color: $light;
+    background-image: url("../images/logo_header.png");
     background-size: $background_size;
     height: $header_height;
     width: $header_width;
     background-repeat: no-repeat;
-    background-position: center; 
+    background-position: center;
     text-align: center;
 }
 
-.jumbo_banner{
-    background-color : $dark;
+.jumbo_banner {
+    background-color: $dark;
 }
 
-.logo_banner img{
+.logo_banner img {
     max-height: $logo_height;
     width: $header_width;
     margin: $spacing_logo;
