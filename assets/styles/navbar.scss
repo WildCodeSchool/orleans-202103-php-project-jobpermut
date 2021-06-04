@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 $height: 100px;
 $font-size-navbar: 1.3em;
@@ -6,10 +6,20 @@ $font-size-navbar: 1.3em;
 .navbar {
     font-family: $title-font;
     font-size: $font-size-navbar;
-    height: $height;
 
-    .container-fluid {
-        height: $height;
+    .logo-navbar {
+        $width-logo: 220px;
+        width: $width-logo;
     }
 
+    .navbar-toggler {
+        border: none;
+    }
+
+    .navbar-toggler:focus,
+    .navbar-toggler:active,
+    .navbar-toggler-icon:focus {
+        outline: none;
+        box-shadow: none;
+    }
 }
