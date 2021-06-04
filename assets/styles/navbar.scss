@@ -35,7 +35,7 @@
     }
 
     a {
-        $duration: .5s;
+        $duration: 0.5s;
         transition: $duration ease-out;
 
         &:hover {
