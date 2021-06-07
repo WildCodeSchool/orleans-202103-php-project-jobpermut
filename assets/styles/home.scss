@@ -34,3 +34,55 @@ header {
         }
     }
 }
+
+.presentation-container {
+    background-color: $dark;
+    color: $secondary;
+
+    .page-title {
+        margin-top: 0.5em;
+    }
+
+    .page-subtitle {
+        margin-bottom: 1.5em;
+    }
+}
+
+.list {
+    margin-bottom: 1.5em;
+    list-style: none;
+
+    .list-title {
+        font-family: $title-font;
+    }
+
+    .list-subtitle {
+        font-family: $font-p;
+        font-weight: 300;
+    }
+
+    .number {
+        background-color: $white;
+        width: 50px;
+        height: 50px;
+        border-radius: 90px;
+        color: $dark;
+        font-weight: bold;
+        font-size: 25px;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        p {
+            padding: 0;
+            margin: 0;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+}
