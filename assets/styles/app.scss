@@ -8,11 +8,20 @@ body {
 }
 
 h1,
-h2,
-h3 {
+h2 {
     font-family: $title-font;
+}
+
+h3 {
+    font-family: $font-size-p;
+    font-weight: 300;
 }
 
 p {
     font-size: $font-size-p;
+}
+
+.btn {
+    font-family: $title-font;
+    border-radius: 10px;
 }
