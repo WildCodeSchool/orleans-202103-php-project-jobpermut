@@ -1,0 +1,36 @@
+@import 'variables.scss';
+@import 'app.scss';
+
+header {
+    img {
+        $width: 700px;
+        width: $width;
+    }
+
+    .banner-icons {
+        background-color: $dark;
+        color: $light;
+
+        .card-banner {
+            $width: 300px;
+            width: $width;
+
+            .title-icons {
+                $font-size: 1.1em;
+                font-weight: bold;
+                font-family: $font-p;
+                font-size: $font-size;
+            }
+
+            i {
+                $font-size: 3em;
+                font-size: $font-size;
+            }
+
+            .txt-banner {
+                $font-weight: 300;
+                font-weight: $font-weight;
+            }
+        }
+    }
+}
