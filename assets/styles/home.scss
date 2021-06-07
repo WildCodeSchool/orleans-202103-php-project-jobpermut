@@ -17,8 +17,8 @@ header {
 
             .title-icons {
                 $font-size: 1.1em;
-                font-weight: bold;
                 font-family: $font-p;
+                font-weight: bold;
                 font-size: $font-size;
             }
 
@@ -34,7 +34,9 @@ header {
         }
     }
 }
+
 $margin-bot:1.5em;
+
 .presentation-container {
     background-color: $dark;
     color: $secondary;
