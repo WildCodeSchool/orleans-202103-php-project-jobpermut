@@ -1,39 +1,43 @@
-@import 'variables';
+@import "variables";
 
 footer {
     font-family: $font-p;
     font-size: $font-size-p;
+    $fab-width: 36px;
+    $fab-padding: 10px;
+    $fab-border-radius: 50%;
+    $fab-hover-opacity: .7;
+    $fab-hover-transition-duration: .7s;
 
     a {
         text-decoration: none;
-        color : $primary;
+        color: $primary;
         &:hover {
             text-decoration: underline;
-            color : $primary;
+            color: $primary;
         }
     }
 
     .fab {
-        color : $secondary;
+        color: $secondary;
         background-color: $primary;
-        width: 36px;
-        border-radius: 50%;
-        padding:  10px;
+        width: $fab-width;
+        border-radius: $fab-border-radius;
+        padding: $fab-padding;
 
-        
         &:hover {
-            opacity: 0.7;
-            transition-duration: 0.7s
+            opacity: $fab-hover-opacity;
+            transition-duration: $fab-hover-transition-duration;
         }
     }
 
     .title {
         font-family: $title-font;
-        color : $primary;
+        color: $primary;
         font-size: $font-size-p * 1.5;
     }
 
     .paragraph {
-        color : $primary;
+        color: $primary;
     }
 }
