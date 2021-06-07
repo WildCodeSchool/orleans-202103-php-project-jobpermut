@@ -34,7 +34,7 @@ header {
         }
     }
 }
-
+$margin-bot:1.5em;
 .presentation-container {
     background-color: $dark;
     color: $secondary;
@@ -44,12 +44,12 @@ header {
     }
 
     .page-subtitle {
-        margin-bottom: 1.5em;
+        margin-bottom: $margin-bot;
     }
 }
 
 .list {
-    margin-bottom: 1.5em;
+    margin-bottom: $margin-bot;
     list-style: none;
 
     .list-title {
@@ -62,27 +62,31 @@ header {
     }
 
     .number {
+        $size:50px;
+        $spacing:0;
+        $placement: center;
+
         background-color: $white;
-        width: 50px;
-        height: 50px;
+        width: $size;
+        height: $size;
         border-radius: 90px;
         color: $dark;
         font-weight: bold;
         font-size: 25px;
-        margin: 0;
-        padding: 0;
+        margin: $spacing;
+        padding: $spacing;
         display: flex;
-        justify-content: center;
-        align-items: center;
+        justify-content: $placement;
+        align-items: $placement;
 
         p {
-            padding: 0;
-            margin: 0;
-            width: 50px;
-            height: 50px;
+            padding: $spacing;
+            margin: $spacing;
+            width: $size;
+            height: $size;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            justify-content: $placement;
+            align-items: $placement;
         }
     }
 }
