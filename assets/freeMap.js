@@ -3,8 +3,9 @@ require('leaflet');
 // On initialise la latitude et la longitude de Paris (centre de la carte)
 const lat = 48.852969;
 const lon = 2.2;
+// eslint-disable-next-line
+const L = window.L;
 let map = null;
-const { L } = window;
 
 // Fonction d'initialisation de la carte
 function initMap() {
