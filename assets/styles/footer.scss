@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 footer {
     font-family: $font-p;
@@ -8,20 +8,26 @@ footer {
     $fab-border-radius: 50%;
     $fab-hover-opacity: .7;
     $fab-hover-transition-duration: .7s;
+    $font-weight: 300;
+
+    .logo-footer {
+        width: 300px;
+    }
 
     a {
         text-decoration: none;
         color: $primary;
+        font-weight: $font-weight;
+        transition: ease-in-out .4s;
 
         &:hover {
-            text-decoration: underline;
-            color: $primary;
+            color: $dark;
         }
     }
 
     .fab {
-        color: $secondary;
-        background-color: $primary;
+        color: $light;
+        background-color: $warning;
         width: $fab-width;
         border-radius: $fab-border-radius;
         padding: $fab-padding;
@@ -39,6 +45,7 @@ footer {
     }
 
     .paragraph {
+        font-weight: $font-weight;
         color: $primary;
     }
 }
