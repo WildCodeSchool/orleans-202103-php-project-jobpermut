@@ -33,6 +33,8 @@ Encore
      */
     .addEntry('app', './assets/app.js')
 
+    .addEntry('freeMap', './assets/freeMap.js')
+
     .addStyleEntry('home', './assets/styles/home.scss')
 
     .addStyleEntry('navbar', './assets/styles/navbar.scss')

@@ -10,6 +10,11 @@
 	- Acceuil
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('freeMap') }}
+{% endblock %}
+
 {% block body %}
 	<header>
 		<div class="p-5 d-flex flex-column justify-content-center">
@@ -34,4 +39,7 @@
 			</div>
 		</div>
 	</header>
+    <section class = "freeMap">
+        <div id="map"></div>
+    </section>
 {% endblock %}
