@@ -1,75 +1,77 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('home') }}
+	{{ parent() }}
+	{{ encore_entry_link_tags('home') }}
 {% endblock %}
 
 {% block title %}
-    {{ parent() }}
-    - Acceuil
+	{{ parent() }}
+	- Acceuil
 {% endblock %}
 
 {% block body %}
-    <header>
-        <div class="p-5 d-flex flex-column justify-content-center">
-            <img class="m-auto img-fluid" src="{{ asset('build/images/logo_header.png') }}" alt="logo">
-            <a class="btn btn-lg btn-primary m-auto" href="{{ path('home') }}">Découvrir Jobpermut</a>
-        </div>
-        <div class="row m-0 row-cols-1 row-cols-lg-3 py-4 banner-icons d-flex justify-content-center">
-            <div class="col card-banner text-center py-3 mx-3">
-                <i class="fas fa-car mb-3"></i>
-                <p class="title-icons">16,7 Millions de Navetteurs*</p>
-                <p class="mb-0 txt-banner">*Un navetteur est un travailleur qui quitte chaque jour sa ville de domicile pour se rendre à son travail</p>
-            </div>
-            <div class="col card-banner text-center py-3 mx-3">
-                <i class="fas fa-stopwatch mb-3"></i>
-                <p class="title-icons">64 mn / jour</p>
-                <p class="mb-0 txt-banner">Temps moyen Aller/Retour Domicile/Travail</p>
-            </div>
-            <div class="col card-banner text-center py-3 mx-3">
-                <i class="fas fa-map-marked-alt mb-3"></i>
-                <p class="title-icons">3/4 Français</p>
-                <p class="mb-0 txt-banner">Prêts à changer de travail pour se rapprocher de leur domicile</p>
-            </div>
-        </div>
-    </header>
+	<header>
+		<div class="p-5 d-flex flex-column justify-content-center">
+			<img class="m-auto img-fluid" src="{{ asset('build/images/logo_header.png') }}" alt="logo">
+			<a class="btn btn-lg btn-primary m-auto" href="{{ path('home') }}">Découvrir Jobpermut</a>
+		</div>
+		<div class="row m-0 row-cols-1 row-cols-lg-3 py-4 banner-icons d-flex justify-content-center">
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-car mb-3"></i>
+				<p class="title-icons">16,7 Millions de Navetteurs*</p>
+				<p class="mb-0 txt-banner">*Un navetteur est un travailleur qui quitte chaque jour sa ville de domicile pour se rendre à son travail</p>
+			</div>
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-stopwatch mb-3"></i>
+				<p class="title-icons">64 mn / jour</p>
+				<p class="mb-0 txt-banner">Temps moyen Aller/Retour Domicile/Travail</p>
+			</div>
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-map-marked-alt mb-3"></i>
+				<p class="title-icons">3/4 Français</p>
+				<p class="mb-0 txt-banner">Prêts à changer de travail pour se rapprocher de leur domicile</p>
+			</div>
+		</div>
+	</header>
 
-    <section class="testimony p-5" id="#testimony">
-        <h2 class="h1 text-center">Témoignages</h2>
-        <h3 class="h3 text-center">Ils ont essayé Jobpermut et ils ont aimé !</h3>
+	<section class="testimony d-flex flex-column justify-content-center p-lg-5 p-4" id="#testimony">
+		<h2 class="h1 text-center">Témoignages</h2>
+		<h3 class="h3 text-center">Ils ont essayé Jobpermut et ils ont aimé !</h3>
 
-        <div class="d-flex flex-direction-row testimony-container mt-3 row g-4 px-lg-5">
-            <div class="col testimony-card p-5 mx-3">
-                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-                    <div class="ms-3 mb-1 testimony-titles">
-                        <h4 class="m-0">Sophie</h4>
-                        <h5 class="m-0">Comptable</h5>
-                    </div>
-                </div>
-                <p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-            </div>
-            <div class="col testimony-card p-5 mx-3">
-                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-                    <div class="ms-3 mb-1 testimony-titles">
-                        <h4 class="m-0">Sophie</h4>
-                        <h5 class="m-0">Comptable</h5>
-                    </div>
-                </div>
-                <p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-            </div>
-            <div class="col testimony-card p-5 mx-3">
-                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-                    <div class="ms-3 mb-1 testimony-titles">
-                        <h4 class="m-0">Sophie</h4>
-                        <h5 class="m-0">Comptable</h5>
-                    </div>
-                </div>
-                <p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-            </div>
-        </div>
-    </section>
+		<div class="d-flex flex-direction-row testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
+			<div class="col testimony-card p-5 mx-3">
+				<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+					<img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+					<div class="ms-3 mb-1 testimony-titles">
+						<h4 class="m-0 text-warning">Sophie</h4>
+						<h5 class="m-0">Comptable</h5>
+					</div>
+				</div>
+				<p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
+			</div>
+			<div class="col testimony-card p-5 mx-3">
+				<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+					<img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+					<div class="ms-3 mb-1 testimony-titles">
+						<h4 class="m-0 text-warning">Sophie</h4>
+						<h5 class="m-0">Comptable</h5>
+					</div>
+				</div>
+				<p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
+			</div>
+			<div class="col testimony-card p-5 mx-3">
+				<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+					<img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+					<div class="ms-3 mb-1 testimony-titles">
+						<h4 class="m-0 text-warning">Sophie</h4>
+						<h5 class="m-0">Comptable</h5>
+					</div>
+				</div>
+				<p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
+			</div>
+		</div>
+
+		<a href="#loginModal" class="btn btn-lg btn-primary mx-auto">Faîtes comme eux !</a>
+	</section>
 {% endblock %}

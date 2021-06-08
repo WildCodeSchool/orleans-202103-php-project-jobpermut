@@ -21,7 +21,48 @@ p {
     font-size: $font-size-p;
 }
 
-.btn {
+.btn-primary {
+    box-sizing: border-box;
+    appearance: none;
+    border: 2px solid $light;
+    border-radius: .6em;
+    color: $light;
+    line-height: 1;
+    padding: .8em 1.8em;
     font-family: $title-font;
-    border-radius: 10px;
+    border-color: $light;
+    background: {
+        image: linear-gradient(45deg, $light 50%, transparent 50%);
+        position: 100%;
+        size: 400%;
+    }
+    transition: background .5s ease-in-out;
+
+    &:hover {
+        background-position: 0;
+        color: $primary;
+    }
+}
+
+.btn-warning {
+    box-sizing: border-box;
+    appearance: none;
+    border: 2px solid $dark;
+    border-radius: .6em;
+    color: $dark;
+    line-height: 1;
+    padding: .8em 1.8em;
+    font-family: $title-font;
+    border-color: $dark;
+    background: {
+        image: linear-gradient(45deg, $dark 50%, transparent 50%);
+        position: 100%;
+        size: 400%;
+    }
+    transition: background .5s ease-in-out;
+
+    &:hover {
+        background-position: 0;
+        color: $warning;
+    }
 }
