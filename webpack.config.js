@@ -32,7 +32,6 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
-    .addStyleEntry('header', './assets/styles/header.scss')
     .addStyleEntry('navbar', './assets/styles/navbar.scss')
     .addStyleEntry('footer', './assets/styles/footer.scss')
     .addStyleEntry('home', './assets/styles/home.scss')
