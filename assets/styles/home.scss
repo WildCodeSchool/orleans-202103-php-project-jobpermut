@@ -51,8 +51,16 @@ $margin-bot:1.5em;
 }
 
 .list {
+    $outline-spacing: 0;
+
     margin-bottom: $margin-bot;
     list-style: none;
+    padding: $outline-spacing;
+    margin: $outline-spacing;
+
+    .list-text {
+        margin-left: 2em;
+    }
 
     .list-title {
         font-family: $title-font;
@@ -64,8 +72,8 @@ $margin-bot:1.5em;
     }
 
     .number {
-        $size:50px;
-        $spacing:0;
+        $size:80px;
+        $inline-spacing:0;
         $placement: center;
 
         background-color: $white;
@@ -74,16 +82,16 @@ $margin-bot:1.5em;
         border-radius: 90px;
         color: $dark;
         font-weight: bold;
-        font-size: 25px;
-        margin: $spacing;
-        padding: $spacing;
+        font-size: 40px;
+        margin: 1em;
+        padding: $inline-spacing;
         display: flex;
         justify-content: $placement;
         align-items: $placement;
 
         p {
-            padding: $spacing;
-            margin: $spacing;
+            padding: $inline-spacing;
+            margin: $inline-spacing;
             width: $size;
             height: $size;
             display: flex;
