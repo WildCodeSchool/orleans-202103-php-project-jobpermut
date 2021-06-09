@@ -1,11 +1,37 @@
 {% extends 'layout.html.twig' %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('home') }}
+{% endblock %}
+
 {% block title %}
-    {{ parent() }}
-    - Acceuil
+	{{ parent() }}
+	- Acceuil
 {% endblock %}
 
 {% block body %}
-    <h1>Jobpermut</h1>
-    {% include "includes/_header.html.twig" %}
+	<header>
+		<div class="p-5 d-flex flex-column justify-content-center">
+			<img class="m-auto img-fluid" src="{{ asset('build/images/logo_header.png') }}" alt="logo">
+			<a class="btn btn-lg btn-primary m-auto" href="{{ path('home') }}">Découvrir Jobpermut</a>
+		</div>
+		<div class="row m-0 row-cols-1 row-cols-lg-3 py-4 banner-icons d-flex justify-content-center">
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-car mb-3"></i>
+				<p class="title-icons">16,7 Millions de Navetteurs*</p>
+				<p class="mb-0 txt-banner">*Un navetteur est un travailleur qui quitte chaque jour sa ville de domicile pour se rendre à son travail</p>
+			</div>
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-stopwatch mb-3"></i>
+				<p class="title-icons">64 mn / jour</p>
+				<p class="mb-0 txt-banner">Temps moyen Aller/Retour Domicile/Travail</p>
+			</div>
+			<div class="col card-banner text-center py-3 mx-3">
+				<i class="fas fa-map-marked-alt mb-3"></i>
+				<p class="title-icons">3/4 Français</p>
+				<p class="mb-0 txt-banner">Prêts à changer de travail pour se rapprocher de leur domicile</p>
+			</div>
+		</div>
+	</header>
 {% endblock %}
