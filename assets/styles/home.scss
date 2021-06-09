@@ -18,8 +18,8 @@ header {
 
             .title-icons {
                 $font-size: 1.1em;
-                font-weight: bold;
                 font-family: $font-p;
+                font-weight: bold;
                 font-size: $font-size;
             }
 
@@ -39,5 +39,71 @@ header {
 .freeMap {
     #map {
         height: 100vh;
+    }
+}
+
+$margin-bot:1.5em;
+
+.presentation-container {
+    background-color: $dark;
+    color: $secondary;
+
+    .page-title {
+        margin-top: 0.5em;
+    }
+
+    .page-subtitle {
+        margin-bottom: $margin-bot;
+    }
+}
+
+.list {
+    $outline-spacing: 0;
+
+    margin-bottom: $margin-bot;
+    list-style: none;
+    padding: $outline-spacing;
+    margin: $outline-spacing;
+
+    .list-text {
+        margin-left: 2em;
+    }
+
+    .list-title {
+        font-family: $title-font;
+    }
+
+    .list-subtitle {
+        font-family: $font-p;
+        font-weight: 300;
+    }
+
+    .number {
+        $size:80px;
+        $inline-spacing:0;
+        $placement: center;
+
+        background-color: $white;
+        width: $size;
+        height: $size;
+        border-radius: 90px;
+        color: $dark;
+        font-weight: bold;
+        font-size: 40px;
+        margin: 1em;
+        padding: $inline-spacing;
+        display: flex;
+        justify-content: $placement;
+        align-items: $placement;
+
+        p {
+            padding: $inline-spacing;
+            margin: $inline-spacing;
+            width: $size;
+            height: $size;
+            display: flex;
+            justify-content: $placement;
+            align-items: $placement;
+        }
     }
 }
