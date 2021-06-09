@@ -11,15 +11,15 @@
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('freeMap') }}
+    {{ parent() }}
+    {{ encore_entry_script_tags('freeMap') }}
 {% endblock %}
 
 {% block body %}
     <header>
         <div class="p-5 d-flex flex-column justify-content-center">
             <img class="m-auto img-fluid" src="{{ asset('build/images/logo_header.png') }}" alt="logo">
-            <a class="btn btn-lg btn-primary m-auto" href="{{ path('home') }}">Découvrir Jobpermut</a>
+            <a class="btn btn-lg btn-primary m-auto" href="#presentation">Découvrir Jobpermut</a>
         </div>
         <div class="row m-0 row-cols-1 row-cols-lg-3 py-4 banner-icons d-flex justify-content-center">
             <div class="col card-banner text-center py-3 mx-3">
@@ -48,7 +48,7 @@
         <div class="container-fluid presentation-container">
             <div class="row">
                 <div class="text-center">
-                    <h2 class="h1 page-title">
+                    <h2 class="h1 page-title mt-5">
                         JobPermut c'est quoi ?
                     </h2>
                     <h3 class="h3">
