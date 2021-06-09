@@ -1,88 +1,166 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	{{ encore_entry_link_tags('home') }}
+    {{ parent() }}
+    {{ encore_entry_link_tags('home') }}
 {% endblock %}
 
 {% block title %}
-	{{ parent() }}
-	- Acceuil
+    {{ parent() }}
+    - Acceuil
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('freeMap') }}
+    {{ parent() }}
+    {{ encore_entry_script_tags('freeMap') }}
 {% endblock %}
 
 {% block body %}
-	<header>
-		<div class="p-5 d-flex flex-column justify-content-center">
-			<img class="m-auto img-fluid" src="{{ asset('build/images/logo_header.png') }}" alt="logo">
-			<a class="btn btn-lg btn-primary m-auto" href="{{ path('home') }}">Découvrir Jobpermut</a>
-		</div>
-		<div class="row m-0 row-cols-1 row-cols-lg-3 py-4 banner-icons d-flex justify-content-center">
-			<div class="col card-banner text-center py-3 mx-3">
-				<i class="fas fa-car mb-3"></i>
-				<p class="title-icons">16,7 Millions de Navetteurs*</p>
-				<p class="mb-0 txt-banner">*Un navetteur est un travailleur qui quitte chaque jour sa ville de domicile pour se rendre à son travail</p>
-			</div>
-			<div class="col card-banner text-center py-3 mx-3">
-				<i class="fas fa-stopwatch mb-3"></i>
-				<p class="title-icons">64 mn / jour</p>
-				<p class="mb-0 txt-banner">Temps moyen Aller/Retour Domicile/Travail</p>
-			</div>
-			<div class="col card-banner text-center py-3 mx-3">
-				<i class="fas fa-map-marked-alt mb-3"></i>
-				<p class="title-icons">3/4 Français</p>
-				<p class="mb-0 txt-banner">Prêts à changer de travail pour se rapprocher de leur domicile</p>
-			</div>
-		</div>
-	</header>
-    <section class = "freeMap">
+    <header id="home">
+        <div class="p-5 d-flex flex-column justify-content-center">
+            <img class="m-auto img-fluid" src="{{ asset('build/images/logo_header.png') }}" alt="logo">
+            <a class="btn btn-lg btn-primary m-auto" href="#presentation">Découvrir Jobpermut</a>
+        </div>
+        <div class="row m-0 row-cols-1 row-cols-lg-3 py-4 banner-icons d-flex justify-content-center">
+            <div class="col card-banner text-center py-3 mx-3">
+                <i class="fas fa-car mb-3"></i>
+                <p class="title-icons">16,7 Millions de Navetteurs*</p>
+                <p class="mb-0 txt-banner">*Un navetteur est un travailleur qui quitte chaque jour sa ville de domicile pour se rendre à son travail</p>
+            </div>
+            <div class="col card-banner text-center py-3 mx-3">
+                <i class="fas fa-stopwatch mb-3"></i>
+                <p class="title-icons">64 mn / jour</p>
+                <p class="mb-0 txt-banner">Temps moyen Aller/Retour Domicile/Travail</p>
+            </div>
+            <div class="col card-banner text-center py-3 mx-3">
+                <i class="fas fa-map-marked-alt mb-3"></i>
+                <p class="title-icons">3/4 Français</p>
+                <p class="mb-0 txt-banner">Prêts à changer de travail pour se rapprocher de leur domicile</p>
+            </div>
+        </div>
+    </header>
+
+    <section class="freeMap">
         <div id="map"></div>
     </section>
 
-  {% include "includes/_presentation.html.twig" %}
+    <section id="presentation">
+        <div class="container-fluid presentation-container">
+            <div class="row">
+                <div class="text-center">
+                    <h2 class="h1 page-title mt-5">
+                        JobPermut c'est quoi ?
+                    </h2>
+                    <h3 class="h3">
+                        Comment ça marche ?
+                    </h3>
+                </div>
+            </div>
+            <div class="row mt-lg-2 mt-0 mb-lg-0 mb-4 pb-1 pb-lg-3 row g-4 px-lg-5 px-3">
+                <div class="d-flex justify-content-center">
+                    <ol class="p-0">
+                        <li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+                            <div class="mx-md-3 mx-1 number">
+                                <p>1</p>
+                            </div>
+                            <div class="list-text">
+                                <div class="h1 m-0 list-title">Je me rends sur jobpermut.fr</div>
+                                <div class="h3 m-0 text-muted list-subtitle">Puis je rentre mon lieu de domicile et de travail</div>
+                            </div>
+                        </li>
+                        <li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+                            <div class="mx-md-3 mx-1 number">
+                                <p>2</p>
+                            </div>
+                            <div class="list-text">
+                                <div class="h1 m-0 list-title">J'estime le temps passé sur mon trajet
+                                </div>
+                                <div class="h3 m-0 text-muted list-subtitle">J'ai un aperçu des échanges potentiels</div>
+                            </div>
+                        </li>
+                        <li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+                            <div class="mx-md-3 mx-1 number">
+                                <p>3</p>
+                            </div>
+                            <div class="list-text">
+                                <div class="h1 m-0 list-title">Je m'inscris et rentre mes infos personnelles</div>
+                                <div class="h3 m-0 text-muted list-subtitle">Je peux proposer le match à d'autres utilisateurs</div>
+                            </div>
+                        </li>
 
-  	<section class="testimony d-flex flex-column justify-content-center p-lg-5 p-4" id="#testimony">
-		<h2 class="h1 text-center">Témoignages</h2>
-		<h3 class="h3 text-center">Ils ont essayé Jobpermut et ils ont aimé !</h3>
+                        <li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+                            <div class="mx-md-3 mx-1 number">
+                                <p>4</p>
+                            </div>
+                            <div class="list-text">
+                                <div class="h1 m-0 list-title">Je passe en premium</div>
+                                <div class="h3 m-0 text-muted list-subtitle">Je peux valider le match et voir ceux qu'on me propose</div>
+                            </div>
+                        </li>
+                        <li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+                            <div class="mx-md-3 mx-1 number">
+                                <p>5</p>
+                            </div>
+                            <div class="list-text">
+                                <div class="h1 m-0 list-title">Le match est accepté par les deux utilisateurs</div>
+                                <div class="h3 m-0 text-muted list-subtitle">Notre dossier est analysé par l'équipe JobPermut</div>
+                            </div>
+                        </li>
+                        <li class="d-flex justify-content-start align-items-center list mb-2 mb-md-0">
+                            <div class="mx-md-3 mx-1 check">
+                                <p>
+                                    <i class="fas fa-check"></i>
+                                </p>
+                            </div>
+                            <div class="list-text">
+                                <div class="h1 m-0 list-title">Je permut !</div>
+                                <div class="h3 m-0 text-muted list-subtitle">Et réalise de belles économies de temps et d'argent !</div>
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
 
-		<div class="d-flex flex-direction-row testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
-			<div class="col testimony-card p-5 mx-3">
-				<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-					<img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-					<div class="ms-3 mb-1 testimony-titles">
-						<h4 class="m-0 text-warning">Sophie</h4>
-						<h5 class="m-0">Comptable</h5>
-					</div>
-				</div>
-				<p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-			</div>
-			<div class="col testimony-card p-5 mx-3">
-				<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-					<img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-					<div class="ms-3 mb-1 testimony-titles">
-						<h4 class="m-0 text-warning">Sophie</h4>
-						<h5 class="m-0">Comptable</h5>
-					</div>
-				</div>
-				<p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-			</div>
-			<div class="col testimony-card p-5 mx-3">
-				<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-					<img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-					<div class="ms-3 mb-1 testimony-titles">
-						<h4 class="m-0 text-warning">Sophie</h4>
-						<h5 class="m-0">Comptable</h5>
-					</div>
-				</div>
-				<p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-			</div>
-		</div>
+    <section class="testimony d-flex flex-column justify-content-center p-lg-5 p-4" id="testimony">
+        <h2 class="h1 text-center mt-0">Témoignages</h2>
+        <h3 class="h3 text-center">Ils ont essayé Jobpermut et ils ont aimé !</h3>
 
-		<a href="#loginModal" class="btn btn-lg btn-primary mx-auto">Faîtes comme eux !</a>
-	</section>
+        <div class="d-flex flex-direction-row testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
+            <div class="col testimony-card p-5 mx-3">
+                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                    <div class="ms-3 mb-1 testimony-titles">
+                        <h4 class="m-0 text-warning">Sophie</h4>
+                        <h5 class="m-0">Comptable</h5>
+                    </div>
+                </div>
+                <p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
+            </div>
+            <div class="col testimony-card p-5 mx-3">
+                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                    <div class="ms-3 mb-1 testimony-titles">
+                        <h4 class="m-0 text-warning">Sophie</h4>
+                        <h5 class="m-0">Comptable</h5>
+                    </div>
+                </div>
+                <p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
+            </div>
+            <div class="col testimony-card p-5 mx-3">
+                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                    <div class="ms-3 mb-1 testimony-titles">
+                        <h4 class="m-0 text-warning">Sophie</h4>
+                        <h5 class="m-0">Comptable</h5>
+                    </div>
+                </div>
+                <p class="m-0">Je ne connaissais pas Permutjob, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
+            </div>
+        </div>
+
+        <a href="#loginModal" class="btn btn-lg btn-primary mx-auto">Faîtes comme eux !</a>
+    </section>
 
 {% endblock %}

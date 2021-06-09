@@ -40,6 +40,18 @@ header {
     #map {
         height: 100vh;
     }
+
+    .fas {
+        font-size: 25px;
+    }
+
+    .fa-home {
+        color: $warning;
+    }
+
+    .fa-briefcase {
+        color: $primary;
+    }
 }
 
 .testimony {
@@ -88,68 +100,101 @@ header {
     }
 }
 
-$margin-bot:1.5em;
-
 .presentation-container {
+    $margin-bot: 1.5em;
     background-color: $dark;
     color: $secondary;
-
-    .page-title {
-        margin-top: 0.5em;
-    }
+    $font-weight: 300;
 
     .page-subtitle {
         margin-bottom: $margin-bot;
-    }
-}
-
-.list {
-    $outline-spacing: 0;
-
-    margin-bottom: $margin-bot;
-    list-style: none;
-    padding: $outline-spacing;
-    margin: $outline-spacing;
-
-    .list-text {
-        margin-left: 2em;
-    }
-
-    .list-title {
-        font-family: $title-font;
-    }
-
-    .list-subtitle {
         font-family: $font-p;
-        font-weight: 300;
+        font-weight: $font-weight;
     }
 
-    .number {
-        $size:80px;
-        $inline-spacing:0;
-        $placement: center;
+    .list {
+        list-style: none;
 
-        background-color: $white;
-        width: $size;
-        height: $size;
-        border-radius: 90px;
-        color: $dark;
-        font-weight: bold;
-        font-size: 40px;
-        margin: 1em;
-        padding: $inline-spacing;
-        display: flex;
-        justify-content: $placement;
-        align-items: $placement;
+        .list-text {
+            margin-left: 1em;
+        }
 
-        p {
-            padding: $inline-spacing;
-            margin: $inline-spacing;
+        .list-title {
+            font-family: $title-font;
+            font-size: 30px;
+
+            @media screen and (max-width: 768px) {
+                font-size: 24px;
+            }
+        }
+
+        .list-subtitle {
+            font-family: $font-p;
+            font-weight: $font-weight;
+
+            @media screen and (max-width: 768px) {
+                font-size: 20px;
+            }
+        }
+
+        .number {
+            $size: 60px;
+            $inline-spacing: 0;
+            $placement: center;
+
+            background-color: $white;
             width: $size;
             height: $size;
+            border-radius: 90px;
+            border: 2px solid $white;
+            color: $dark;
+            font-weight: bold;
+            font-size: 35px;
+            margin: 1em;
+            padding: $inline-spacing;
             display: flex;
             justify-content: $placement;
             align-items: $placement;
+
+            p {
+                padding: $inline-spacing;
+                margin: $inline-spacing;
+                width: $size;
+                height: $size;
+                display: flex;
+                justify-content: $placement;
+                align-items: $placement;
+            }
+        }
+
+        .check {
+            $size: 60px;
+            $inline-spacing: 0;
+            $placement: center;
+
+            background-color: transparent;
+            width: $size;
+            height: $size;
+            border-radius: 90px;
+            border: 2px solid $white;
+            color: $white;
+            font-weight: bold;
+            font-size: 35px;
+            margin: 1em;
+            padding: $inline-spacing;
+            display: flex;
+            justify-content: $placement;
+            align-items: $placement;
+
+            p {
+                padding: $inline-spacing;
+                margin: $inline-spacing;
+                width: $size;
+                height: $size;
+                display: flex;
+                justify-content: $placement;
+                align-items: $placement;
+            }
         }
     }
 }

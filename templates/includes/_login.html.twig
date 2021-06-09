@@ -1,0 +1,30 @@
+<a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
+    <i class="fas fa-user"></i>
+    Connexion
+</a>
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ path('app_login') }}" method="post">
+                <div class="modal-body">
+                    <label for="inputEmail">Email</label>
+                    <input type="email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+                    <label for="inputPassword">Password</label>
+                    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-lg btn-primary" type="submit">
+                        Connexion
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
