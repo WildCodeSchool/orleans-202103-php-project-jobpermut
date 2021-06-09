@@ -1,9 +1,9 @@
-@import "variables";
-
-$height: 100px;
-$font-size-navbar: 1.3em;
+@import 'variables';
 
 .navbar {
+    $height: 100px;
+    $font-size-navbar: 1.3em;
+
     font-family: $title-font;
     font-size: $font-size-navbar;
 
@@ -13,13 +13,36 @@ $font-size-navbar: 1.3em;
     }
 
     .navbar-toggler {
-        border: none;
+        border: 0;
+
+        &:focus,
+        &:active,
+        .navbar-toggler-icon {
+            box-shadow: none;
+            outline: none;
+
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            }
+        }
     }
 
-    .navbar-toggler:focus,
-    .navbar-toggler:active,
-    .navbar-toggler-icon:focus {
-        outline: none;
-        box-shadow: none;
+    .fa-bars {
+        $font-size: 40px;
+        color: $primary;
+        font-size: $font-size;
+    }
+
+    a {
+        $duration: 0.5s;
+        transition: $duration ease-out;
+
+        &:hover {
+            $brightness: 0%;
+            color: $warning;
+            filter: brightness($brightness);
+            transition: $duration ease-out;
+        }
     }
 }
