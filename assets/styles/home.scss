@@ -93,7 +93,7 @@ header {
     background-color: $dark;
     color: $secondary;
     $font-weight: 300;
-    $font-size:30px;
+    $font-size: 30px;
 
     .page-subtitle {
         margin-bottom: $margin-bot;
@@ -186,7 +186,7 @@ header {
                 width: $size/2;
                 height: $size/2;
             }
-            
+
             p {
                 padding: $inline-spacing;
                 margin: $inline-spacing;
