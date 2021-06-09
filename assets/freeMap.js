@@ -19,7 +19,7 @@ function initMap() {
         center: [48.852969, 2.2],
     }).setView(
         [lat, lon],
-        12,
+        10,
     );
     // Leaflet ne récupère pas les cartes (tiles) sur un serveur par défaut.
     // Nous devons lui préciser où nous souhaitons les récupérer. Ici, thunderforest.com
@@ -29,12 +29,14 @@ function initMap() {
             // Il est toujours bien de laisser le lien vers la source des données
             attribution:
             'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-            minZoom: 12,
-            maxZoom: 12,
+            minZoom: 10,
+            maxZoom: 10,
         },
     ).addTo(map);
-    const homeIcon = L.divIcon({ className: 'fas fa-briefcase' });
-    L.marker([48.8534, 2.3488], { icon: homeIcon }).addTo(map);
+    const workIcon = L.divIcon({ className: 'fas fa-briefcase' });
+    L.marker([48.8534, 2.3488], { icon: workIcon }).addTo(map);
+    const homeIcon = L.divIcon({ className: 'fas fa-home' });
+    L.marker([48.95, 2.8667], { icon: homeIcon }).addTo(map);
 }
 window.onload = function () {
     // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé

@@ -42,7 +42,15 @@ header {
     }
 
     .fas {
-        font-size: 20px;
+        font-size: 25px;
+    }
+
+    .fa-home {
+        color: $warning;
+    }
+
+    .fa-briefcase {
+        color: $primary;
     }
 }
 
