@@ -1,5 +1,6 @@
 @import 'variables.scss';
 @import 'app.scss';
+@import '~leaflet/dist/leaflet.css';
 
 header {
     img {
@@ -32,6 +33,12 @@ header {
                 font-weight: $font-weight;
             }
         }
+    }
+}
+
+.freeMap {
+    #map {
+        height: 100vh;
     }
 }
 

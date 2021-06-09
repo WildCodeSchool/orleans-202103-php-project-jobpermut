@@ -32,6 +32,9 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+
+    .addEntry('freeMap', './assets/freeMap.js')
+
     .addStyleEntry('navbar', './assets/styles/navbar.scss')
     .addStyleEntry('footer', './assets/styles/footer.scss')
     .addStyleEntry('home', './assets/styles/home.scss')
