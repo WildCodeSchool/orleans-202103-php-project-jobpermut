@@ -11,8 +11,8 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('freeMap') }}
+	{{ parent() }}
+	{{ encore_entry_script_tags('freeMap') }}
 {% endblock %}
 
 {% block body %}
@@ -40,7 +40,11 @@
         </div>
     </header>
 
-    <section>
+    <section class="freeMap">
+        <div id="map"></div>
+    </section>
+
+    <section id="#presentation">
         <div class="container-fluid presentation-container">
             <div class="row">
                 <div class="text-center">
