@@ -10,7 +10,13 @@
                     <i class="fas fa-sign-in-alt"></i>
                     Inscription
                 </a>
-                {% include "includes/_login.html.twig" %}
+                {% if app.user %}
+                    <a class="nav-link" href="{{ path('app_logout')}}">
+                        <i class="fas fa-user"></i>
+                        Déconnexion</a>
+                {% else %}
+                    {% include "includes/_login.html.twig" %}
+                {% endif %}
             </div>
         </div>
     </div>
