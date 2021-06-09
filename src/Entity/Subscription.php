@@ -25,12 +25,17 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $cv;
+    private $curriculum;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", length=255, nullable=true)
      */
     private $jobDescription;
+
+    /**
+     * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="subscription", cascade={"persist", "remove"})
+     */
+    private $registeredUser;
 
     public function getId(): ?int
     {
@@ -49,14 +54,14 @@ class Subscription
         return $this;
     }
 
-    public function getCv(): ?string
+    public function getcurriculum(): ?string
     {
-        return $this->cv;
+        return $this->curriculum;
     }
 
-    public function setCv(string $cv): self
+    public function setcurriculum(string $curriculum): self
     {
-        $this->cv = $cv;
+        $this->curriculum = $curriculum;
 
         return $this;
     }
@@ -69,6 +74,28 @@ class Subscription
     public function setJobDescription(?string $jobDescription): self
     {
         $this->jobDescription = $jobDescription;
+
+        return $this;
+    }
+
+    public function getRegisteredUser(): ?RegisteredUser
+    {
+        return $this->registeredUser;
+    }
+
+    public function setRegisteredUser(?RegisteredUser $registeredUser): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($registeredUser === null && $this->registeredUser !== null) {
+            $this->registeredUser->setSubscription(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($registeredUser !== null && $registeredUser->getSubscription() !== $this) {
+            $registeredUser->setSubscription($this);
+        }
+
+        $this->registeredUser = $registeredUser;
 
         return $this;
     }
