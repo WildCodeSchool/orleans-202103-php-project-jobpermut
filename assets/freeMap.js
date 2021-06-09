@@ -10,7 +10,14 @@ let map = null;
 // Fonction d'initialisation de la carte
 function initMap() {
     // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
-    map = L.map('map', { zoomControl: false, scrollWheelZoom: false }).setView(
+    map = L.map('map', {
+        zoomControl: false,
+        scrollWheelZoom: false,
+        dragging: false,
+        tap: false,
+        touchZoom: false,
+        center: [48.852969, 2.2],
+    }).setView(
         [lat, lon],
         12,
     );
@@ -26,6 +33,8 @@ function initMap() {
             maxZoom: 12,
         },
     ).addTo(map);
+    const homeIcon = L.divIcon({ className: 'fas fa-briefcase' });
+    L.marker([48.8534, 2.3488], { icon: homeIcon }).addTo(map);
 }
 window.onload = function () {
     // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
