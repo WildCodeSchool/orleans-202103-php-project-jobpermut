@@ -36,6 +36,7 @@ class Subscription
 
     /**
      * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="subscription", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private RegisteredUser $registeredUser;
 
