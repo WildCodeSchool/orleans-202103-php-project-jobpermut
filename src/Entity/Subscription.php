@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\SubscriptionRepository;
+use DateTimeInterface;
+use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,27 +17,27 @@ class Subscription
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="datetime")
      */
-    private $subscriptionAt;
+    private DateTimeInterface $subscriptionAt;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $curriculum;
+    private string $curriculum;
 
     /**
-     * @ORM\Column(type="text", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $jobDescription;
+    private TextType $jobDescription;
 
     /**
      * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="subscription", cascade={"persist", "remove"})
      */
-    private $registeredUser;
+    private RegisteredUser $registeredUser;
 
     public function getId(): ?int
     {
@@ -54,26 +56,28 @@ class Subscription
         return $this;
     }
 
-    public function getcurriculum(): ?string
+    public function getCurriculum(): ?string
     {
         return $this->curriculum;
     }
 
-    public function setcurriculum(string $curriculum): self
+    public function setCurriculum(string $curriculum): self
     {
         $this->curriculum = $curriculum;
 
         return $this;
     }
 
-    public function getJobDescription(): ?string
+    public function getJobDescription(): ?TextType
     {
         return $this->jobDescription;
     }
 
-    public function setJobDescription(?string $jobDescription): self
+    public function setJobDescription(?TextType $jobDescription): self
     {
-        $this->jobDescription = $jobDescription;
+        if ($jobDescription !== null) {
+            $this->jobDescription = $jobDescription;
+        }
 
         return $this;
     }

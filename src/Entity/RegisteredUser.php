@@ -15,48 +15,53 @@ class RegisteredUser
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $pseudo;
+    private string $pseudo;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $firstname;
+    private string $firstname;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $lastname;
+    private string $lastname;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $phone;
+    private int $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $address;
+    private string $address;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $jobAddress;
+    private string $jobAddress;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $ogr;
+    private int $ogr;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="registeredUser", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $user;
+    private User $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Subscription::class, inversedBy="registeredUser", cascade={"persist", "remove"})
+     */
+    private Subscription $subscription;
 
     public function getId(): ?int
     {
@@ -106,7 +111,9 @@ class RegisteredUser
 
     public function setPhone(?int $phone): self
     {
-        $this->phone = $phone;
+        if ($phone !== null) {
+            $this->phone = $phone;
+        }
 
         return $this;
     }
@@ -155,6 +162,20 @@ class RegisteredUser
     public function setUser(User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getSubscription(): ?Subscription
+    {
+        return $this->subscription;
+    }
+
+    public function setSubscription(?Subscription $subscription): self
+    {
+        if ($subscription !== null) {
+            $this->subscription = $subscription;
+        }
 
         return $this;
     }
