@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\User;
-use Faker\Generator;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
@@ -22,15 +21,14 @@ class UserFixtures extends Fixture
         ],
     ];
 
-    private const MAX_FIXTURES = 10;
+    public const MAX_FIXTURES = 10;
 
     private UserPasswordEncoderInterface $passwordEncoder;
-    private Generator $faker;
 
     public function __construct(UserPasswordEncoderInterface $passwordEncoder)
     {
         $this->passwordEncoder = $passwordEncoder;
-        $this->faker = Factory::create();
+        $this->faker = Factory::create('fr_FR');
     }
 
     public function load(ObjectManager $manager)
@@ -50,6 +48,7 @@ class UserFixtures extends Fixture
                 )
             );
             $manager->persist($user);
+            $this->addReference('user_' . $i, $user);
         }
 
         //for use in demo
