@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
@@ -24,10 +25,12 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
     public const LOGIN_ROUTE = 'app_login';
 
     private UrlGeneratorInterface $urlGenerator;
+    private SessionInterface $session;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator)
+    public function __construct(UrlGeneratorInterface $urlGenerator, SessionInterface $session)
     {
         $this->urlGenerator = $urlGenerator;
+        $this->session = $session;
     }
 
     public function authenticate(Request $request): PassportInterface
@@ -47,9 +50,9 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        dd($request);
-        // For example:
-        return new RedirectResponse($this->urlGenerator->generate('home'));
+        $lastRoute = $this->session->get('last_route');
+        $this->session->remove('last_route');
+        return new RedirectResponse($this->urlGenerator->generate($lastRoute['route'], $lastRoute['params']));
     }
 
     protected function getLoginUrl(Request $request): string
