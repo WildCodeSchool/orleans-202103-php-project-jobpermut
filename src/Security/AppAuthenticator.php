@@ -47,7 +47,7 @@ class AppAuthenticator extends AbstractLoginFormAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-
+        dd($request);
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('home'));
     }
