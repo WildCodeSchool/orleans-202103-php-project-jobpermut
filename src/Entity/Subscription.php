@@ -99,7 +99,9 @@ class Subscription
             $registeredUser->setSubscription($this);
         }
 
-        $this->registeredUser = $registeredUser;
+        if ($registeredUser !== null) {
+            $this->registeredUser = $registeredUser;
+        }
 
         return $this;
     }
