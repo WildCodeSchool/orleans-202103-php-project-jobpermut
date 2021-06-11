@@ -58,11 +58,13 @@ header {
             $font-weight: 300;
             $img-width: 75px;
             $p-font-size: 22px;
+
             p {
                 color: $white;
                 font-family: $font-p;
                 font-weight: $font-weight;
                 font-size: $p-font-size;
+
                 @media screen and (max-width: 768px) {
                     font-size: $p-font-size/1.5;
                 }
@@ -125,7 +127,7 @@ header {
             }
 
             span {
-                color : $warning;
+                color: $warning;
             }
         }
 
