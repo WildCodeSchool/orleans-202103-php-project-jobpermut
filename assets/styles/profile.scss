@@ -1,17 +1,18 @@
-@import 'variables.scss';
-@import 'app.scss';
+@import 'variables';
+@import 'app';
 
 .profile {
     $font-weight-light: 300;
+    $font-size: 1.2em;
 
     border-radius: 30px;
     color: $white;
 
     .profile-header {
         img {
+            height: 75px;
             object-fit: cover;
             width: 75px;
-            height: 75px;
         }
 
         i {
@@ -20,24 +21,24 @@
 
         .profile-titles {
             .h3 {
-                font-weight: $font-weight-light;
                 font-family: $font-p;
+                font-size: $font-size;
+                font-weight: $font-weight-light;
                 font-style: italic;
-                font-size: 1.2em;
             }
         }
     }
 
     .profile-body {
         i {
-            font-size: 1.6em;
             color: $warning;
+            font-size: 1.6em;
         }
 
         p {
+            font-size: $font-size;
             font-family: $font-p;
             font-weight: 400;
-            font-size: 1.2em;
 
             span {
                 font-weight: $font-weight-light;
