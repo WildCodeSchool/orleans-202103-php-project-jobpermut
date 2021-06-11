@@ -8,8 +8,9 @@
     font-size: $font-size-navbar;
 
     .logo-navbar {
-        $width-logo: 220px;
+        $width-logo: 100px;
         width: $width-logo;
+        font-size: 30px;
     }
 
     .navbar-toggler {
@@ -38,11 +39,21 @@
         $duration: 0.5s;
         transition: $duration ease-out;
 
+        img {
+            transition: $duration ease-out;
+        }
+
         &:hover {
-            $brightness: 0%;
+            $brightness: 100%;
             color: $warning;
             filter: brightness($brightness);
             transition: $duration ease-out;
+
+            img {
+                transition: $duration ease-out;
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+            }
         }
     }
 }
