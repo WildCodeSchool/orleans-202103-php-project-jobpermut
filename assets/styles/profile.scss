@@ -10,9 +10,11 @@
 
     .profile-header {
         img {
-            height: 75px;
+            $size: 75px;
+
+            height: $size;
             object-fit: cover;
-            width: 75px;
+            width: $size;
         }
 
         i {
