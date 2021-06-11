@@ -7,9 +7,12 @@ use App\Entity\RegisteredUser;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Generator;
 
 class RegisteredUserFixtures extends Fixture implements DependentFixtureInterface
 {
+    private Generator $faker;
+
     public function __construct()
     {
         $this->faker = Factory::create('fr_FR');
@@ -19,17 +22,19 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
     {
         for ($i = 0; $i < UserFixtures::MAX_FIXTURES; $i++) {
             $registeredUser = new RegisteredUser();
-            $registeredUser->setPseudo($this->faker->unique()->firstName() . $this->faker->randomNumber());
+            $registeredUser->setUsername($this->faker->unique()->firstName() . $this->faker->randomNumber());
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
-            $registeredUser->setPhone($this->faker->randomNumber());
+            $registeredUser->setPhone($this->faker->phoneNumber());
             $registeredUser->setAddress($this->faker->streetAddress());
             $registeredUser->setJobAddress($this->faker->streetAddress());
             $registeredUser->setOgr($this->faker->randomNumber());
             $registeredUser->setUser($this->getReference('user_' . $i));
+            $registeredUser->setSubscription($this->getReference('subscription_' . $i));
 
             $manager->persist($registeredUser);
         }
+
         $manager->flush();
     }
 
@@ -37,6 +42,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
     {
         return [
             UserFixtures::class,
+            SubscriptionFixtures::class,
         ];
     }
 }

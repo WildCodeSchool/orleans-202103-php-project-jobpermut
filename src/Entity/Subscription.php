@@ -32,13 +32,7 @@ class Subscription
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private TextType $jobDescription;
-
-    /**
-     * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="subscription", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private RegisteredUser $registeredUser;
+    private string $jobDescription;
 
     public function getId(): ?int
     {
@@ -69,39 +63,15 @@ class Subscription
         return $this;
     }
 
-    public function getJobDescription(): ?TextType
+    public function getJobDescription(): ?string
     {
         return $this->jobDescription;
     }
 
-    public function setJobDescription(?TextType $jobDescription): self
+    public function setJobDescription(?string $jobDescription): self
     {
         if ($jobDescription !== null) {
             $this->jobDescription = $jobDescription;
-        }
-
-        return $this;
-    }
-
-    public function getRegisteredUser(): ?RegisteredUser
-    {
-        return $this->registeredUser;
-    }
-
-    public function setRegisteredUser(?RegisteredUser $registeredUser): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($registeredUser === null && $this->registeredUser !== null) {
-            $this->registeredUser->setSubscription(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($registeredUser !== null && $registeredUser->getSubscription() !== $this) {
-            $registeredUser->setSubscription($this);
-        }
-
-        if ($registeredUser !== null) {
-            $this->registeredUser = $registeredUser;
         }
 
         return $this;

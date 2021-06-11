@@ -20,11 +20,6 @@ class RegisteredUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $pseudo;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private string $firstname;
 
     /**
@@ -33,9 +28,9 @@ class RegisteredUser
     private string $lastname;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
-    private int $phone;
+    private string $phone;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -59,26 +54,19 @@ class RegisteredUser
     private User $user;
 
     /**
-     * @ORM\OneToOne(targetEntity=Subscription::class, inversedBy="registeredUser", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=Subscription::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private Subscription $subscription;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $username;
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getPseudo(): ?string
-    {
-        return $this->pseudo;
-    }
-
-    public function setPseudo(string $pseudo): self
-    {
-        $this->pseudo = $pseudo;
-
-        return $this;
     }
 
     public function getFirstname(): ?string
@@ -105,12 +93,12 @@ class RegisteredUser
         return $this;
     }
 
-    public function getPhone(): ?int
+    public function getPhone(): ?string
     {
         return $this->phone;
     }
 
-    public function setPhone(?int $phone): self
+    public function setPhone(?string $phone): self
     {
         if ($phone !== null) {
             $this->phone = $phone;
@@ -177,6 +165,18 @@ class RegisteredUser
         if ($subscription !== null) {
             $this->subscription = $subscription;
         }
+
+        return $this;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
