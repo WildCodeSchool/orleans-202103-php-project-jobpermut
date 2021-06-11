@@ -37,8 +37,23 @@ header {
 }
 
 .freeMap {
+
+    form  {
+
+        border-radius: .6em;
+        position: absolute;
+        z-index: 2;
+        left: 100px;
+        top: 1100px;
+
+    }
+
     #map {
+
         height: 100vh;
+        position: relative;
+        z-index: 1;
+
     }
 
     .fas {
