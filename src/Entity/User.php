@@ -40,6 +40,11 @@ class User implements UserInterface
      */
     private DateTimeInterface $createdAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private RegisteredUser $registeredUser;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -129,6 +134,23 @@ class User implements UserInterface
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getRegisteredUser(): ?RegisteredUser
+    {
+        return $this->registeredUser;
+    }
+
+    public function setRegisteredUser(RegisteredUser $registeredUser): self
+    {
+        // set the owning side of the relation if necessary
+        if ($registeredUser->getUser() !== $this) {
+            $registeredUser->setUser($this);
+        }
+
+        $this->registeredUser = $registeredUser;
 
         return $this;
     }

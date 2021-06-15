@@ -1,0 +1,52 @@
+@import 'variables';
+@import 'app';
+
+.profile {
+    $font-weight-light: 300;
+    $font-size: 1.2em;
+
+    border-radius: 30px;
+    color: $white;
+
+    .profile-header {
+        img {
+            $size: 75px;
+
+            height: $size;
+            object-fit: cover;
+            width: $size;
+        }
+
+        i {
+            font-size: 2.5em;
+        }
+
+        .profile-titles {
+            .h3 {
+                font-family: $font-p;
+                font-size: $font-size;
+                font-weight: $font-weight-light;
+                font-style: italic;
+            }
+        }
+    }
+
+    .profile-body {
+        i {
+            color: $warning;
+            font-size: 1.6em;
+        }
+
+        p {
+            font-size: $font-size;
+            font-family: $font-p;
+            font-weight: 400;
+
+            span {
+                font-weight: $font-weight-light;
+                font-style: italic;
+                font-size: 1em;
+            }
+        }
+    }
+}
