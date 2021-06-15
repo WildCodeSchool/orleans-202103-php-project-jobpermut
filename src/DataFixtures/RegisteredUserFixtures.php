@@ -26,8 +26,8 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
             $registeredUser->setPhone($this->faker->phoneNumber());
-            $registeredUser->setAddress($this->faker->streetAddress());
-            $registeredUser->setJobAddress($this->faker->streetAddress());
+            $registeredUser->setAddress($this->faker->city());
+            $registeredUser->setJobAddress($this->faker->city());
             $registeredUser->setOgr($this->faker->randomNumber());
             $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));
