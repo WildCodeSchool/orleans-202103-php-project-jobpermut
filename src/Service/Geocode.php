@@ -2,6 +2,7 @@
 
 namespace App\Service;
 
+use OndraM\CiDetector\Env;
 use Symfony\Component\HttpClient\HttpClient;
 
 class Geocode
@@ -12,8 +13,7 @@ class Geocode
         $client = HttpClient::create();
         $response = $client->request(
             'GET',
-            'https://api.openrouteservice.org/geocode/autocomplete?
-            api_key=5b3ce3597851110001cf6248ecf8b45b3e3f4969a29278100e6e0664&text=' . $city
+            '%env{OPENROUTESERVICE_KEY}%' . $city
         );
 
         $content = $response->toArray();
