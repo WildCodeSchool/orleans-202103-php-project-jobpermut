@@ -23,14 +23,15 @@
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     {{ app.session.set('last_route', {route: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}
                     {% if app.session.get('error') %}
-                        <input type="hidden" class="error"></input>
-                {% endif %}
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-lg btn-primary col-12" type="submit">
-                    Se connecter
-                </button>
-                <a href="#" class="btn btn-lg btn-warning col-12">Pas encore incrit ?</a>
+                        <input type="hidden" class="error">
+                    {% endif %}
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-lg btn-primary col-12" type="submit">
+                        Se connecter
+                    </button>
+                    <a href="#" class="btn btn-lg btn-warning col-12">Pas encore incrit ?</a>
+                </div>
             </div>
         </div>
     </form>
