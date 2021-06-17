@@ -8,8 +8,9 @@
     <form id="formLogin" action="{{ path('app_login') }}" method="post">
         <div class="modal-dialog">
             <div class="modal-content">
-                {% if error and error != 'login' %}
+                {% if error %}
                     <div class="alert alert-danger">{{ error }}</div>
+                    <input type="hidden" class="error">
                 {% endif %}
                 <div class="modal-header">
                     <h2 class="modal-title h4" id="exampleModalLabel">Se connecter</h2>
@@ -25,9 +26,6 @@
                         <input type="password" name="password" class="form-control shadow-sm p-2 mb-1 bg-white rounded fw-light" id="inputPassword" autocomplete="current-password" required>
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    {% if error %}
-                        <input type="hidden" class="error">
-                    {% endif %}
                 </div>
                 <div class="d-flex flex-column justify-content-center align-items-center p-2">
                     <button class="btn btn-lg btn-primary col-11 mb-2" type="submit">
