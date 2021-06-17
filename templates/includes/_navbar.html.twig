@@ -1,6 +1,9 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-color">
     <div class="container-fluid">
-        <a class="navbar-brand logo-navbar" href="{{ path('home') }}"><img src="{{ asset('build/images/logo_permut.png') }}" alt="logo" class="logo-navbar me-1">Jobpermut </a>
+        <a class="navbar-brand logo-navbar col-3" href="{{ path('home') }}">
+            <img src="{{ asset('build/images/logo_permut.png') }}" alt="logo" class="logo-navbar me-1">
+            JobPermut
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
@@ -13,9 +16,26 @@
                     </a>
                 {% endif %}
                 {% if app.user %}
-                    <a class="nav-link" href="{{ path('app_logout') }}">
-                        <i class="fas fa-user"></i>
-                        Déconnexion</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bonjour
+                            {{ app.user.registeredUser.username }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item text-wrap" href="#">Editer mes paramètres de connexion</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-wrap" href="#">Editer mon profil</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-wrap" href="{{ path('app_logout') }}">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Déconnexion
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 {% else %}
                     {{ render(controller('App\\Controller\\SecurityController::modalLogin')) }}
                 {% endif %}
