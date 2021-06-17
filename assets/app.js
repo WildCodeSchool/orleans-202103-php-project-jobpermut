@@ -13,9 +13,7 @@ const bootstrap = require('bootstrap');
 
 window.addEventListener('load', (event) => {
     if (document.querySelector('.error')) {
-        const loginModal = new bootstrap.Modal(
-            document.getElementById('loginModal')
-        );
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
         loginModal.show();
     }
 });
