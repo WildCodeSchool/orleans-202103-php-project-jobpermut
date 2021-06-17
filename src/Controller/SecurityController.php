@@ -40,9 +40,10 @@ class SecurityController extends AbstractController
     public function modalLogin(SessionInterface $session): Response
     {
         $error = '';
+
         if ($session->get('error')) {
             $error = $session->get('error');
-            $session->set('error', '');
+            $session->remove('error');
         }
 
         return $this->render('includes/_login.html.twig', [
