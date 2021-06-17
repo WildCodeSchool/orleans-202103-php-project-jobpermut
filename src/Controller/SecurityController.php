@@ -5,8 +5,8 @@ namespace App\Controller;
 use LogicException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -14,14 +14,18 @@ class SecurityController extends AbstractController
     /**
      * @Route("/login", name="app_login")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(SessionInterface $session, AuthenticationUtils $authenticationUtils): Response
     {
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
+        // get the last route for redirection if login has false
+        $lastRoute = $session->get('last_route');
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        $session->set('error', $error ?
+        'Email ou mot de passe incorrect.' :
+        'login');
+
+        return $this->redirectToRoute($lastRoute['route'], $lastRoute['params']);
     }
 
     /**
@@ -31,5 +35,19 @@ class SecurityController extends AbstractController
     {
         throw new LogicException('This method can be blank -
         it will be intercepted by the logout key on your firewall.');
+    }
+
+    public function modalLogin(SessionInterface $session): Response
+    {
+        $error = '';
+
+        if ($session->get('error')) {
+            $error = $session->get('error');
+            $session->remove('error');
+        }
+
+        return $this->render('includes/_login.html.twig', [
+            'error' => $error
+        ]);
     }
 }
