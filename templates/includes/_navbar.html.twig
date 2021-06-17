@@ -1,21 +1,23 @@
 <nav class="navbar navbar-expand-lg bg-white navbar-color">
-	<div class="container-fluid">
-		<a class="navbar-brand logo-navbar col-3" href="{{ path('home') }}">
-			<img src="{{ asset('build/images/logo_permut.png') }}" alt="logo" class="logo-navbar me-1">
-			JobPermut
-		</a>
-		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-			<i class="fas fa-bars"></i>
-		</button>
-		<div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-			<div class="navbar-nav">
-				<a class="nav-link" href="#">
-					<i class="fas fa-sign-in-alt"></i>
-					Inscription
-				</a>
-				{% if app.user %}
-					<div class="dropdown">
-						<a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+    <div class="container-fluid">
+        <a class="navbar-brand logo-navbar col-3" href="{{ path('home') }}">
+            <img src="{{ asset('build/images/logo_permut.png') }}" alt="logo" class="logo-navbar me-1">
+            JobPermut
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                {% if not app.user %}
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Inscription
+                    </a>
+                {% endif %}
+                {% if app.user %}
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 							Bonjour
 							{{ app.user.username }}
 						</a>
@@ -39,11 +41,12 @@
 								</a>
 							</li>
 						</ul>
-					</div>
-				{% else %}
-					{% include "includes/_login.html.twig" %}
-				{% endif %}
-			</div>
-		</div>
-	</div>
+                    </div>
+                {% else %}
+                    {{ render(controller('App\\Controller\\SecurityController::modalLogin')) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </nav>
+{{ app.session.set('last_route', {route: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}
