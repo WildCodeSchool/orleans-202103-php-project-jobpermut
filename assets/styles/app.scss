@@ -64,3 +64,17 @@ p {
         color: $warning;
     }
 }
+
+.btn-light {
+    border: 2px solid $light;
+    color: $dark;
+    border-color: $light;
+    background: {
+        image: linear-gradient(45deg, $dark 50%, transparent 50%);
+    }
+
+    &:hover {
+        color: $warning;
+        border-color: $dark;
+    }
+}

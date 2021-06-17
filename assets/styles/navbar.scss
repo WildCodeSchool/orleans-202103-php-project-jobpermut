@@ -8,9 +8,13 @@
     font-size: $font-size-navbar;
 
     .logo-navbar {
-        $width-logo: 100px;
+        $width-logo: 80px;
         width: $width-logo;
         font-size: 30px;
+        @media screen and (max-width: 768px) {
+            width: 60px;
+            font-size: 20px;
+        }
     }
 
     .navbar-toggler {
