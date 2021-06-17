@@ -67,32 +67,32 @@ class RegisteredUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $street;
+    private string $street;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $streetNumber;
+    private string $streetNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $zipcode;
+    private string $zipcode;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $jobStreet;
+    private string $jobStreet;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $jobStreetNumber;
+    private string $jobStreetNumber;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $jobZipcode;
+    private string $jobZipcode;
 
     public function getId(): ?int
     {

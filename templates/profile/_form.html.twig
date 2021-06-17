@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+{{ form_widget(form) }}
+<input class="btn btn-primary" type="submit" value="Enregistrer mes informations">
+<a class="btn btn-warning" href="{{ path('profile_show', {username: registeredUser.username}) }}">Voir mon profil</a>
+{{ form_end(form) }}
