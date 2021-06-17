@@ -8,8 +8,8 @@
     <form id="formLogin" action="{{ path('app_login') }}" method="post">
         <div class="modal-dialog">
             <div class="modal-content">
-                {% if app.session.get('error') and app.session.get('error') != 'login' %}
-                    <div class="alert alert-danger">{{ app.session.get('error') }}</div>
+                {% if error and error != 'login' %}
+                    <div class="alert alert-danger">{{ error }}</div>
                 {% endif %}
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Se connecter</h5>
@@ -21,8 +21,7 @@
                     <label class="mt-3" for="inputPassword">Mot de passe</label>
                     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    {{ app.session.set('last_route', {route: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}
-                    {% if app.session.get('error') %}
+                    {% if error %}
                         <input type="hidden" class="error">
                     {% endif %}
                 </div>

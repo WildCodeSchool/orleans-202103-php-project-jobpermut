@@ -36,4 +36,17 @@ class SecurityController extends AbstractController
         throw new LogicException('This method can be blank -
         it will be intercepted by the logout key on your firewall.');
     }
+
+    public function modalLogin(SessionInterface $session): Response
+    {
+        $error = '';
+        if ($session->get('error')) {
+            $error = $session->get('error');
+            $session->set('error', '');
+        }
+
+        return $this->render('includes/_login.html.twig', [
+            'error' => $error
+        ]);
+    }
 }
