@@ -1,23 +1,46 @@
-<nav class="navbar navbar-expand-lg bg-white mb-3 navbar-color">
+<nav class="navbar navbar-expand-lg bg-white navbar-color">
     <div class="container-fluid">
-        <a class="navbar-brand logo-navbar" href="{{ path('home') }}"><img src="{{ asset('build/images/logo_final.png') }}" alt="logo" class="logo-navbar"></a>
+        <a class="navbar-brand logo-navbar col-3" href="{{ path('home') }}">
+            <img src="{{ asset('build/images/logo_permut.png') }}" alt="logo" class="logo-navbar me-1">
+            JobPermut
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-sign-in-alt"></i>
-                    Inscription
-                </a>
+                {% if not app.user %}
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Inscription
+                    </a>
+                {% endif %}
                 {% if app.user %}
-                    <a class="nav-link" href="{{ path('app_logout') }}">
-                        <i class="fas fa-user"></i>
-                        Déconnexion</a>
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" id="dropdown" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            Bonjour
+                            {{ app.user.registeredUser.username }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item text-wrap" href="#">Editer mes paramètres de connexion</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-wrap" href="#">Editer mon profil</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-wrap" href="{{ path('app_logout') }}">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    Déconnexion
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 {% else %}
-                    {% include "includes/_login.html.twig" %}
+                    {{ render(controller('App\\Controller\\SecurityController::modalLogin')) }}
                 {% endif %}
             </div>
         </div>
     </div>
 </nav>
+{{ app.session.set('last_route', {route: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}

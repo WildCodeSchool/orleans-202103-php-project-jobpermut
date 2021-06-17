@@ -3,9 +3,30 @@
 @import '~leaflet/dist/leaflet.css';
 
 header {
-    img {
-        $width: 700px;
-        width: $width;
+    .main-header {
+        background: no-repeat fixed center/100% url('../images/check.jpg');
+        object-fit: cover;
+        height: 60vh;
+
+        .text-header {
+
+            .h1 {
+                font-size: 7em;
+                text-shadow: 4px 4px 2px rgba(0,0,0,0.6);
+                @media screen and (max-width: 768px) {
+                    font-size: 4em;
+                }
+            }
+
+            .h2 {
+                font-family: $font-p;
+                text-shadow: 2px 2px 2px rgba(0,0,0,0.6);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            background: no-repeat fixed center/300% url('../images/check.jpg');
+        }
     }
 
     .banner-icons {
@@ -56,12 +77,18 @@ header {
             background-color: $dark;
             border-radius: 30px;
             $font-weight: 300;
+            $img-width: 75px;
+            $p-font-size: 22px;
 
             p {
                 color: $white;
                 font-family: $font-p;
                 font-weight: $font-weight;
-                font-size: 22px;
+                font-size: $p-font-size;
+
+                @media screen and (max-width: 768px) {
+                    font-size: $p-font-size/1.5;
+                }
             }
 
             .testimony-header {
@@ -69,8 +96,12 @@ header {
 
                 img {
                     object-fit: cover;
-                    width: 75px;
-                    height: 75px;
+                    width: $img-width;
+                    height: $img-width;
+                    @media screen and (max-width: 768px) {
+                        width: $img-width/1.5;
+                        height: $img-width/1.5;
+                    }
                 }
 
                 .testimony-titles {
@@ -115,6 +146,10 @@ header {
             @media screen and (max-width: 768px) {
                 font-size: 20px;
             }
+
+            span {
+                color: $warning;
+            }
         }
 
         .list-subtitle {
@@ -131,11 +166,11 @@ header {
             $inline-spacing: 0;
             $placement: center;
 
-            background-color: $white;
+            background-color: $warning;
             width: $size;
             height: $size;
             border-radius: 90px;
-            border: 2px solid $white;
+            border: 2px solid $warning;
             color: $dark;
             font-weight: bold;
             font-size: 35px;
@@ -171,8 +206,8 @@ header {
             width: $size;
             height: $size;
             border-radius: 90px;
-            border: 2px solid $white;
-            color: $white;
+            border: 2px solid $warning;
+            color: $warning;
             font-weight: bold;
             font-size: 35px;
             margin: 1em;
