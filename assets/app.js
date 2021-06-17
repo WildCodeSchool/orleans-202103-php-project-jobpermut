@@ -8,6 +8,14 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 import './bootstrap';
-import './login';
 
-require('bootstrap');
+const bootstrap = require('bootstrap');
+
+window.addEventListener('load', (event) => {
+    if (document.querySelector('.error')) {
+        const loginModal = new bootstrap.Modal(
+            document.getElementById('loginModal')
+        );
+        loginModal.show();
+    }
+});
