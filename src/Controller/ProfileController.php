@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\RegisteredUser;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RegisteredUserType;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/profile", name="profile_")
@@ -17,34 +19,41 @@ class ProfileController extends AbstractController
 {
     /**
      * @Route("/{username}", name="show")
-     * @ParamConverter("registeredUser", class="App\Entity\RegisteredUser",
+     * @ParamConverter("user", class="App\Entity\User"),
      * options={"mapping": {"username": "username"}})
      */
-    public function show(RegisteredUser $registeredUser): Response
+    public function show(User $user): Response
     {
         return $this->render('profile/show.html.twig', [
-            'registeredUser' => $registeredUser,
+            'user' => $user,
         ]);
     }
 
     /**
      * @Route("/{username}/edit", name="edit", methods={"GET","POST"})
-     * @ParamConverter("registeredUser", class="App\Entity\RegisteredUser",
+     * @ParamConverter("user", class="App\Entity\User"),
      * options={"mapping": {"username": "username"}})
      */
-    public function edit(Request $request, RegisteredUser $registeredUser): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(RegisteredUserType::class, $registeredUser);
+        $registeredUser = new RegisteredUser();
+        $registeredUser->setUser($user);
+
+        $form = $this->createForm(RegisteredUserType::class, $user->getRegisteredUser() ?? $registeredUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            if (!$user->getRegisteredUser()) {
+                $entityManager->persist($registeredUser);
+            }
 
-            return $this->redirectToRoute('profile_show', ['username' => $registeredUser->getUsername()]);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }
 
         return $this->render('profile/edit.html.twig', [
-            'registeredUser' => $registeredUser,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

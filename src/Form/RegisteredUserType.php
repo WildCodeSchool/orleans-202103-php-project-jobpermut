@@ -13,19 +13,18 @@ class RegisteredUserType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('firstname', TextType::class)
-            ->add('lastname', TextType::class)
-            ->add('phone', TextType::class)
-            ->add('city', TextType::class)
-            ->add('cityJob', TextType::class)
-            ->add('ogr', TextType::class)
-            ->add('username', TextType::class)
-            ->add('street', TextType::class)
-            ->add('streetNumber', TextType::class)
-            ->add('zipcode', TextType::class)
-            ->add('jobStreet', TextType::class)
-            ->add('jobStreetNumber', TextType::class)
-            ->add('jobZipcode', TextType::class)
+            ->add('firstname', TextType::class, ['attr' => ['placeholder' => 'John']])
+            ->add('lastname', TextType::class, ['attr' => ['placeholder' => 'Doe']])
+            ->add('phone', TextType::class, ['attr' => ['placeholder' => '06 56 86 98 09']])
+            ->add('city', TextType::class, ['attr' => ['placeholder' => 'Orléans']])
+            ->add('cityJob', TextType::class, ['attr' => ['placeholder' => 'Tours']])
+            ->add('ogr', TextType::class, ['attr' => ['placeholder' => 'Développeur Web']])
+            ->add('street', TextType::class, ['attr' => ['placeholder' => 'Rue des Lumières']])
+            ->add('streetNumber', TextType::class, ['attr' => ['placeholder' => '67']])
+            ->add('zipcode', TextType::class, ['attr' => ['placeholder' => '45100']])
+            ->add('jobStreet', TextType::class, ['attr' => ['placeholder' => 'Avenue Charles Lenoir']])
+            ->add('jobStreetNumber', TextType::class, ['attr' => ['placeholder' => '253']])
+            ->add('jobZipcode', TextType::class, ['attr' => ['placeholder' => '37000']])
         ;
     }
 

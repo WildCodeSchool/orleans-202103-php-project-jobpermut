@@ -62,15 +62,11 @@ class RegisteredUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $username;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
     private string $street;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private string $streetNumber;
 
@@ -86,6 +82,7 @@ class RegisteredUser
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
      */
     private string $jobStreetNumber;
 
@@ -195,18 +192,6 @@ class RegisteredUser
         if ($subscription !== null) {
             $this->subscription = $subscription;
         }
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
 
         return $this;
     }

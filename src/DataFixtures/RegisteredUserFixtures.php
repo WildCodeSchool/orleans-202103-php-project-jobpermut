@@ -22,7 +22,6 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
     {
         for ($i = 0; $i < UserFixtures::MAX_FIXTURES; $i++) {
             $registeredUser = new RegisteredUser();
-            $registeredUser->setUsername($this->faker->unique()->firstName() . $this->faker->randomNumber());
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
             $registeredUser->setPhone($this->faker->phoneNumber());

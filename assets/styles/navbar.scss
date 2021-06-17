@@ -42,6 +42,7 @@
     a {
         $duration: 0.5s;
         transition: $duration ease-out;
+        z-index:1;
 
         img {
             transition: $duration ease-out;
@@ -59,5 +60,9 @@
                 transform: scaleX(-1);
             }
         }
+    }
+
+    .dropdown-item {
+        font-family: $font-p;
     }
 }

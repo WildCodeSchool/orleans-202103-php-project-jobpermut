@@ -11,11 +11,16 @@
 {% endblock %}
 
 {% block body %}
-	{% if app.user.email == registeredUser.user.email %}
-		<h1>Editer mes informations</h1>
-		{{ include('profile/_form.html.twig') }}
+	{% if app.user and app.user.email == user.email %}
+		<main class="p-5 edit-profile">
+			<h1 class="h1 text-center text-dark">Editer mes informations</h1>
+			<h2 class="h3 text-center text-dark">Ajouter et mettez à jour vos informations personnelles afin de rendre votre profil visible</h2>
+
+			<div class="d-flex justify-content-center">
+				{{ include('profile/_form.html.twig') }}
+			</div>
+		</main>
 	{% else %}
-		<h1>Erreur 403</h1>
-		<h2>Vous n'avez pas les droits d'accès pour cette page</h2>
+		{{ include('error/error403.html.twig') }}
 	{% endif %}
 {% endblock %}
