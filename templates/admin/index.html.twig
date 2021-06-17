@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
+{% block body %}
+    <main class="container-fluid d-flex align-items-center outer-admin-container">
+
+            <div class="card mx-auto align-items-center admin-card">
+                <i class="fas fa-user-cog logoAdmin"></i>
+                <div class="card-body">
+                    <a class="btn btn btn-secondary" href="#" role="button">Gestion des administrateurs</a>
+                </div>
+            </div>
+
+            <div class="card mx-auto align-items-center admin-card">
+                <i class="fas fa-envelope-open-text logoAdmin"></i>
+                <div class="card-body">
+                    <a class="btn btn btn-secondary" href="#" role="button">Envoi de mails</a>
+                </div>
+            </div>
+
+            <div class="card mx-auto align-items-center admin-card">
+                <i class="fas fa-comment-dots logoAdmin"></i>
+                <div class="card-body">
+                    <a class="btn btn btn-secondary" href="#" role="button">Gestion des commentaires</a>
+                </div>
+            </div>
+
+    </main>
+
+{% endblock %}
