@@ -38,7 +38,7 @@
     a {
         $duration: 0.5s;
         transition: $duration ease-out;
-        z-index:10;
+        z-index:1;
 
         img {
             transition: $duration ease-out;
