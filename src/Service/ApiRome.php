@@ -2,7 +2,6 @@
 
 namespace App\Service;
 
-use Symfony\Component\HttpClient\Response\TraceableResponse;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Symfony\Contracts\HttpClient\ResponseInterface;
 
@@ -10,6 +9,7 @@ class ApiRome
 {
     private const URL_API = 'https://entreprise.pole-emploi.fr/';
     private HttpClientInterface $client;
+
 
     public function __construct(HttpClientInterface $client)
     {
