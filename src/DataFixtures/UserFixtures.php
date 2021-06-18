@@ -62,7 +62,11 @@ class UserFixtures extends Fixture
         $user->setEmail('wildjobexchangeUser@gmail.com');
         $user->setRoles(self::USERS_PASSWORDS['user']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
-        $user->setPassword($this->passwordEncoder->encodePassword($user, self::USERS_PASSWORDS['user']['password']));
+        $user->setPassword(
+            $this
+                ->passwordEncoder
+                ->encodePassword($user, self::USERS_PASSWORDS['user']['password'])
+        );
         $manager->persist($user);
 
         //for ROLE_ADMIN
@@ -70,7 +74,11 @@ class UserFixtures extends Fixture
         $user->setEmail('wildjobexchangeAdmin@gmail.com');
         $user->setRoles(self::USERS_PASSWORDS['admin']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
-        $user->setPassword($this->passwordEncoder->encodePassword($user, self::USERS_PASSWORDS['admin']['password']));
+        $user->setPassword(
+            $this
+                ->passwordEncoder
+                ->encodePassword($user, self::USERS_PASSWORDS['admin']['password'])
+        );
         $manager->persist($user);
 
         $user = new User();
