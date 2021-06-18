@@ -15,17 +15,17 @@
             <h2 class="h4">Inscription</h2>
             {{ form_start(registrationForm) }}
                 {{ form_label(registrationForm.email, null,
-                    {label: 'Veuillez saisir votre adresse e-mail'}) }}
+                    {label: 'Veuillez saisir votre adresse e-mail', 'label_attr': {'class': 'h6'}}) }}
                 {{ form_widget(registrationForm.email,
                     {'attr': {'placeholder': 'exemple@mail.com', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
 
                 {{ form_label(registrationForm.plainPassword.first, null,
-                    {label: 'Veuillez saisir votre Mot de passe'}) }}
+                    {label: 'Veuillez saisir votre Mot de passe', 'label_attr': {'class': 'h6'}}) }}
                 {{ form_widget(registrationForm.plainPassword.first,
                     {'attr': {'placeholder': 'Votre mot de passe doit comporter au moins 8 caractères', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
 
                 {{ form_label(registrationForm.plainPassword.second, null,
-                    {label: 'Veuillez répéter votre Mot de passe'}) }}
+                    {label: 'Veuillez répéter votre Mot de passe', 'label_attr': {'class': 'h6'}}) }}
                 {{ form_widget(registrationForm.plainPassword.second,
                     {'attr': {'placeholder': 'Votre mot de passe doit comporter au moins 8 caractères', 'class': 'shadow-sm p-2 mb-1 bg-white rounded fw-light mb-3'}}) }}
 
