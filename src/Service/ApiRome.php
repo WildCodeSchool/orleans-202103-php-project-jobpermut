@@ -10,13 +10,12 @@ class ApiRome
     private const URL_API = 'https://entreprise.pole-emploi.fr/';
     private HttpClientInterface $client;
 
-
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
     }
 
-    public function testApi(): ResponseInterface
+    public function token(): ResponseInterface
     {
         $response = $this->client->request(
             'POST',

@@ -14,7 +14,7 @@ class HomeController extends AbstractController
      */
     public function index(ApiRome $apiRome): Response
     {
-        dd($apiRome->testApi());
+        dd($apiRome->token());
         return $this->render('home/index.html.twig');
     }
 }
