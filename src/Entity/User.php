@@ -43,7 +43,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private RegisteredUser $registeredUser;
+    private ?RegisteredUser $registeredUser;
 
     public function getId(): ?int
     {
