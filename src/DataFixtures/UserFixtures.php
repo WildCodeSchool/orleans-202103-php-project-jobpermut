@@ -20,6 +20,10 @@ class UserFixtures extends Fixture
             'password' => 'admin123456789',
             'role' => ['ROLE_ADMIN'],
         ],
+        'superadmin' => [
+            'password' => 'admin123456789',
+            'role' => ['ROLE_SUPERADMIN'],
+        ],
     ];
 
     public const MAX_FIXTURES = 10;
@@ -67,6 +71,17 @@ class UserFixtures extends Fixture
         $user->setRoles(self::USERS_PASSWORDS['admin']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
         $user->setPassword($this->passwordEncoder->encodePassword($user, self::USERS_PASSWORDS['admin']['password']));
+        $manager->persist($user);
+
+        $user = new User();
+        $user->setEmail('wildjobexchangeSuperAdmin@gmail.com');
+        $user->setRoles(self::USERS_PASSWORDS['superadmin']['role']);
+        $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
+        $user->setPassword(
+            $this
+                ->passwordEncoder
+                ->encodePassword($user, self::USERS_PASSWORDS['superadmin']['password'])
+        );
         $manager->persist($user);
 
         $manager->flush();
