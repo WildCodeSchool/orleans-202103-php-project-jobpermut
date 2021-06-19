@@ -2,7 +2,6 @@
 
 namespace App\Service\ApiRome;
 
-
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 abstract class ApiRomeConstants
