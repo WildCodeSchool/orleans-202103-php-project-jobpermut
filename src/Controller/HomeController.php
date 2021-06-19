@@ -2,10 +2,10 @@
 
 namespace App\Controller;
 
-use App\Service\ApiRome;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Service\ApiRome\ApiRome;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -14,7 +14,8 @@ class HomeController extends AbstractController
      */
     public function index(ApiRome $apiRome): Response
     {
-        dd($apiRome->token());
+        dd($apiRome->getOgr(11158));
+
         return $this->render('home/index.html.twig');
     }
 }
