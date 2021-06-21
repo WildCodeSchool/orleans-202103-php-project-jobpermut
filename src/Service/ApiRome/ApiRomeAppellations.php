@@ -27,6 +27,11 @@ class ApiRomeAppellations extends ApiRomeJobs
         return $response->toArray();
     }
 
+    /**
+     * return all OGR
+     *
+     * @return array
+     */
     public function getAllAppelations(): array
     {
         $response = $this->client->request(
