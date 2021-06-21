@@ -18,32 +18,32 @@
                 {% if app.user %}
                     <div class="dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-							Bonjour
-							{{ app.user.username }}
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-							<li>
-								<a class="dropdown-item text-wrap" href="{{ path('profile_show', {username: app.user.username}) }}">
-									<i class="fas fa-user me-2"></i>Voir mon profil</a>
-							</li>
-							<li>
-								<a class="dropdown-item text-wrap" href="{{ path('profile_edit', {username: app.user.username}) }}">
-									<i class="fas fa-pen me-2"></i>Editer mon profil</a>
-							</li>
+                            Bonjour
+                            {{ app.user.username }}
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <li>
+                                <a class="dropdown-item text-wrap" href="{{ path('profile_show', {username: app.user.username}) }}">
+                                    <i class="fas fa-user me-2"></i>Voir mon profil</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item text-wrap" href="{{ path('profile_edit', {username: app.user.username}) }}">
+                                    <i class="fas fa-pen me-2"></i>Editer mon profil</a>
+                            </li>
                             <li>
                                 <a class="dropdown-item text-wrap" href="#">
-									                <i class="fas fa-cog me-2"></i>Paramètres</a>
+                                    <i class="fas fa-cog me-2"></i>Paramètres</a>
                             </li>
                             {% if is_granted('ROLE_ADMIN') %}
-                            <li>
-                                <a class="dropdown-item text-wrap" href="{{ path('admin_index') }}">Administration</a>
-                            </li>
+                                <li>
+                                    <a class="dropdown-item text-wrap" href="{{ path('admin_index') }}">Administration</a>
+                                </li>
                             {% endif %}
                             <li>
                                 <a class="dropdown-item text-wrap text-danger" href="{{ path('app_logout') }}">
-									                <i class="fas fa-sign-out-alt me-1"></i>
-									                Déconnexion
-								                </a>
+                                    <i class="fas fa-sign-out-alt me-1"></i>
+                                    Déconnexion
+                                </a>
                             </li>
                         </ul>
                     </div>
