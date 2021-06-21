@@ -22,12 +22,17 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
     {
         for ($i = 0; $i < UserFixtures::MAX_FIXTURES; $i++) {
             $registeredUser = new RegisteredUser();
-            $registeredUser->setUsername($this->faker->unique()->firstName() . $this->faker->randomNumber());
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
             $registeredUser->setPhone($this->faker->phoneNumber());
-            $registeredUser->setAddress($this->faker->city());
-            $registeredUser->setJobAddress($this->faker->city());
+            $registeredUser->setStreetNumber($this->faker->buildingNumber());
+            $registeredUser->setStreet($this->faker->streetName());
+            $registeredUser->setZipcode($this->faker->postcode());
+            $registeredUser->setCity($this->faker->city());
+            $registeredUser->setJobStreetNumber($this->faker->buildingNumber());
+            $registeredUser->setJobStreet($this->faker->streetName());
+            $registeredUser->setJobZipcode($this->faker->postcode());
+            $registeredUser->setCityJob($this->faker->city());
             $registeredUser->setOgr($this->faker->randomNumber());
             $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));

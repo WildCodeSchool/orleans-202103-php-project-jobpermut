@@ -34,6 +34,11 @@ class Subscription
      */
     private string $jobDescription;
 
+    public function __serialize(): array
+    {
+        return [];
+    }
+
     public function getId(): ?int
     {
         return $this->id;

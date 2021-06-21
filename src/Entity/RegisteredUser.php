@@ -35,12 +35,12 @@ class RegisteredUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $address;
+    private string $city;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $jobAddress;
+    private string $cityJob;
 
     /**
      * @ORM\Column(type="integer")
@@ -62,7 +62,34 @@ class RegisteredUser
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private string $username;
+    private string $street;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private string $streetNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $zipcode;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $jobStreet;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private string $jobStreetNumber;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $jobZipcode;
 
     public function getId(): ?int
     {
@@ -107,26 +134,26 @@ class RegisteredUser
         return $this;
     }
 
-    public function getAddress(): ?string
+    public function getCity(): ?string
     {
-        return $this->address;
+        return $this->city;
     }
 
-    public function setAddress(string $address): self
+    public function setCity(string $city): self
     {
-        $this->address = $address;
+        $this->city = $city;
 
         return $this;
     }
 
-    public function getJobAddress(): ?string
+    public function getCityJob(): ?string
     {
-        return $this->jobAddress;
+        return $this->cityJob;
     }
 
-    public function setJobAddress(string $jobAddress): self
+    public function setCityJob(string $cityJob): self
     {
-        $this->jobAddress = $jobAddress;
+        $this->cityJob = $cityJob;
 
         return $this;
     }
@@ -169,14 +196,74 @@ class RegisteredUser
         return $this;
     }
 
-    public function getUsername(): ?string
+    public function getStreet(): ?string
     {
-        return $this->username;
+        return $this->street;
     }
 
-    public function setUsername(string $username): self
+    public function setStreet(string $street): self
     {
-        $this->username = $username;
+        $this->street = $street;
+
+        return $this;
+    }
+
+    public function getStreetNumber(): ?string
+    {
+        return $this->streetNumber;
+    }
+
+    public function setStreetNumber(string $streetNumber): self
+    {
+        $this->streetNumber = $streetNumber;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?string
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(string $zipcode): self
+    {
+        $this->zipcode = $zipcode;
+
+        return $this;
+    }
+
+    public function getJobStreet(): ?string
+    {
+        return $this->jobStreet;
+    }
+
+    public function setJobStreet(string $jobStreet): self
+    {
+        $this->jobStreet = $jobStreet;
+
+        return $this;
+    }
+
+    public function getJobStreetNumber(): ?string
+    {
+        return $this->jobStreetNumber;
+    }
+
+    public function setJobStreetNumber(string $jobStreetNumber): self
+    {
+        $this->jobStreetNumber = $jobStreetNumber;
+
+        return $this;
+    }
+
+    public function getJobZipcode(): ?string
+    {
+        return $this->jobZipcode;
+    }
+
+    public function setJobZipcode(string $jobZipcode): self
+    {
+        $this->jobZipcode = $jobZipcode;
 
         return $this;
     }
