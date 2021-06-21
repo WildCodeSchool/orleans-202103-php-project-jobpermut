@@ -28,6 +28,11 @@
                             <li>
                                 <a class="dropdown-item text-wrap" href="#">Editer mon profil</a>
                             </li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li>
+                                <a class="dropdown-item text-wrap" href="{{ path('admin_index') }}">Administration</a>
+                            </li>
+                            {% endif %}
                             <li>
                                 <a class="dropdown-item text-wrap" href="{{ path('app_logout') }}">
                                     <i class="fas fa-sign-out-alt"></i>
