@@ -21,7 +21,7 @@
                             Bonjour
                             <span class="text-warning">{{ app.user.username }}</span>
                         </a>
-                        <ul class="dropdown-menu shadow-lg p-0 w-100" aria-labelledby="dropdownMenuLink">
+                        <ul class="dropdown-menu shadow-lg w-100" aria-labelledby="dropdownMenuLink">
                             <li>
                                 <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('profile_show', {username: app.user.username}) }}">
                                     <i class="fas fa-user me-2"></i>Voir mon profil</a>
