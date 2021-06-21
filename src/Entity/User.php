@@ -43,7 +43,12 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private RegisteredUser $registeredUser;
+    private ?RegisteredUser $registeredUser;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $username;
 
     public function getId(): ?int
     {
@@ -60,16 +65,6 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
     }
 
     /**
@@ -151,6 +146,18 @@ class User implements UserInterface
         }
 
         $this->registeredUser = $registeredUser;
+
+        return $this;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
