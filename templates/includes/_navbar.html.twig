@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <a class="navbar-brand logo-navbar col-3" href="{{ path('home') }}">
             <img src="{{ asset('build/images/logo_permut.png') }}" alt="logo" class="logo-navbar me-1">
-            JobPermut
+            Jobpermut
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
@@ -31,16 +31,21 @@
 									<i class="fas fa-pen me-2"></i>Editer mon profil</a>
 							</li>
                             <li>
-								<a class="dropdown-item text-wrap" href="#">
-									<i class="fas fa-cog me-2"></i>Paramètres</a>
-							</li>
-							<li>
-								<a class="dropdown-item text-wrap text-danger" href="{{ path('app_logout') }}">
-									<i class="fas fa-sign-out-alt me-1"></i>
-									Déconnexion
-								</a>
-							</li>
-						</ul>
+                                <a class="dropdown-item text-wrap" href="#">
+									                <i class="fas fa-cog me-2"></i>Paramètres</a>
+                            </li>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <li>
+                                <a class="dropdown-item text-wrap" href="{{ path('admin_index') }}">Administration</a>
+                            </li>
+                            {% endif %}
+                            <li>
+                                <a class="dropdown-item text-wrap text-danger" href="{{ path('app_logout') }}">
+									                <i class="fas fa-sign-out-alt me-1"></i>
+									                Déconnexion
+								                </a>
+                            </li>
+                        </ul>
                     </div>
                 {% else %}
                     {{ render(controller('App\\Controller\\SecurityController::modalLogin')) }}
