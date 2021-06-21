@@ -23,7 +23,7 @@ abstract class ApiRomeConfig
     /**
      * Get the value of client
      */
-    public function getClient(): HttpClientInterface
+    protected function getClient(): HttpClientInterface
     {
         return $this->client;
     }
@@ -31,7 +31,7 @@ abstract class ApiRomeConfig
     /**
      * Get the value of romeClientId
      */
-    public function getClientId(): string
+    protected function getClientId(): string
     {
         return $this->clientId;
     }
@@ -39,7 +39,7 @@ abstract class ApiRomeConfig
     /**
      * Get the value of romeSecretKey
      */
-    public function getSecretKey(): string
+    protected function getSecretKey(): string
     {
         return $this->secretKey;
     }

@@ -12,15 +12,30 @@ class ApiRomeAppellations extends ApiRomeJobs
      * @param array $job
      * @return array
      */
-    public function getAppelations(array $job): array
+    public function getAppelationsByJob(array $job): array
     {
         $response = $this->client->request(
             'GET',
             self::URL_REQUEST_GET . 'metier/' . $job['code'] . '/appellation',
             [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->getToken()
-                ]
+                'headers' =>  [
+                    'Authorization' => $this->getToken()
+                ],
+            ]
+        );
+
+        return $response->toArray();
+    }
+
+    public function getAllAppelations(): array
+    {
+        $response = $this->client->request(
+            'GET',
+            self::URL_REQUEST_GET . 'appellation',
+            [
+                'headers' =>  [
+                    'Authorization' => $this->getToken()
+                ],
             ]
         );
 

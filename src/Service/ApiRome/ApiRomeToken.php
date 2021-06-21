@@ -29,6 +29,6 @@ class ApiRomeToken extends ApiRomeConfig
             ]
         );
 
-        return $response->toArray()['access_token'];
+        return 'Bearer ' . $response->toArray()['access_token'];
     }
 }

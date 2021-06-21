@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\RomeType;
 use App\Service\ApiRome\ApiRome;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,8 +15,10 @@ class HomeController extends AbstractController
      */
     public function index(ApiRome $apiRome): Response
     {
-        dd($apiRome->getOgr(11158));
+        $form = $this->createForm(RomeType::class);
 
-        return $this->render('home/index.html.twig');
+        return $this->render('home/test.html.twig', [
+            'form' => $form->createView()
+        ]);
     }
 }

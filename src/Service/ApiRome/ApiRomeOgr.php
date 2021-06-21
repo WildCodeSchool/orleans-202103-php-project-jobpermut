@@ -19,9 +19,9 @@ class ApiRomeOgr extends ApiRomeAppellations
             'GET',
             self::URL_REQUEST_GET . 'appellation/' . $appellation,
             [
-                'headers' => [
-                    'Authorization' => 'Bearer ' . $this->getToken()
-                ]
+                'headers' =>  [
+                    'Authorization' => $this->getToken()
+                ],
             ]
         );
 
