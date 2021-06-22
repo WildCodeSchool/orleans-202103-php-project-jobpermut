@@ -11,7 +11,7 @@ body {
         margin: $spacing;
         $font-weight-light: 300;
         $font-size-title: 4rem;
-        
+
         h1 {
             color: $primary;
             font-size: $font-size-title;
@@ -20,15 +20,14 @@ body {
                 font-size: 3em;
             }
         }
+
         .h3 {
             font-family: $font-p;
             font-size: $font-size-title/2.5;
         }
-    
     }
 
     .admin-container {
-
         .card-row {
             margin-bottom: $spacing;
 
@@ -43,7 +42,7 @@ body {
                     color: $secondary;
                 }
 
-                .description{
+                .description {
                     color: $secondary;
                 }
 
