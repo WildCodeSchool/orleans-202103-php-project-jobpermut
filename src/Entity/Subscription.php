@@ -31,7 +31,7 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $curriculum;
+    private ?string $curriculum;
 
     /**
      * @Vich\UploadableField(mapping="curriculum", fileNameProperty="curriculum")
@@ -41,7 +41,7 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $jobDescription;
+    private ?string $jobDescription;
 
     /**
      * @Vich\UploadableField(mapping="job_description", fileNameProperty="jobDescription")
