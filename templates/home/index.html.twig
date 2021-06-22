@@ -42,7 +42,7 @@
 
     <section class="freeMap">
         <div class =  "VisitorTripForm">
-            {{ form_start(form) {form_attr: {class: ''}} }}
+            {{ form_start(form, {'form_attr': {'class': ''}}) }}
                 {{ form_label(form.homeCity, 'Votre Ville de Domicile') }}
                 {{ form_widget(form.homeCity, {'id': 'homeCity'}) }}
 
