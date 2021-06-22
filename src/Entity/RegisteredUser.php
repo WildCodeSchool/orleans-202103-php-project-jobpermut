@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\RegisteredUserRepository;
+use App\Entity\Subscription;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\RegisteredUserRepository;
 
 /**
  * @ORM\Entity(repositoryClass=RegisteredUserRepository::class)
@@ -43,9 +44,9 @@ class RegisteredUser
     private string $cityJob;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=5)
      */
-    private int $ogr;
+    private string $rome;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="registeredUser", cascade={"persist", "remove"})
@@ -158,14 +159,14 @@ class RegisteredUser
         return $this;
     }
 
-    public function getOgr(): ?int
+    public function getRome(): ?string
     {
-        return $this->ogr;
+        return $this->rome;
     }
 
-    public function setOgr(int $ogr): self
+    public function setRome(string $rome): self
     {
-        $this->ogr = $ogr;
+        $this->rome = $rome;
 
         return $this;
     }

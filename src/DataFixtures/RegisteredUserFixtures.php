@@ -3,15 +3,17 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use Faker\Generator;
 use App\Entity\RegisteredUser;
+use App\DataFixtures\UserFixtures;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Persistence\ObjectManager;
-use Faker\Generator;
 
 class RegisteredUserFixtures extends Fixture implements DependentFixtureInterface
 {
     private Generator $faker;
+    private const ROME = ['H2101', 'G1201', 'K1101'];
 
     public function __construct()
     {
@@ -33,7 +35,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setJobStreet($this->faker->streetName());
             $registeredUser->setJobZipcode($this->faker->postcode());
             $registeredUser->setCityJob($this->faker->city());
-            $registeredUser->setOgr($this->faker->randomNumber());
+            $registeredUser->setRome(self::ROME[rand(0, 2)]);
             $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));
 
