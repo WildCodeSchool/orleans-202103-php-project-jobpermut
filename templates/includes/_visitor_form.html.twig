@@ -1,0 +1,26 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{{ form_start(form) }}
+<div class = "visitorForm text-light bg-dark rounded-5 col-md-3 p-4">
+    <h2 class = "text-warning text-center">Evaluez votre trajet</h2>
+    <div class="col-12">
+        {{ form_label(form.homeCity, 'Votre Ville de Domicile') }}
+        {{ form_widget(form.homeCity, {
+            'id': 'homeCity',
+            'attr': {
+                'class': 'form-control shadow-sm bg-white rounded'
+            }
+        }) }}
+    </div>
+    <div class="col-12">
+        {{ form_label(form.workCity, 'Votre Ville de Travail') }}
+        {{ form_widget(form.workCity, {
+            'id': 'workCity',
+            'attr': {
+                'class': 'form-control shadow-sm bg-white rounded'
+            }
+        }) }}
+    </div>
+    <button class = "btn form-check col-12 mt-4 bg-warning rounded">Evaluez!</button>
+</div>
+{{ form_end(form) }}

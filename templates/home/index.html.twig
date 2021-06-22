@@ -47,17 +47,7 @@
     </header>
 
     <section class="freeMap">
-        <div class =  "VisitorTripForm">
-            {{ form_start(form, {'form_attr': {'class': ''}}) }}
-                {{ form_label(form.homeCity, 'Votre Ville de Domicile') }}
-                {{ form_widget(form.homeCity, {'id': 'homeCity'}) }}
-
-                {{ form_label(form.workCity, 'Votre Ville de Travail') }}
-                {{ form_widget(form.workCity, {'id': 'workCity'}) }}
-
-                <button class = "btn">{{ button_label|default('Evaluez!') }}</button>
-            {{ form_end(form) }}
-        </div>
+        {{ include('includes/_visitor_form.html.twig') }}
         <div id="map"></div>
         <div class="TripEvaluation"></div>
     </section>

@@ -2,8 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\VisitorTripRepository;
-
 class VisitorTrip
 {
 
