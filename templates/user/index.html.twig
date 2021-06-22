@@ -37,33 +37,55 @@
                                     <span class="text-primary">
                                         Utilisateur
                                     </span>
-                                {% elseif user.roles == ["ROLE_ADMIN","ROLE_USER"] %}
+
+                                {% elseif user.roles == ["ROLE_ADMIN",
+                                                            "ROLE_USER"] %}
 
                                     <span class="text-warning">
                                         Administrateur
                                     </span>
-                                {% elseif user.roles == ["ROLE_SUPERADMIN","ROLE_USER"] %}
-                                
+
+                                {% elseif user.roles == ["ROLE_SUPERADMIN",
+                                                            "ROLE_USER"] %}
+
                                     <span class="text-danger">
                                         Super-Administrateur
                                     </span>
+
                                 {% endif %}
+
                             </td>
                             <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                             <td>{{ user.username }}</td>
                             <td class="d-flex justify-content-center flex-row">
-                                {% if user.roles == ["ROLE_SUPERADMIN","ROLE_USER"] and app.user.roles != user.roles %}
+
+                                {% if user.roles == ["ROLE_SUPERADMIN",
+                                                        "ROLE_USER"] and app.user.roles != user.roles %}
+
                                     {% else %}
+
                                         <a href="{{ path('profile_show', {username: user.username}) }}" class="btn fas fa-eye text-primary"></a>
+
                                 {% endif %}
-                                {% if user.roles == ["ROLE_SUPERADMIN","ROLE_USER"] %}
-                                    {% elseif user.roles == ["ROLE_ADMIN","ROLE_USER"] and app.user.roles == ["ROLE_ADMIN","ROLE_USER"] %}
+
+                                {% if user.roles == ["ROLE_SUPERADMIN",
+                                                        "ROLE_USER"] %}
+
+                                    {% elseif user.roles == ["ROLE_ADMIN",
+                                                                "ROLE_USER"] and app.user.roles == ["ROLE_ADMIN",
+                                                                                                        "ROLE_USER"] %}
+
                                     {% else %}
+
                                         {{ include('user/_delete_form.html.twig') }}
+
                                 {% endif %}
+
                             </td>
                         </tr>
+
                     {% else %}
+
                         <tr>
                             <td colspan="7">Il n'y à aucun utilisateur inscrit.</td>
                         </tr>
