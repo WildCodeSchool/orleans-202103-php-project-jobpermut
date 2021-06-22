@@ -2,6 +2,7 @@
 
 namespace App\Service\ApiRome;
 
+use Exception;
 use App\Service\ApiRome\ApiRomeConfig;
 
 class ApiRomeToken extends ApiRomeConfig
@@ -29,6 +30,13 @@ class ApiRomeToken extends ApiRomeConfig
             ]
         );
 
-        return 'Bearer ' . $response->toArray()['access_token'];
+        try {
+            return 'Bearer ' . $response->toArray()['access_token'];
+        } catch (Exception $e) {
+            throw new Exception(
+                'Un problème de connexion avec notre partenaire est en cours.
+                 Merci de retester ultèrieurement.'
+            );
+        }
     }
 }
