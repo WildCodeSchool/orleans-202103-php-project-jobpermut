@@ -61,13 +61,24 @@ header {
 
     .visitorForm {
 
-        border-radius: .6em;
         position: absolute;
         z-index: 2;
         left: 100px;
         top: 1100px;
         border-radius: 25px;
         
+    }
+
+    @media screen and (max-width: 768px) {
+        .visitorForm {
+
+            position: static;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            border-radius: 0;
+            width: 100vw;
+        }
     }
 
     #map {
