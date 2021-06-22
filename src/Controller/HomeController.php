@@ -22,10 +22,8 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $homeCity = $form->getData()['homeCity'];
-            $workCity = $form->getData()['workCity'];
-            $visitorTrip->setHomeCity($homeCity);
-            $visitorTrip->setWorkCity($workCity);
+            $homeCity = $visitorTrip->getHomeCity();
+            $workCity = $visitorTrip->getWorkCity();
             $homeCityCoordonate = $geocode->getCoordonates($homeCity);
             $workCityCoordonate = $geocode->getCoordonates($workCity);
             $visitorTrip->setHomeCityCoordonates($homeCityCoordonate);

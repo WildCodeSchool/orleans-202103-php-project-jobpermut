@@ -6,14 +6,16 @@ use App\Entity\VisitorTrip;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class VisitorTripType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('homeCity')
-            ->add('workCity');
+            ->add('homeCity', TextType::class)
+            ->add('workCity', TextType::class)
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void

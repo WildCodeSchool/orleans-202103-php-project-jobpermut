@@ -15,7 +15,7 @@ class Geocode
         $this->key = $key;
     }
 
-    public function getCoordonates(string $location, string $layer = 'locality', string $country = 'FRA'): ?array
+    public function getCoordonates(?string $location, string $layer = 'locality', string $country = 'FRA'): ?array
     {
         $content = [];
         $client = HttpClient::create();
