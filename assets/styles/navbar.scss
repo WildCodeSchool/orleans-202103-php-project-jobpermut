@@ -8,8 +8,13 @@
     font-size: $font-size-navbar;
 
     .logo-navbar {
-        $width-logo: 220px;
+        $width-logo: 80px;
         width: $width-logo;
+        font-size: 30px;
+        @media screen and (max-width: 768px) {
+            width: 60px;
+            font-size: 20px;
+        }
     }
 
     .navbar-toggler {
@@ -37,12 +42,41 @@
     a {
         $duration: 0.5s;
         transition: $duration ease-out;
+        z-index: 1;
+
+        img {
+            transition: $duration ease-out;
+        }
 
         &:hover {
-            $brightness: 0%;
+            $brightness: 100%;
             color: $warning;
             filter: brightness($brightness);
             transition: $duration ease-out;
+
+            img {
+                transition: $duration ease-out;
+                -webkit-transform: scaleX(-1);
+                transform: scaleX(-1);
+            }
+        }
+    }
+
+    #inputEmail,
+    #inputPassword,
+    .dropdown-item {
+        font-family: $font-p;
+    }
+
+    .dropdown {
+        ul {
+            border: none;
+
+            a {
+                font-size: 16px;
+                font-weight: 300;
+                font-family: $font-p;
+            }
         }
     }
 }

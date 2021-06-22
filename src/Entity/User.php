@@ -40,6 +40,16 @@ class User implements UserInterface
      */
     private DateTimeInterface $createdAt;
 
+    /**
+     * @ORM\OneToOne(targetEntity=RegisteredUser::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private ?RegisteredUser $registeredUser;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $username;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -55,16 +65,6 @@ class User implements UserInterface
         $this->email = $email;
 
         return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
     }
 
     /**
@@ -129,6 +129,35 @@ class User implements UserInterface
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getRegisteredUser(): ?RegisteredUser
+    {
+        return $this->registeredUser;
+    }
+
+    public function setRegisteredUser(RegisteredUser $registeredUser): self
+    {
+        // set the owning side of the relation if necessary
+        if ($registeredUser->getUser() !== $this) {
+            $registeredUser->setUser($this);
+        }
+
+        $this->registeredUser = $registeredUser;
+
+        return $this;
+    }
+
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
         return $this;
     }
