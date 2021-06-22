@@ -38,13 +38,17 @@ header {
 
 .freeMap {
 
-    form  {
+    form {
 
         border-radius: .6em;
         position: absolute;
         z-index: 2;
         left: 100px;
         top: 1100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
 
     }
 

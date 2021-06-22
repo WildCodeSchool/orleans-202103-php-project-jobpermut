@@ -41,26 +41,19 @@
     </header>
 
     <section class="freeMap">
-        <form class ="text-light bg-dark">
-            <div class ="d-flex flex-column align-items-center pt-4 pb-4">
-                <h2 class = "col-8 text-center">Evaluez la durée de vos trajets</h2>
-                <div class="form-group d-flex flex-column justify-content-center col-10 m-3">
-                    <label for="homeCity">Ma ville de domicile</label>
-                    <input type="text" class="form-control" id="homeCity" placeholder="Meaux">
-                </div>
-                <div class="form-group d-flex flex-column justify-content-center col-10 m-3">
-                    <label for="workCity">Ma ville de travail</label>
-                    <input type="text" class="form-control" id="workCity" placeholder="Paris">
-                </div>
-                <div class="form-group d-flex flex-column justify-content-center col-10 m-3">
-                    <label for="Work">Mon métier</label>
-                    <input type="text" class="form-control" id="Work" placeholder="Développeur PHP">
-                </div>
-                <button type="submit" class="btn btn-warning m-3 col-10">Evaluez!</button>
-            </div>
-        </form>
+        <div class =  "VisitorTripForm">
+            {{ form_start(form) {form_attr: {class: ''}} }}
+                {{ form_label(form.homeCity, 'Votre Ville de Domicile') }}
+                {{ form_widget(form.homeCity, {'id': 'homeCity'}) }}
+
+                {{ form_label(form.workCity, 'Votre Ville de Travail') }}
+                {{ form_widget(form.workCity, {'id': 'workCity'}) }}
+
+                <button class = "btn">{{ button_label|default('Evaluez!') }}</button>
+            {{ form_end(form) }}
+        </div>
         <div id="map"></div>
-        <div id="TripEvaluation"></div>
+        <div class="TripEvaluation"></div>
     </section>
 
     <section id="presentation">
