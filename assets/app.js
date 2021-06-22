@@ -8,6 +8,8 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.scss';
 import './bootstrap';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const bootstrap = require('bootstrap');
 
@@ -17,3 +19,5 @@ window.addEventListener('load', (event) => {
         loginModal.show();
     }
 });
+
+AOS.init();
