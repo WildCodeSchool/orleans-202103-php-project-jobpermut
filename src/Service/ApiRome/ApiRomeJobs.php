@@ -31,7 +31,7 @@ class ApiRomeJobs extends ApiRomeToken
      *
      * @return array
      */
-    public function getJobsByCodeName(string $query): array
+    public function getJobsByCodeName(string $code): array
     {
         $response = $this->client->request(
             'GET',
@@ -41,7 +41,7 @@ class ApiRomeJobs extends ApiRomeToken
                     'Authorization' => $this->getToken()
                 ],
                 'query' => [
-                    'code' => $query
+                    'code' => $code
                 ]
             ]
         );
