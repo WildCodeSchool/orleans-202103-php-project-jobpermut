@@ -45,6 +45,7 @@ class UserFixtures extends Fixture
         for ($i = 0; $i < self::MAX_FIXTURES; $i++) {
             $user = new User();
             $user->setEmail($this->faker->unique()->email());
+            $user->setUsername($this->faker->unique()->firstName() . $this->faker->randomNumber(2));
             $user->setRoles(self::USERS_PASSWORDS['user']['role']);
             $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
             $user->setPassword(
@@ -60,6 +61,7 @@ class UserFixtures extends Fixture
         //for use in demo
         $user = new User();
         $user->setEmail('wildjobexchangeUser@gmail.com');
+        $user->setUsername('WildUSER');
         $user->setRoles(self::USERS_PASSWORDS['user']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
         $user->setPassword(
@@ -72,6 +74,7 @@ class UserFixtures extends Fixture
         //for ROLE_ADMIN
         $user = new User();
         $user->setEmail('wildjobexchangeAdmin@gmail.com');
+        $user->setUsername('ADMIN');
         $user->setRoles(self::USERS_PASSWORDS['admin']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
         $user->setPassword(
@@ -83,6 +86,7 @@ class UserFixtures extends Fixture
 
         $user = new User();
         $user->setEmail('wildjobexchangeSuperAdmin@gmail.com');
+        $user->setUsername('SUPERADMIN');
         $user->setRoles(self::USERS_PASSWORDS['superadmin']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
         $user->setPassword(
