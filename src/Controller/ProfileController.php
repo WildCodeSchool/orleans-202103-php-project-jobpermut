@@ -11,6 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\RegisteredUserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * @Route("/profile", name="profile_")
@@ -36,6 +37,10 @@ class ProfileController extends AbstractController
      */
     public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
     {
+        if ($user !== $this->getUser()) {
+            return new RedirectResponse('/error403');
+        }
+
         $registeredUser = new RegisteredUser();
         $registeredUser->setUser($user);
 
