@@ -15,7 +15,7 @@ class Geocode
         $this->key = $key;
     }
 
-    public function getCoordonates(?string $location, string $layer = 'locality', string $country = 'FRA'): ?array
+    public function getCoordinates(?string $location, string $layer = 'locality', string $country = 'FRA'): ?array
     {
         $content = [];
         $client = HttpClient::create();
@@ -42,6 +42,6 @@ class Geocode
             return $content['features'][0]['geometry']['coordinates'];
         }
 
-        throw new Exception('Le serice est temporairement indisponible');
+        throw new Exception('Le service est temporairement indisponible');
     }
 }
