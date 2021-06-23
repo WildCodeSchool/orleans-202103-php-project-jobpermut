@@ -14,7 +14,6 @@
 
             <h2 class="h2">Inscription</h2>
             {{ form_start(registrationForm) }}
-            {{ form_errors(registrationForm.plainPassword) }}
                 {{ form_label(registrationForm.username, null,
                     {label: 'Veuillez choisir un pseudonyme', 'label_attr': {'class': 'h6'}}) }}
                 {{ form_widget(registrationForm.username,
