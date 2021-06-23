@@ -70,7 +70,7 @@ class VisitorTrip
      *
      * @return  self
      */
-    public function setworkCityCoordinates(?array $workCityCoordinates): self
+    public function setWorkCityCoordinates(?array $workCityCoordinates): self
     {
         $this->workCityCoordinates = $workCityCoordinates;
 

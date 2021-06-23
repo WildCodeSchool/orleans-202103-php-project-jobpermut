@@ -24,10 +24,10 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $homeCity = $visitorTrip->getHomeCity();
             $workCity = $visitorTrip->getWorkCity();
-            $homeCityCoordonate = $geocode->getCoordinates($homeCity);
-            $workCityCoordonate = $geocode->getCoordinates($workCity);
-            $visitorTrip->setHomeCityCoordinates($homeCityCoordonate);
-            $visitorTrip->setworkCityCoordinates($workCityCoordonate);
+            $homeCityCoordinate = $geocode->getCoordinates($homeCity);
+            $workCityCoordinate = $geocode->getCoordinates($workCity);
+            $visitorTrip->setHomeCityCoordinates($homeCityCoordinate);
+            $visitorTrip->setWorkCityCoordinates($workCityCoordinate);
             return $this->redirectToRoute('home');
         }
         return $this->render('home/index.html.twig', [
