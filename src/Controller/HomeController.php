@@ -34,17 +34,17 @@ class HomeController extends AbstractController
                     $homeCityCoordinate = $geocode->getCoordinates($homeCity);
                     $workCityCoordinate = $geocode->getCoordinates($workCity);
                 } catch (LogicException $e) {
-                    $e = [
+                    $exception = [
                        'class' => 'warning',
-                       'message' => $e->getMessage(),
+                       'text' => $e->getMessage(),
                     ];
-                    $this->addFlash('geocode', $e);
+                    $this->addFlash('geocode', $exception);
                 } catch (RuntimeException $e) {
-                    $e = [
+                    $exception = [
                         'class' => 'danger',
-                        'message' => $e->getMessage(),
+                        'text' => $e->getMessage(),
                     ];
-                    $this->addFlash('geocode', $e);
+                    $this->addFlash('geocode', $exception);
                 }
                 $visitorTrip->setHomeCityCoordinates($homeCityCoordinate);
                 $visitorTrip->setworkCityCoordinates($workCityCoordinate);
