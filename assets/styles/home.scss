@@ -58,8 +58,42 @@ header {
 }
 
 .freeMap {
+
+    .visitorForm {
+        position: absolute;
+        z-index: 2;
+        left: 100px;
+        top: 1100px;
+        border-radius: 25px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .visitorForm {
+            position: static;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            border-radius: 0;
+            width: 100vw;
+        }
+    }
+
     #map {
         height: 100vh;
+        position: relative;
+        z-index: 1;
+    }
+
+    .fas {
+        font-size: 25px;
+    }
+
+    .fa-home {
+        color: $warning;
+    }
+
+    .fa-briefcase {
+        color: $primary;
     }
 }
 
