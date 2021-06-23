@@ -26,8 +26,8 @@ class HomeController extends AbstractController
             $workCity = $visitorTrip->getWorkCity();
             $homeCityCoordonate = $geocode->getCoordinates($homeCity);
             $workCityCoordonate = $geocode->getCoordinates($workCity);
-            $visitorTrip->setHomeCityCoordonates($homeCityCoordonate);
-            $visitorTrip->setworkCityCoordonates($workCityCoordonate);
+            $visitorTrip->setHomeCityCoordinates($homeCityCoordonate);
+            $visitorTrip->setworkCityCoordinates($workCityCoordonate);
             return $this->redirectToRoute('home');
         }
         return $this->render('home/index.html.twig', [

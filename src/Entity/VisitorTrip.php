@@ -9,9 +9,9 @@ class VisitorTrip
 
     private string $workCity;
 
-    private ?array $homeCityCoordonates;
+    private ?array $homeCityCoordinates;
 
-    private ?array $workCityCoordonates;
+    private ?array $workCityCoordinates;
 
     public function getHomeCity(): ?string
     {
@@ -38,41 +38,41 @@ class VisitorTrip
     }
 
     /**
-     * Get the value of homeCityCoordonates
+     * Get the value of homeCityCoordinates
      */
-    public function getHomeCityCoordonates(): ?array
+    public function gethomeCityCoordinates(): ?array
     {
-        return $this->homeCityCoordonates;
+        return $this->homeCityCoordinates;
     }
 
     /**
-     * Set the value of homeCityCoordonates
+     * Set the value of homeCityCoordinates
      *
      * @return  self
      */
-    public function setHomeCityCoordonates(?array $homeCityCoordonates): self
+    public function sethomeCityCoordinates(?array $homeCityCoordinates): self
     {
-        $this->homeCityCoordonates = $homeCityCoordonates;
+        $this->homeCityCoordinates = $homeCityCoordinates;
 
         return $this;
     }
 
     /**
-     * Get the value of workCityCoordonates
+     * Get the value of workCityCoordinates
      */
-    public function getWorkCityCoordonates(): ?array
+    public function getworkCityCoordinates(): ?array
     {
-        return $this->workCityCoordonates;
+        return $this->workCityCoordinates;
     }
 
     /**
-     * Set the value of workCityCoordonates
+     * Set the value of workCityCoordinates
      *
      * @return  self
      */
-    public function setWorkCityCoordonates(?array $workCityCoordonates): self
+    public function setworkCityCoordinates(?array $workCityCoordinates): self
     {
-        $this->workCityCoordonates = $workCityCoordonates;
+        $this->workCityCoordinates = $workCityCoordinates;
 
         return $this;
     }
