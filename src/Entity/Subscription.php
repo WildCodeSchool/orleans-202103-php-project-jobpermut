@@ -2,13 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\SubscriptionRepository;
 use DateTimeInterface;
-use Doctrine\DBAL\Types\TextType;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\DBAL\Types\TextType;
+use App\Repository\SubscriptionRepository;
+use DateTimeImmutable;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
+ * @Vich\Uploadable
  */
 class Subscription
 {
@@ -25,14 +29,31 @@ class Subscription
     private DateTimeInterface $subscriptionAt;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private string $curriculum;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @Vich\UploadableField(mapping="curriculum", fileNameProperty="curriculum")
+     * @var File|null
+     */
+    private $curriculumFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private string $jobDescription;
+
+    /**
+     * @Vich\UploadableField(mapping="job_description", fileNameProperty="jobDescription")
+     * @var File|null
+     */
+    private $jobDescriptionFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private DateTimeInterface $updatedAt;
 
     public function __serialize(): array
     {
@@ -44,12 +65,12 @@ class Subscription
         return $this->id;
     }
 
-    public function getSubscriptionAt(): ?\DateTimeInterface
+    public function getSubscriptionAt(): ?DateTimeInterface
     {
         return $this->subscriptionAt;
     }
 
-    public function setSubscriptionAt(\DateTimeInterface $subscriptionAt): self
+    public function setSubscriptionAt(DateTimeInterface $subscriptionAt): self
     {
         $this->subscriptionAt = $subscriptionAt;
 
@@ -78,6 +99,46 @@ class Subscription
         if ($jobDescription !== null) {
             $this->jobDescription = $jobDescription;
         }
+
+        return $this;
+    }
+
+    public function setCurriculumFile(?File $curriculumFile = null): void
+    {
+        $this->curriculumFile = $curriculumFile;
+
+        if (null !== $curriculumFile) {
+            $this->updatedAt = new DateTimeImmutable();
+        }
+    }
+
+    public function getCurriculumFile(): ?File
+    {
+        return $this->curriculumFile;
+    }
+
+    public function setjobDescriptionFile(?File $jobDescriptionFile = null): void
+    {
+        $this->jobDescriptionFile = $jobDescriptionFile;
+
+        if (null !== $jobDescriptionFile) {
+            $this->updatedAt = new DateTimeImmutable();
+        }
+    }
+
+    public function getjobDescriptionFile(): ?File
+    {
+        return $this->jobDescriptionFile;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

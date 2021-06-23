@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
             <div class="navbar-nav">
                 {% if not app.user %}
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="{{ path('app_register') }}">
                         <i class="fas fa-sign-in-alt"></i>
                         Inscription
                     </a>
