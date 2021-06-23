@@ -5,10 +5,14 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="Cet email est déjà utilisé. Veuillez en essayer un autre.")
+ * @UniqueEntity(fields={"username"}, message="Ce pseudonyme est déjà utilisé. Veuillez en essayer un autre.")
  */
 class User implements UserInterface
 {
@@ -21,6 +25,9 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\NotNull
+     * @Assert\NotBlank()
+     * @Assert\Length(max=180)
      */
     private string $email;
 
