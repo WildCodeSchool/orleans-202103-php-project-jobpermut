@@ -34,16 +34,22 @@ class HomeController extends AbstractController
                     $homeCityCoordinate = $geocode->getCoordinates($homeCity);
                     $workCityCoordinate = $geocode->getCoordinates($workCity);
                 } catch (LogicException $e) {
-                    $message = $e->getMessage();
-                    $this->addFlash('warning', $message);
+                    $e = [
+                       'class' => 'warning',
+                       'message' => $e->getMessage(),
+                    ];
+                    $this->addFlash('geocode', $e);
                 } catch (RuntimeException $e) {
-                    $message = $e->getMessage();
-                    $this->addFlash('danger', $message);
+                    $e = [
+                        'class' => 'danger',
+                        'message' => $e->getMessage(),
+                    ];
+                    $this->addFlash('geocode', $e);
                 }
                 $visitorTrip->setHomeCityCoordinates($homeCityCoordinate);
                 $visitorTrip->setworkCityCoordinates($workCityCoordinate);
             }
-            return $this->redirectToRoute('home' /*, ['_fragment' => 'map']*/);
+            return $this->redirectToRoute('home', ['_fragment' => 'map']);
         }
 
         return $this->render('home/index.html.twig', [
