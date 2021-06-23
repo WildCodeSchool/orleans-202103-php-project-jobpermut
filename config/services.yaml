@@ -5,7 +5,12 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 
 parameters:
+<<<<<<< HEAD
     api_key: '%env(OPEN_ROUTE_SERVICE_KEY)%'
+=======
+    app.locales: [fr, en]
+    local: fr
+>>>>>>> 751681da91daac773ba11788b945dee0055552de
 
 services:
     # default configuration for services in *this* file
