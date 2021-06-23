@@ -2,11 +2,32 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class VisitorTrip
 {
-
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max="255")
+     * @Assert\Regex(
+     * pattern="/\d/",
+     * match=false,
+     * message="Your name cannot contain a number"
+     * )
+     *
+    */
     private string $homeCity;
 
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max="255")
+     * @Assert\Regex(
+     * pattern="/\d/",
+     * match=false,
+     * message="Your name cannot contain a number"
+     * )
+     *
+    */
     private string $workCity;
 
     private ?array $homeCityCoordonates;
