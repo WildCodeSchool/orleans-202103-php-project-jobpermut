@@ -74,10 +74,10 @@ class SecurityController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $mailTo = $user->getEmail();
+
             $email = (new Email())
             ->from(strval($this->getParameter('mailer_from')))
-            ->to($mailTo)
+            ->to(!empty($user->getEmail()))
             ->subject('Confirmation de votre inscription')
             ->html($this->renderView('mail/confirmationMail.html.twig', ['user' => $user]));
             $mailer->send($email);
