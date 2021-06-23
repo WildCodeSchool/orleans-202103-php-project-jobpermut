@@ -26,8 +26,8 @@ class RegistrationFormType extends AbstractType
 
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
-                'first_options' => ['label' => 'Veuillez saisir votre Mot de passe'],
-                'second_options' => ['label' => 'Veuillez répéter votre Mot de passe'],
+                'first_options' => ['label' => 'Veuillez saisir votre mot de passe'],
+                'second_options' => ['label' => 'Veuillez répéter votre mot de passe'],
                 'invalid_message' => 'Les deux mots de passe doivent être identiques',
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],

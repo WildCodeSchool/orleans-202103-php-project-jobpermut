@@ -13,6 +13,6 @@ class ErrorController extends AbstractController
      */
     public function error403(): Response
     {
-        return $this->render('error/error_403.html.twig');
+        return $this->render('errors/error403.html.twig');
     }
 }
