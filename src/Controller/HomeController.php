@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use RuntimeException;
+use LogicException;
+use App\Service\Geocode;
 use App\Entity\VisitorTrip;
 use App\Form\VisitorTripType;
-use App\Service\Geocode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -23,15 +25,27 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+                $homeCityCoordinate = [];
+                $workCityCoordinate = [];
+
                 $homeCity = $visitorTrip->getHomeCity();
                 $workCity = $visitorTrip->getWorkCity();
-                $homeCityCoordinate = $geocode->getCoordinates($homeCity);
-                $workCityCoordinate = $geocode->getCoordinates($workCity);
+                try {
+                    $homeCityCoordinate = $geocode->getCoordinates($homeCity);
+                    $workCityCoordinate = $geocode->getCoordinates($workCity);
+                } catch (LogicException $e) {
+                    $message = $e->getMessage();
+                    $this->addFlash('warning', $message);
+                } catch (RuntimeException $e) {
+                    $message = $e->getMessage();
+                    $this->addFlash('danger', $message);
+                }
                 $visitorTrip->setHomeCityCoordinates($homeCityCoordinate);
                 $visitorTrip->setworkCityCoordinates($workCityCoordinate);
             }
-            return $this->redirectToRoute('home', []);
+            return $this->redirectToRoute('home' /*, ['_fragment' => 'map']*/);
         }
+
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
         ]);

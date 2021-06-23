@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use Error;
-use Exception;
+use LogicException;
+use RuntimeException;
 use Symfony\Component\HttpClient\HttpClient;
 
 class Geocode
@@ -42,11 +42,11 @@ class Geocode
             // convert the response (here in JSON) to an PHP array
 
             if ($content['features'] === []) {
-                throw new Error('Ceci n\'est pas un lieu valide.');
+                throw new LogicException('Le lieu indiqué n\'existe pas.');
             }
             return $content['features'][0]['geometry']['coordinates'];
         }
 
-        throw new Exception('Le service est temporairement indisponible.');
+        throw new RuntimeException('Le service est temporairement indisponible.');
     }
 }

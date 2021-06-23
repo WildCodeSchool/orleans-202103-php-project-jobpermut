@@ -3,6 +3,13 @@
 {{ form_start(form) }}
 <div class = "visitorForm text-light bg-dark rounded-5 col-12 col-md-3 p-4">
     <h2 class = "text-warning text-center">Evaluez votre trajet</h2>
+    {% for category, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ category }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
     <div class="col-12 mt-4">
         {{ form_label(form.homeCity, 'Votre Ville de Domicile') }}
         {{ form_widget(form.homeCity, {
