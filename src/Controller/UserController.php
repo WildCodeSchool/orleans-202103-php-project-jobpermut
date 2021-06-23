@@ -32,9 +32,10 @@ class UserController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request,
-    UserPasswordEncoderInterface $passwordEncoder): Response
-    {
+    public function new(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder
+    ): Response {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
@@ -50,7 +51,7 @@ class UserController extends AbstractController
             );
             $entityManager->persist($user);
             $entityManager->flush();
-            
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -65,7 +66,7 @@ class UserController extends AbstractController
      */
     public function delete(Request $request, User $user): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($user);
             $entityManager->flush();
