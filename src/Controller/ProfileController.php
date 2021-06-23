@@ -54,6 +54,8 @@ class ProfileController extends AbstractController
 
             $entityManager->flush();
 
+            $this->addFlash('success', 'Votre profil a bien été modifié.');
+
             return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }
 
