@@ -58,7 +58,7 @@ class Subscription
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="subscription")
      */
-    private $company;
+    private ?Company $company;
 
     public function __serialize(): array
     {

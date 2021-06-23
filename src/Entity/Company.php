@@ -17,32 +17,32 @@ class Company
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $adress;
+    private string $adress;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $code;
+    private int $code;
 
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="company")
      */
-    private $subscription;
+    private Collection $subscription;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="company")
      */
-    private $user;
+    private Collection $user;
 
     public function __construct()
     {

@@ -60,7 +60,7 @@ class User implements UserInterface
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="user")
      */
-    private $company;
+    private ?Company $company;
 
     public function getId(): ?int
     {
