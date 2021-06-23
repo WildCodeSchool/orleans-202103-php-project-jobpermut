@@ -21,14 +21,16 @@ class HomeController extends AbstractController
         $form = $this->createForm(VisitorTripType::class, $visitorTrip);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $homeCity = $visitorTrip->getHomeCity();
-            $workCity = $visitorTrip->getWorkCity();
-            $homeCityCoordonate = $geocode->getCoordinates($homeCity);
-            $workCityCoordonate = $geocode->getCoordinates($workCity);
-            $visitorTrip->setHomeCityCoordonates($homeCityCoordonate);
-            $visitorTrip->setworkCityCoordonates($workCityCoordonate);
-            return $this->redirectToRoute('home');
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $homeCity = $visitorTrip->getHomeCity();
+                $workCity = $visitorTrip->getWorkCity();
+                $homeCityCoordinate = $geocode->getCoordinates($homeCity);
+                $workCityCoordinate = $geocode->getCoordinates($workCity);
+                $visitorTrip->setHomeCityCoordinates($homeCityCoordinate);
+                $visitorTrip->setworkCityCoordinates($workCityCoordinate);
+            }
+            return $this->redirectToRoute('home', []);
         }
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
