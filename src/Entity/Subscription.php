@@ -31,22 +31,24 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $curriculum;
+    private string $curriculum;
 
     /**
      * @Vich\UploadableField(mapping="curriculum", fileNameProperty="curriculum")
+     * @var File|null
      */
-    private ?File $curriculumFile;
+    private $curriculumFile;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $jobDescription;
+    private string $jobDescription;
 
     /**
      * @Vich\UploadableField(mapping="job_description", fileNameProperty="jobDescription")
+     * @var File|null
      */
-    private ?File $jobDescriptionFile;
+    private $jobDescriptionFile;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
