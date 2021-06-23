@@ -3,10 +3,10 @@
 {{ form_start(form) }}
 <div class = "visitorForm text-light bg-dark rounded-5 col-12 col-md-3 p-4">
     <h2 class = "text-warning text-center">Evaluez votre trajet</h2>
-    {% for messages in app.flashes(['geocode']) %}
+    {% for messages in app.flashes('geocode') %}
         {% for message in messages %}
-            <div class="alert alert-{{ message.class }}">
-                {{ message.text }}
+            <div class="alert alert-warning">
+                {{ message }}
             </div>
         {% endfor %}
     {% endfor %}
