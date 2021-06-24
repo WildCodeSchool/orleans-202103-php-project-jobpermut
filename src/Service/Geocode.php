@@ -27,7 +27,7 @@ class Geocode
                 'query' => [
                     'api_key' => $this->key,
                     'layer' => $layer,
-                   /* 'boundary.country' => $country, */
+                    'boundary.country' => $country,
                     'text' => $location
                 ]
             ]

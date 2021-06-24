@@ -58,7 +58,7 @@ window.onload = function () {
         workLong = parseFloat(workLong.searchParams.get('workLong'));
         workLat = parseFloat(workLat.searchParams.get('workLat'));
         const lat = (homeLat + workLat) / 2;
-        const long = (homeLong + workLong) / 2;
+        const long = ((homeLong + workLong) / 2) - 0.2;
         initMap(homeLong, homeLat, workLong, workLat, lat, long);
     } else {
         initMap();
