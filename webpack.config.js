@@ -41,6 +41,7 @@ Encore
     .addStyleEntry('profile', './assets/styles/profile.scss')
     .addStyleEntry('admin', './assets/styles/admin.scss')
     .addStyleEntry('error', './assets/styles/error.scss')
+    .addStyleEntry('setting', './assets/styles/setting.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

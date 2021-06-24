@@ -2,10 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\ChangePassword;
 use DateTime;
 use LogicException;
 use App\Entity\User;
+use App\Form\ChangePasswordType;
 use App\Form\RegistrationFormType;
+use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -88,6 +92,43 @@ class SecurityController extends AbstractController
 
         return $this->render('includes/_login.html.twig', [
             'error' => $error
+        ]);
+    }
+
+    /**
+     * @Route("parametres/{username}/mot-de-passe", name="change_password")
+     * @ParamConverter("user", class="App\Entity\User"),
+     * options={"mapping": {"username": "username"}})
+     */
+    public function changePassword(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        EntityManagerInterface $entityManager,
+        User $user
+    ): Response {
+
+        $changePassword = new ChangePassword();
+
+        $form = $this->createForm(ChangePasswordType::class, $changePassword);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('newPassword')->getData()
+                )
+            );
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre mot de passe a bien été modifié.');
+
+            return $this->redirectToRoute('setting');
+        }
+
+        return $this->render('setting/change_password.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }

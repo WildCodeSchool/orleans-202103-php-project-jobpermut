@@ -48,6 +48,7 @@ class UserFixtures extends Fixture
             $user->setUsername($this->faker->unique()->firstName() . $this->faker->randomNumber(2));
             $user->setRoles(self::USERS_PASSWORDS['user']['role']);
             $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
+            $user->setIsVisible(true);
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
                     $user,
@@ -64,6 +65,7 @@ class UserFixtures extends Fixture
         $user->setUsername('WildUSER');
         $user->setRoles(self::USERS_PASSWORDS['user']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
+        $user->setIsVisible(true);
         $user->setPassword(
             $this
                 ->passwordEncoder
@@ -77,6 +79,7 @@ class UserFixtures extends Fixture
         $user->setUsername('ADMIN');
         $user->setRoles(self::USERS_PASSWORDS['admin']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
+        $user->setIsVisible(false);
         $user->setPassword(
             $this
                 ->passwordEncoder
@@ -89,6 +92,7 @@ class UserFixtures extends Fixture
         $user->setUsername('SUPERADMIN');
         $user->setRoles(self::USERS_PASSWORDS['superadmin']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
+        $user->setIsVisible(false);
         $user->setPassword(
             $this
                 ->passwordEncoder
