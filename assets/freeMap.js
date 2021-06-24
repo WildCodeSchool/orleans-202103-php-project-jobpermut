@@ -34,15 +34,18 @@ function initMap(
             // Il est toujours bien de laisser le lien vers la source des données
             attribution:
             'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-            minZoom: 10,
-            maxZoom: 10,
         },
     ).addTo(map);
 
-    const workIcon = L.divIcon({ className: 'fas fa-briefcase' });
+    const workIcon = L.divIcon({ className: 'fas fa-briefcase', iconAnchor: [12, 25] });
     L.marker([workLat, workLong], { icon: workIcon }).addTo(map);
-    const homeIcon = L.divIcon({ className: 'fas fa-home' });
+    const homeIcon = L.divIcon({ className: 'fas fa-home', iconAnchor: [12, 25] });
     L.marker([homeLat, homeLong], { icon: homeIcon }).addTo(map);
+
+    map.fitBounds([
+        [workLat, workLong],
+        [homeLat, homeLong],
+    ]);
 }
 
 window.onload = function () {
@@ -58,7 +61,7 @@ window.onload = function () {
         workLong = parseFloat(workLong.searchParams.get('workLong'));
         workLat = parseFloat(workLat.searchParams.get('workLat'));
         const lat = (homeLat + workLat) / 2;
-        const long = ((homeLong + workLong) / 2) - 0.2;
+        const long = (homeLong + workLong) / 2;
         initMap(homeLong, homeLat, workLong, workLat, lat, long);
     } else {
         initMap();
