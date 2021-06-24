@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="home", methods={"POST", "GET"})
      */
     public function index(Request $request, Geocode $geocode, SessionInterface $session): Response
     {
@@ -24,29 +24,34 @@ class HomeController extends AbstractController
         $form = $this->createForm(VisitorTripType::class, $visitorTrip);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $homeCityCoordinate = [];
-                $workCityCoordinate = [];
+        $homeCityCoordinate = [0, 0];
+        $workCityCoordinate = [0, 0];
 
-                $homeCity = $visitorTrip->getHomeCity();
-                $workCity = $visitorTrip->getWorkCity();
-                try {
-                    $homeCityCoordinate = $geocode->getCoordinates($homeCity);
-                    $workCityCoordinate = $geocode->getCoordinates($workCity);
-                } catch (LogicException $e) {
-                    $exception = $e->getMessage();
-                    $this->addFlash('geocode', $exception);
-                } catch (RuntimeException $e) {
-                    $exception = $e->getMessage();
-                    $this->addFlash('geocode', $exception);
-                }
-                $visitorTrip->setHomeCityCoordinates($homeCityCoordinate);
-                $visitorTrip->setworkCityCoordinates($workCityCoordinate);
-                $session->set('visitor_trip', $visitorTrip);
 
-                return $this->json($visitorTrip);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $homeCity = $visitorTrip->getHomeCity();
+            $workCity = $visitorTrip->getWorkCity();
+            try {
+                $homeCityCoordinate = $geocode->getCoordinates($homeCity);
+                $workCityCoordinate = $geocode->getCoordinates($workCity);
+                return $this->redirectToRoute('home', [
+                    '_fragment' => 'map',
+                    'homeLong' => $homeCityCoordinate[0] ?? 0,
+                    'homeLat' => $homeCityCoordinate[1] ?? 0,
+                    'workLong' => $workCityCoordinate[0] ?? 0,
+                    'workLat' => $workCityCoordinate[1] ?? 0,
+                ]);
+            } catch (LogicException $e) {
+                $exception = $e->getMessage();
+                $this->addFlash('geocode', $exception);
+            } catch (RuntimeException $e) {
+                $exception = $e->getMessage();
+                $this->addFlash('geocode', $exception);
             }
+
+            return $this->redirectToRoute('home', [
+                '_fragment' => 'map',
+            ]);
         }
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
