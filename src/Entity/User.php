@@ -60,7 +60,7 @@ class User implements UserInterface
     /**
      * @ORM\OneToOne(targetEntity=Testimony::class, mappedBy="user", cascade={"persist", "remove"})
      */
-    private Testimony $testimony;
+    private ?Testimony $testimony;
 
     public function getId(): ?int
     {

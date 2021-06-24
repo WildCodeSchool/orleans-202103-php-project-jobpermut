@@ -21,13 +21,10 @@ class TestimonyFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         for ($i = 5; $i < UserFixtures::MAX_FIXTURES; $i++) {
-
             $testimony = new Testimony();
-
-            $testimony->setCommentary($this->faker->realText($maxNbChars = 150, $indexSize = 2));
+            $testimony->setCommentary($this->faker->realText(150, 2));
             $testimony->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
             $testimony->setUser($this->getReference('user_' . $i));
-
             $manager->persist($testimony);
         }
 

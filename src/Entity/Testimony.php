@@ -3,7 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TestimonyRepository;
-use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,12 +26,12 @@ class Testimony
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTime $created_at;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="testimony", cascade={"persist", "remove"})
      */
-    private User $user;
+    private ?User $user;
 
     public function getId(): ?int
     {
@@ -52,12 +52,12 @@ class Testimony
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
