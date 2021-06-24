@@ -3,6 +3,11 @@
 {{ form_start(form) }}
 <div class = "visitorForm text-light bg-dark rounded-5 col-12 col-md-3 p-4">
     <h2 class = "text-warning text-center">Evaluez votre trajet</h2>
+    {% for message in app.flashes('geocode') %}
+        <div class="alert alert-warning">
+            {{ message }}
+        </div>
+    {% endfor %}
     <div class="col-12 mt-4">
         {{ form_label(form.homeCity, 'Votre Ville de Domicile') }}
         {{ form_widget(form.homeCity, {
