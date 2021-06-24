@@ -1,6 +1,5 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
-
-{{ form_start(form) }}
+{{ form_start(form, {'attr': {'id': 'button-visitor'}}) }}
 <div class = "visitorForm text-light bg-dark rounded-5 col-12 col-md-3 p-4">
     <h2 class = "text-warning text-center">Evaluez votre trajet</h2>
     {% for message in app.flashes('geocode') %}
@@ -28,6 +27,6 @@
             }
         }) }}
     </div>
-    <button class = "btn btn-warning form-check col-12 mt-4 rounded">Evaluez!</button>
+    <button class="btn btn-warning form-check col-12 mt-4 rounded">Evaluez!</button>
 </div>
 {{ form_end(form) }}

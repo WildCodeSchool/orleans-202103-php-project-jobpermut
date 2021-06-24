@@ -38,7 +38,3 @@ function initMap() {
     const homeIcon = L.divIcon({ className: 'fas fa-home' });
     L.marker([48.95, 2.8667], { icon: homeIcon }).addTo(map);
 }
-window.onload = function () {
-    // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
-    initMap();
-};

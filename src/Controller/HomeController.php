@@ -11,13 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
      */
-    public function index(Request $request, Geocode $geocode): Response
+    public function index(Request $request, Geocode $geocode, SessionInterface $session): Response
     {
         $visitorTrip = new VisitorTrip();
         $form = $this->createForm(VisitorTripType::class, $visitorTrip);
@@ -42,10 +43,11 @@ class HomeController extends AbstractController
                 }
                 $visitorTrip->setHomeCityCoordinates($homeCityCoordinate);
                 $visitorTrip->setworkCityCoordinates($workCityCoordinate);
-            }
-            return $this->redirectToRoute('home', ['_fragment' => 'map']);
-        }
+                $session->set('visitor_trip', $visitorTrip);
 
+                return $this->json($visitorTrip);
+            }
+        }
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
         ]);
