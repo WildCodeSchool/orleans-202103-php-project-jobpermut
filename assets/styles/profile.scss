@@ -28,6 +28,10 @@
                 font-weight: $font-weight-light;
                 font-style: italic;
             }
+
+            i {
+                font-size: 30px;
+            }
         }
     }
 
@@ -47,6 +51,23 @@
                 font-style: italic;
                 font-size: 1em;
             }
+        }
+    }
+}
+
+.edit-profile {
+    h2 {
+        font-family: $font-p;
+        font-weight: 300;
+    }
+
+    .btn {
+        width: 400px;
+        height: 60px;
+        font-size: 20px;
+
+        @media screen and (max-width: 768px) {
+            width: 100%;
         }
     }
 }
