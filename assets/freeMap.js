@@ -6,10 +6,10 @@ let map = null;
 
 // Fonction d'initialisation de la carte
 function initMap(
+    homeLong = 2.8884657,
+    homeLat = 48.9562018,
     workLong = 2.3488,
     workLat = 48.8534,
-    homeLong = 2.8667,
-    homeLat = 48.95,
     lat = 48.852969,
     lon = 2.2,
 ) {
