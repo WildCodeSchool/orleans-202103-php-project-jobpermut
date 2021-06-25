@@ -42,6 +42,15 @@ function initMap(
     const homeIcon = L.divIcon({ className: 'fas fa-home', iconAnchor: [12, 25] });
     L.marker([homeLat, homeLong], { icon: homeIcon }).addTo(map);
 
+    fetch('/leaflet/direction/' + homeLong + '/' + homeLat + '/' + workLong + '/' + workLat)
+        .then((response) => response.json())
+        .then((data) => {
+            data.forEach((element) => {
+                element = element.reverse();
+            });
+            L.polyline(data, { color: 'red' }).addTo(map);
+        })
+
     map.fitBounds([
         [workLat, workLong],
         [homeLat, homeLong],
