@@ -26,7 +26,7 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 5; $i < UserFixtures::MAX_FIXTURES; $i++) {
             $company = new Company();
             $company->setName($this->faker->company());
-            $company->setAdress($this->faker->address());
+            $company->setAddress($this->faker->address());
             $company->setCode($this->faker->randomNumber(5, true));
             $company->addSubscription($this->getReference('subscription_' . $i));
             $company->addUser($this->getReference('user_' . $i));
