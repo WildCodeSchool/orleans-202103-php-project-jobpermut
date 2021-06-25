@@ -69,7 +69,7 @@ class SecurityController extends AbstractController
             );
 
             $user->setCreatedAt(new DateTime('now'));
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles('ROLE_USER');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
