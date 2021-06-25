@@ -39,3 +39,7 @@ services:
     App\Service\Geocode:
         arguments:
             $key: '%api_key%'
+            
+    App\Service\Matrix:
+        arguments:
+            $key: '%api_key%'
