@@ -14,15 +14,15 @@ class UserFixtures extends Fixture
     private const USERS_PASSWORDS = [
         'user' => [
             'password' => '123456789',
-            'role' => ['ROLE_USER'],
+            'role' => 'ROLE_USER',
         ],
         'admin' => [
             'password' => 'admin123456789',
-            'role' => ['ROLE_ADMIN'],
+            'role' => 'ROLE_ADMIN',
         ],
         'superadmin' => [
             'password' => 'admin123456789',
-            'role' => ['ROLE_SUPERADMIN'],
+            'role' => 'ROLE_SUPERADMIN',
         ],
     ];
 
