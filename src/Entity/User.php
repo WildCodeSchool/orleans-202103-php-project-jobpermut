@@ -57,6 +57,11 @@ class User implements UserInterface
      */
     private string $username;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Testimony::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private ?Testimony $testimony;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -165,6 +170,28 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getTestimony(): ?Testimony
+    {
+        return $this->testimony;
+    }
+
+    public function setTestimony(?Testimony $testimony): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($testimony === null && $this->testimony !== null) {
+            $this->testimony->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($testimony !== null && $testimony->getUser() !== $this) {
+            $testimony->setUser($this);
+        }
+
+        $this->testimony = $testimony;
 
         return $this;
     }
