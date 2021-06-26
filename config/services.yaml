@@ -45,3 +45,7 @@ services:
     App\Service\Direction:
         arguments:
             $key: '%api_key%'
+
+    App\Service\Matrix:
+        arguments:
+            $key: '%api_key%'
