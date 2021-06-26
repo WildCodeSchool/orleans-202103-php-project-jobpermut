@@ -38,18 +38,18 @@ class Matrix
 
         if ($statusCode === self::STATUS) {
             // associative array (distances and durations)
-            $result = [];
-            $result['distances']['homeToWork'] = $response->toArray()['distances'][0][1];
-            $result['distances']['workToHome'] = $response->toArray()['distances'][1][0];
-            $result['distances']['homeToFuturWork'] = $response->toArray()['distances'][0][2];
-            $result['distances']['futurWorkToHome'] = $response->toArray()['distances'][2][0];
+            $content = [];
+            $content['distances']['homeToWork'] = $response->toArray()['distances'][0][1];
+            $content['distances']['workToHome'] = $response->toArray()['distances'][1][0];
+            $content['distances']['homeToFuturWork'] = $response->toArray()['distances'][0][2];
+            $content['distances']['futurWorkToHome'] = $response->toArray()['distances'][2][0];
 
-            $result['durations']['homeToWork'] = $response->toArray()['durations'][0][1];
-            $result['durations']['workToHome'] = $response->toArray()['durations'][1][0];
-            $result['durations']['homeToFuturWork'] = $response->toArray()['durations'][0][2];
-            $result['durations']['futurWorkToHome'] = $response->toArray()['durations'][2][0];
+            $content['durations']['homeToWork'] = $response->toArray()['durations'][0][1];
+            $content['durations']['workToHome'] = $response->toArray()['durations'][1][0];
+            $content['durations']['homeToFuturWork'] = $response->toArray()['durations'][0][2];
+            $content['durations']['futurWorkToHome'] = $response->toArray()['durations'][2][0];
 
-            return $result;
+            return $content;
         }
         throw new Exception('Le service est temporairement indisponible');
     }
