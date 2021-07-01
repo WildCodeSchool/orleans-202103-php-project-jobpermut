@@ -7,7 +7,6 @@ use RuntimeException;
 use App\Service\Geocode;
 use App\Entity\VisitorTrip;
 use App\Form\VisitorTripType;
-use App\Service\Matrix;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,7 +18,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home", methods={"POST", "GET"})
      */
-    public function index(Request $request, Geocode $geocode, SessionInterface $session, Matrix $matrix): Response
+    public function index(Request $request, Geocode $geocode, SessionInterface $session): Response
     {
         $visitorTrip = new VisitorTrip();
         $form = $this->createForm(VisitorTripType::class, $visitorTrip);
@@ -34,6 +33,7 @@ class HomeController extends AbstractController
             try {
                 $homeCityCoordinate = $geocode->getCoordinates($homeCity);
                 $workCityCoordinate = $geocode->getCoordinates($workCity);
+
                 return $this->redirectToRoute('home', [
                     '_fragment' => 'map',
                     'homeLong' => $homeCityCoordinate[0] ?? 0,
