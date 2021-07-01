@@ -22,6 +22,8 @@ class LeafletController extends AbstractController
         float $workEnd,
         Direction $direction
     ): Response {
+        $homeCoordinate = [];
+        $workCoordinate = [];
         $homeCoordinate[] = $homeStart;
         $homeCoordinate[] = $homeEnd;
         $workCoordinate[] = $workStart;

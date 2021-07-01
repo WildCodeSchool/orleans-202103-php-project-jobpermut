@@ -20,6 +20,7 @@ class Direction
         array $workCoordinate,
         string $preference = 'recommended'
     ): ?array {
+        $coordinates = [];
         $coordinates[] = $homeCoordinate;
         $coordinates[] = $workCoordinate;
 

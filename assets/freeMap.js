@@ -42,10 +42,10 @@ function initMap(
     const homeIcon = L.divIcon({ className: 'fas fa-home', iconAnchor: [12, 25] });
     L.marker([homeLat, homeLong], { icon: homeIcon }).addTo(map);
 
-    fetch("/leaflet/direction/" + homeLong + "/" + homeLat + "/" + workLong + "/" + workLat)
+    fetch(`/leaflet/direction/${homeLong}/${homeLat}/${workLong}/${workLat}`)
         .then((response) => response.json())
         .then((data) => {
-            data = data['geometry']['coordinates']
+            data = data.geometry.coordinates;
             data.forEach((element) => {
                 element = element.reverse();
             });
