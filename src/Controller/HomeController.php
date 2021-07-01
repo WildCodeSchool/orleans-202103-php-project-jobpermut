@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
-use RuntimeException;
 use LogicException;
+use RuntimeException;
 use App\Service\Geocode;
 use App\Entity\VisitorTrip;
 use App\Form\VisitorTripType;
@@ -11,8 +11,8 @@ use App\Service\Matrix;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
