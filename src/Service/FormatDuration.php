@@ -4,7 +4,7 @@ namespace App\Service;
 
 class FormatDuration
 {
-    function duration($time)
+    public function duration(int $time): string
     {
         $timeTable = array(
             "jours" => 86400,
@@ -12,21 +12,15 @@ class FormatDuration
             "minutes" => 60,
         );
 
-
-
         $result = "";
 
-
         foreach ($timeTable as $timeUnit => $secondsPerUnit) {
-
             $$timeUnit = floor($time / $secondsPerUnit);
             $time = $time % $secondsPerUnit;
 
-
-
-            if ($$timeUnit > 0 || !empty($result))
-
+            if ($$timeUnit > 0 || !empty($result)) {
                 $result .= $$timeUnit . " $timeUnit ";
+            }
         }
         return trim($result);
     }
