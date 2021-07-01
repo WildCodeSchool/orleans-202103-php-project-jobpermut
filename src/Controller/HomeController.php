@@ -7,6 +7,7 @@ use RuntimeException;
 use App\Service\Geocode;
 use App\Entity\VisitorTrip;
 use App\Form\VisitorTripType;
+use App\Service\Direction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home", methods={"POST", "GET"})
      */
-    public function index(Request $request, Geocode $geocode, SessionInterface $session): Response
+    public function index(Request $request, Geocode $geocode, SessionInterface $session, Direction $direction): Response
     {
         $visitorTrip = new VisitorTrip();
         $form = $this->createForm(VisitorTripType::class, $visitorTrip);
@@ -26,6 +27,7 @@ class HomeController extends AbstractController
 
         $homeCityCoordinate = [0, 0];
         $workCityCoordinate = [0, 0];
+        $tripSummary = [];
 
         if ($form->isSubmitted() && $form->isValid()) {
             $homeCity = $visitorTrip->getHomeCity();
@@ -33,12 +35,15 @@ class HomeController extends AbstractController
             try {
                 $homeCityCoordinate = $geocode->getCoordinates($homeCity);
                 $workCityCoordinate = $geocode->getCoordinates($workCity);
+
+                $tripSummary = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
                 return $this->redirectToRoute('home', [
                     '_fragment' => 'map',
                     'homeLong' => $homeCityCoordinate[0] ?? 0,
                     'homeLat' => $homeCityCoordinate[1] ?? 0,
                     'workLong' => $workCityCoordinate[0] ?? 0,
                     'workLat' => $workCityCoordinate[1] ?? 0,
+                    'tripSummary' => $tripSummary,
                 ]);
             } catch (LogicException $e) {
                 $exception = $e->getMessage();
@@ -52,6 +57,8 @@ class HomeController extends AbstractController
                 '_fragment' => 'map',
             ]);
         }
+
+
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
         ]);

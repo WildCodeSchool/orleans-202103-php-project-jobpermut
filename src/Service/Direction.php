@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use Exception;
+use App\Service\FormatDuration;
 use Symfony\Component\HttpClient\HttpClient;
 
 class Direction
@@ -16,13 +17,13 @@ class Direction
     }
 
     public function getDirection(
-        array $homeCoordinate,
-        array $workCoordinate,
+        array $firstCoordinate,
+        array $secondCoordinate,
         string $preference = 'recommended'
     ): ?array {
         $coordinates = [];
-        $coordinates[] = $homeCoordinate;
-        $coordinates[] = $workCoordinate;
+        $coordinates[] = $firstCoordinate;
+        $coordinates[] = $secondCoordinate;
 
         $client = HttpClient::create();
         $response = $client->request(
@@ -52,4 +53,32 @@ class Direction
         }
         throw new Exception('Le service est temporairement indisponible');
     }
+
+    public function tripSummary(array $firstCoordinate, array $secondCoordinate) {
+        
+        $durationToGo = $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['duration'];
+        $durationReturn = $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['duration'];
+        $duration = gmdate("H:i:s", ($durationToGo + $durationReturn));
+
+        $distanceToGo = $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['distance'];
+        $distanceReturn = $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['distance'];
+        $distance = intval(round($distanceToGo + $distanceReturn)/1000);
+
+        $formatDuration = new FormatDuration;
+        $annualDuration = $formatDuration->duration((302*($durationToGo + $durationReturn)));
+
+
+        $annualDistance = 302*$distance;
+
+
+        $summary = array(
+            'duration' => $duration,
+            'distance' => $distance,
+            'annualDuration' => $annualDuration,
+            'annualDistance' => $annualDistance,
+        );
+
+        return $summary;
+    }
+
 }

@@ -49,7 +49,7 @@ function initMap(
             data.forEach((element) => {
                 element = element.reverse();
             });
-            L.polyline(data, { color: 'red' }).addTo(map);
+            L.polyline(data, { color: '#00636f' }).addTo(map);
         });
 
     map.fitBounds([
