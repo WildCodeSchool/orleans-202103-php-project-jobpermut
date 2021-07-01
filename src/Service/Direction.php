@@ -15,32 +15,40 @@ class Direction
         $this->key = $key;
     }
 
-    public function getDirection(string $start, string $end): array
-    {
-        $content = [];
+    public function getDirection(
+        array $homeCoordinate,
+        array $workCoordinate,
+        string $preference = 'recommended'
+    ): ?array {
+        $coordinates[] = $homeCoordinate;
+        $coordinates[] = $workCoordinate;
+
         $client = HttpClient::create();
         $response = $client->request(
-            'GET',
-            'https://api.openrouteservice.org/v2/directions/driving-car',
+            'POST',
+            'https://api.openrouteservice.org/v2/directions/driving-car/geojson',
             [
-                'query' => [
-                    'api_key' => $this->key,
-                    'start' => $start,
-                    'end' => $end
+                'headers' => [
+                    'Accept' => 'application/json, application/geo+json, application/gpx+xml, img/png; charset=utf-8',
+                    'Authorization' => $this->key,
+                    'Content-Type' => 'application/json; charset=utf-8'
+                ],
+                'json' => [
+                    'coordinates' => $coordinates,
+                    'preference' => $preference
+
                 ]
             ]
         );
+
         $statusCode = $response->getStatusCode(); // get Response status code 200
 
         if ($statusCode === self::STATUS) {
-            $content = $response->getContent();
-            // get the response in JSON format
+            // associative array (distances and durations)
+            $content = $response->toArray()['features'][0];
 
-            $content = $response->toArray();
-            // convert the response (here in JSON) to an PHP array
-            return $content['features'][0]['geometry']['coordinates'];
+            return $content;
         }
-
         throw new Exception('Le service est temporairement indisponible');
     }
 }
