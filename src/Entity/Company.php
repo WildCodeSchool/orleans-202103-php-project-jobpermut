@@ -42,12 +42,12 @@ class Company
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="company")
      */
-    private Collection $user;
+    private Collection $users;
 
     public function __construct()
     {
-        $this->subscription = new ArrayCollection();
-        $this->user = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -126,13 +126,13 @@ class Company
      */
     public function getUser(): Collection
     {
-        return $this->user;
+        return $this->users;
     }
 
     public function addUser(User $user): self
     {
-        if (!$this->user->contains($user)) {
-            $this->user[] = $user;
+        if (!$this->users->contains($user)) {
+            $this->users[] = $user;
             $user->setCompany($this);
         }
 
@@ -141,7 +141,7 @@ class Company
 
     public function removeUser(User $user): self
     {
-        if ($this->user->removeElement($user)) {
+        if ($this->users->removeElement($user)) {
             // set the owning side to null (unless already changed)
             if ($user->getCompany() === $this) {
                 $user->setCompany(null);
