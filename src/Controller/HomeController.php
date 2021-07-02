@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
-use RuntimeException;
 use LogicException;
+use RuntimeException;
 use App\Service\Geocode;
 use App\Entity\VisitorTrip;
 use App\Form\VisitorTripType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -26,7 +26,6 @@ class HomeController extends AbstractController
 
         $homeCityCoordinate = [0, 0];
         $workCityCoordinate = [0, 0];
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $homeCity = $visitorTrip->getHomeCity();
