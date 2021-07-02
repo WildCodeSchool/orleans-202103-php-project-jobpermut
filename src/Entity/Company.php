@@ -37,7 +37,7 @@ class Company
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="company")
      */
-    private Collection $subscription;
+    private Collection $subscriptions;
 
     /**
      * @ORM\OneToMany(targetEntity=User::class, mappedBy="company")
@@ -96,13 +96,13 @@ class Company
      */
     public function getSubscription(): Collection
     {
-        return $this->subscription;
+        return $this->subscriptions;
     }
 
     public function addSubscription(Subscription $subscription): self
     {
-        if (!$this->subscription->contains($subscription)) {
-            $this->subscription[] = $subscription;
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions[] = $subscription;
             $subscription->setCompany($this);
         }
 
@@ -111,7 +111,7 @@ class Company
 
     public function removeSubscription(Subscription $subscription): self
     {
-        if ($this->subscription->removeElement($subscription)) {
+        if ($this->subscriptions->removeElement($subscription)) {
             // set the owning side to null (unless already changed)
             if ($subscription->getCompany() === $this) {
                 $subscription->setCompany(null);
