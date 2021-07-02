@@ -2,26 +2,43 @@
 
 namespace App\Service;
 
+use DateTime;
+use DateInterval;
+
 class FormatDuration
 {
-    public function duration(int $time): string
+    const NBSECONDINADAY = 86400;
+    const NBSECONDINANHOUR = 3600;
+    
+    public function duration(int $time): array
     {
-        $timeTable = array(
-            "jours" => 86400,
-            "heures" => 3600,
-            "minutes" => 60,
-        );
+        $dateFirst = new DateTime();
+        $dateSecond = new DateTime();
 
-        $result = "";
+        $dateSecond->add(new DateInterval('PT'.$time.'S'));
+     
+        $duration = $dateSecond->diff($dateFirst);
 
-        foreach ($timeTable as $timeUnit => $secondsPerUnit) {
-            $$timeUnit = floor($time / $secondsPerUnit);
-            $time = $time % $secondsPerUnit;
-
-            if ($$timeUnit > 0 || !empty($result)) {
-                $result .= $$timeUnit . " $timeUnit ";
-            }
+        $day = '';
+        $hour = '';
+        switch ($time){
+            case $this::NBSECONDINADAY < $time:
+                $day = '%a';
+            case $this::NBSECONDINANHOUR < $time:
+                $hour = '%h';
+            default :
+                break;
         }
-        return trim($result);
+
+        $duration = $duration->format($day . ',' . $hour . ',' . '%i');
+
+        $durations = explode(',', $duration);
+        $result = [
+            'days' => $durations[0],
+            'hours' => $durations[1],
+            'minutes' => $durations[2]
+        ];
+
+        return $result;
     }
 }

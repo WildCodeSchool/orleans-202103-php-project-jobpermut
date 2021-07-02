@@ -56,20 +56,25 @@ class Direction
 
     public function tripSummary(?array $firstCoordinate, ?array $secondCoordinate): ?array
     {
+        $durationCalc = new FormatDuration();
+
         $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['distance'] = 0;
         $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['distance'] = 0;
 
 
         $durationToGo = $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['duration'];
         $durationReturn = $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['duration'];
-        $duration = gmdate("H:i:s", ($durationToGo + $durationReturn));
+        $duration = intval(strval(($durationToGo + $durationReturn)));
+
+
+        $duration = $durationCalc->duration($duration);
 
         $distanceToGo = $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['distance'];
         $distanceReturn = $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['distance'];
         $distance = intval(round($distanceToGo + $distanceReturn) / 1000);
 
-        $formatDuration = new FormatDuration();
-        $annualDuration = $formatDuration->duration((302 * ($durationToGo + $durationReturn)));
+        $annualDuration = intval(strval(302 * ($durationToGo + $durationReturn)));
+        $annualDuration = $durationCalc->duration($annualDuration);
 
         $annualDistance = 302 * $distance;
 
