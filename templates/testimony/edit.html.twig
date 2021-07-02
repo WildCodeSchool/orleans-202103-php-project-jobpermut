@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Testimony{% endblock %}
+
+{% block body %}
+    <h1>Edit Testimony</h1>
+
+    {{ include('testimony/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('testimony_index') }}">back to list</a>
+
+    {{ include('testimony/_delete_form.html.twig') }}
+{% endblock %}
