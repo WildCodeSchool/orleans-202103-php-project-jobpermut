@@ -62,6 +62,11 @@ class User implements UserInterface
      */
     private bool $isVisible;
 
+     /*
+     * @ORM\OneToOne(targetEntity=Testimony::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private ?Testimony $testimony;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -91,9 +96,9 @@ class User implements UserInterface
         return array_unique($roles);
     }
 
-    public function setRoles(array $roles): self
+    public function setRoles(string $roles): self
     {
-        $this->roles = $roles;
+        $this->roles[] = $roles;
 
         return $this;
     }
@@ -184,6 +189,28 @@ class User implements UserInterface
         if ($isVisible !== null) {
             $this->isVisible = $isVisible;
         }
+
+        return $this;
+    }
+
+    public function getTestimony(): ?Testimony
+    {
+        return $this->testimony;
+    }
+
+    public function setTestimony(?Testimony $testimony): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($testimony === null && $this->testimony !== null) {
+            $this->testimony->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($testimony !== null && $testimony->getUser() !== $this) {
+            $testimony->setUser($this);
+        }
+
+        $this->testimony = $testimony;
 
         return $this;
     }

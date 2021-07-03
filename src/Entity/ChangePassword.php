@@ -16,7 +16,7 @@ class ChangePassword
 
     /**
      * @Assert\Length(
-     *     min = 6,
+     *     min = 8,
      *     minMessage = "Le nouveau mot de passe doit faire au moins {{ limit }} caractères"
      * )
      */

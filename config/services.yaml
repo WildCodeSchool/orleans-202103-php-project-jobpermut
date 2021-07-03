@@ -5,9 +5,11 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 
 parameters:
+    mailer_from: '%env(resolve:MAILER_FROM_ADDRESS)%'
     api_key: '%env(OPEN_ROUTE_SERVICE_KEY)%'
     app.locales: [fr, en]
     local: fr
+
 
 services:
     # default configuration for services in *this* file
@@ -37,5 +39,9 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
     App\Service\Geocode:
+        arguments:
+            $key: '%api_key%'
+
+    App\Service\Direction:
         arguments:
             $key: '%api_key%'

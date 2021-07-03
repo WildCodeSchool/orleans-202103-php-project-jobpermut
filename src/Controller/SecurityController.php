@@ -7,10 +7,12 @@ use DateTime;
 use LogicException;
 use App\Entity\User;
 use App\Form\ChangePasswordType;
+use Symfony\Component\Mime\Email;
 use App\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -53,8 +55,11 @@ class SecurityController extends AbstractController
     /**
      * @Route("/register", name="app_register")
      */
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
-    {
+    public function register(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        MailerInterface $mailer
+    ): Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -68,10 +73,18 @@ class SecurityController extends AbstractController
             );
 
             $user->setCreatedAt(new DateTime('now'));
-            $user->setRoles(['ROLE_USER']);
+            $user->setRoles('ROLE_USER');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $email = (new Email())
+            ->from(strval($this->getParameter('mailer_from')))
+            ->to($form->get('email')->getData())
+            ->subject('Confirmation de votre inscription')
+            ->html($this->renderView('mail/confirmationMail.html.twig', ['user' => $user]));
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('home');
         }
