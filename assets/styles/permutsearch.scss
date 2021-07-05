@@ -1,0 +1,30 @@
+@import 'variables';
+
+.permutsearch {
+    h2 {
+        font-family: $font-p;
+        font-weight: 300;
+    }
+
+    .permut-card {
+        .permut-header {
+            background-color: $dark;
+            border-radius: 30px;
+
+            h4 {
+                font-size: 22px;
+                font-weight: 300;
+            }
+
+            img {
+                height: 100px;
+                width: 100px;
+                object-fit: cover;
+            }
+
+            .btn {
+                border-color: $warning;
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{% extends 'layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('permutsearch') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    - Permut Search
+{% endblock %}
+
+{% block body %}
+    <main class="p-5 permutsearch">
+        <header class="p-5 mb-3">
+            <h1 class="h1 text-center text-dark">Permut Search</h1>
+            <h2 class="h2 text-center text-dark">Retrouvez vos différentes permutations potentielles</h2>
+        </header>
+
+        <div class="px-5">
+            {% for user in users %}
+                {% if user.isVisible == true %}
+                    <div class="permut-card">
+                        <div class="permut-header mb-2 p-5 d-flex flex-row align-items-center justify-content-between">
+                            <div class="d-flex flex-row align-items-center text-white">
+                                <img class="rounded-circle me-4" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                                <div class="title-card">
+                                    <h3 class="h2 mb-1 text-warning">{{ user.username }}</h3>
+                                    <h4 class="h3">
+                                        {% if user.registeredUser.rome is defined %}
+                                            {{ user.registeredUser.rome }}
+                                        {% else %}
+                                            Non renseigné
+                                        {% endif %}
+                                    </h4>
+                                    <h5 class="mb-0">{{ user.registeredUser.city ?? "null" }}</h5>
+                                </div>
+                            </div>
+                            <a href="{{ path("profile_show", {username: user.username}) }}" class="btn btn-lg btn-warning">Voir le profil</a>
+                        </div>
+                        <div class="permut-body"></div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </main>
+{% endblock %}
