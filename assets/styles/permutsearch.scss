@@ -1,91 +1,91 @@
 @import "variables";
 
 .permutsearch {
-  h2 {
-    font-family: $font-p;
-    font-weight: 300;
-  }
-
-  .permut-card {
-    .permut-header {
-      background-color: $dark;
-      border-radius: 25px;
-      padding: 30px 40px;
-
-      @media screen and (max-width: 430px) {
-        padding: 25px 15px;
-      }
-
-      h3 {
-        font-size: 20px;
-      }
-
-      h4 {
-        font-size: 17px;
+    h2 {
+        font-family: $font-p;
         font-weight: 300;
-      }
-
-      h5 {
-        font-size: 16px;
-      }
-
-      img {
-        height: 70px;
-        width: 70px;
-        object-fit: cover;
-      }
-
-      .btn {
-        border-color: $warning;
-
-        @media screen and (max-width: 430px) {
-          display: none;
-        }
-      }
-
-      .fa-heart {
-        font-size: 40px;
-      }
-
-      .heart-sm {
-        display: none;
-        font-size: 30px;
-
-        @media screen and (max-width: 430px) {
-          display: block;
-        }
-      }
-
-      .heart-md {
-        @media screen and (max-width: 430px) {
-          display: none;
-        }
-      }
     }
 
-    .permut-body {
-      .map {
-        img {
-          width: 100%;
-          height: 70vh;
-          object-fit: cover;
-          border-radius: 25px;
+    .permut-card {
+        .permut-header {
+            background-color: $dark;
+            border-radius: 25px;
+            padding: 30px 40px;
+
+            @media screen and (max-width: 430px) {
+                padding: 25px 15px;
+            }
+
+            h3 {
+                font-size: 20px;
+            }
+
+            h4 {
+                font-size: 17px;
+                font-weight: 300;
+            }
+
+            h5 {
+                font-size: 16px;
+            }
+
+            img {
+                height: 70px;
+                width: 70px;
+                object-fit: cover;
+            }
+
+            .btn {
+                border-color: $warning;
+
+                @media screen and (max-width: 430px) {
+                    display: none;
+                }
+            }
+
+            .fa-heart {
+                font-size: 40px;
+            }
+
+            .heart-sm {
+                display: none;
+                font-size: 30px;
+
+                @media screen and (max-width: 430px) {
+                    display: block;
+                }
+            }
+
+            .heart-md {
+                @media screen and (max-width: 430px) {
+                    display: none;
+                }
+            }
         }
 
-        h3 {
-          font-size: 18px;
-          font-family: $title-font;
-          border-radius: 15px;
-        }
+        .permut-body {
+            .map {
+                img {
+                    width: 100%;
+                    height: 70vh;
+                    object-fit: cover;
+                    border-radius: 25px;
+                }
 
-        .title-courses {
-          border-radius: 20px;
+                h3 {
+                    font-size: 18px;
+                    font-family: $title-font;
+                    border-radius: 15px;
+                }
 
-          i {
-            font-size: 20px;
-          }
+                .title-courses {
+                    border-radius: 20px;
+
+                    i {
+                        font-size: 20px;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }
