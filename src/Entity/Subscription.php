@@ -55,6 +55,11 @@ class Subscription
      */
     private DateTimeInterface $updatedAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="subscription")
+     */
+    private ?Company $company;
+
     public function __serialize(): array
     {
         return [];
@@ -139,6 +144,18 @@ class Subscription
     public function setUpdatedAt(DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
