@@ -1,0 +1,12 @@
+<div class="visitorForm d-flex flex-column justify-content-center text-dark bg-light rounded-5 col-12 p-4">
+    {% if app.request.get('tripSummary').duration.hours is not empty%}
+        {% set hours = app.request.get('tripSummary').duration.hours ~ 'heures' %}
+    {% else %}
+        {% set hours = '' %}
+    {% endif %}
+    <h2 class="text-warning text-center col-12 h1">Evaluation de votre trajet</h2>
+    <h3 class="h3 fw-light text-center">Vous faites en moyenne<br> {{ app.request.get('tripSummary').distance }} kilomètres par jour,<br>
+    soit {{ hours }}  {{ app.request.get('tripSummary').duration.minutes }} minutes passés dans votre voiture.</h3><br>
+    <h3 class="h3 fw-light text-center"> Cela équivaut à<br>{{ app.request.get('tripSummary').annualDistance }} kilomètres<br>
+    soit<br>{{ app.request.get('tripSummary').annualDuration.days }} jours {{ app.request.get('tripSummary').annualDuration.hours }} heures et {{ app.request.get('tripSummary').annualDuration.minutes }} minutes par an.
+</div>

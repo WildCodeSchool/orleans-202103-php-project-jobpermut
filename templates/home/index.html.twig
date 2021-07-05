@@ -48,7 +48,12 @@
     </header>
 
     <section class="freeMap">
+    {% if app.request.get('tripSummary') is null %}
         {{ include('includes/_visitor_form.html.twig') }}
+    {% else %}
+        {{ include('includes/_tripSummary.html.twig') }}
+    {% endif %}
+
         <div id="map"></div>
         <div class="TripEvaluation"></div>
     </section>

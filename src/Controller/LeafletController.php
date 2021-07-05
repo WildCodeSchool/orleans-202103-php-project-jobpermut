@@ -13,22 +13,22 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class LeafletController extends AbstractController
 {
     /**
-    * @Route("/direction/{homeStart}/{homeEnd}/{workStart}/{workEnd}", name="direction")
+    * @Route("/direction/{firstStart}/{firstEnd}/{secondStart}/{secondEnd}", name="direction")
     */
     public function direction(
-        float $homeStart,
-        float $homeEnd,
-        float $workStart,
-        float $workEnd,
+        float $firstStart,
+        float $firstEnd,
+        float $secondStart,
+        float $secondEnd,
         Direction $direction
     ): Response {
-        $homeCoordinate = [];
-        $workCoordinate = [];
-        $homeCoordinate[] = $homeStart;
-        $homeCoordinate[] = $homeEnd;
-        $workCoordinate[] = $workStart;
-        $workCoordinate[] = $workEnd;
+        $firstCoordinate = [];
+        $secondCoordinate = [];
+        $firstCoordinate[] = $firstStart;
+        $firstCoordinate[] = $firstEnd;
+        $secondCoordinate[] = $secondStart;
+        $secondCoordinate[] = $secondEnd;
 
-        return $this->json($direction->getDirection($homeCoordinate, $workCoordinate));
+        return $this->json($direction->getDirection($firstCoordinate, $secondCoordinate));
     }
 }
