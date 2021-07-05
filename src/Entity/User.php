@@ -58,6 +58,11 @@ class User implements UserInterface
     private string $username;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private bool $isVisible;
+
+     /*
      * @ORM\OneToOne(targetEntity=Testimony::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private ?Testimony $testimony;
@@ -170,6 +175,20 @@ class User implements UserInterface
     public function setUsername(string $username): self
     {
         $this->username = $username;
+
+        return $this;
+    }
+
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(?bool $isVisible): self
+    {
+        if ($isVisible !== null) {
+            $this->isVisible = $isVisible;
+        }
 
         return $this;
     }
