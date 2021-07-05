@@ -12,13 +12,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class TestimonyType extends AbstractType
 {
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('commentary', TextType::class, ['attr' => ['placeholder' => 'You\'r text']]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Testimony::class,

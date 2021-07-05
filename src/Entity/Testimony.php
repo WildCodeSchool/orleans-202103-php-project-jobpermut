@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TestimonyRepository;
+use App\Entity\User;
 use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,7 +33,7 @@ class Testimony
     /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="testimony")
      */
-    private ?User $user;
+    private User $user;
 
     public function getId(): ?int
     {
@@ -63,12 +64,12 @@ class Testimony
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getUser(): User
     {
         return $this->user;
     }
 
-    public function setUser(?User $user): self
+    public function setUser(User $user): self
     {
         $this->user = $user;
 

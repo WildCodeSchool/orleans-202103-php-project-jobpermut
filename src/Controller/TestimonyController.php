@@ -2,16 +2,17 @@
 
 namespace App\Controller;
 
+use DateTime;
+use App\Entity\User;
 use App\Entity\Testimony;
 use App\Form\TestimonyType;
 use App\Repository\TestimonyRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("admin/testimony", name="testimony_")
@@ -37,10 +38,14 @@ class TestimonyController extends AbstractController
         $testimony = new Testimony();
         $form = $this->createForm(TestimonyType::class, $testimony);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $testimony->setCreatedAt(new DateTime('now'));
-            $testimony->setUser($this->getUser());
+            /**
+             * @var User
+             */
+            $user = $this->getUser();
+            $testimony->setUser($user);
+
             $entityManager->persist($testimony);
             $entityManager->flush();
 
@@ -88,7 +93,7 @@ class TestimonyController extends AbstractController
      */
     public function delete(Request $request, Testimony $testimony): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$testimony->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $testimony->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($testimony);
             $entityManager->flush();
