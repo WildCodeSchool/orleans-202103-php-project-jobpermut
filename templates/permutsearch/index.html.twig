@@ -11,17 +11,17 @@
 {% endblock %}
 
 {% block body %}
-    <main class="p-5 permutsearch">
-        <header class="p-5 mb-3">
+    <main class="p-md-5 p-2 permutsearch">
+        <header class="mb-5">
             <h1 class="h1 text-center text-dark">Permut Search</h1>
             <h2 class="h2 text-center text-dark">Retrouvez vos différentes permutations potentielles</h2>
         </header>
 
-        <div class="px-5">
+        <div class="px-lg-5 px-2">
             {% for user in users %}
                 {% if user.isVisible == true %}
-                    <div class="permut-card">
-                        <div class="permut-header mb-2 p-5 d-flex flex-row align-items-center justify-content-between">
+                    <div class="permut-card mb-5">
+                        <div class="permut-header mb-3 d-flex flex-row align-items-center justify-content-between">
                             <div class="d-flex flex-row align-items-center text-white">
                                 <img class="rounded-circle me-4" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
                                 <div class="title-card">
@@ -30,15 +30,35 @@
                                         {% if user.registeredUser.rome is defined %}
                                             {{ user.registeredUser.rome }}
                                         {% else %}
-                                            Non renseigné
+                                            Secteur d'activité non renseigné
                                         {% endif %}
                                     </h4>
-                                    <h5 class="mb-0">{{ user.registeredUser.city ?? "null" }}</h5>
+                                    <h5 class="mb-0"><i class="fas fa-map-marker-alt me-1"></i> {{ user.registeredUser.city ?? "Localisation non renseignée" }}</h5>
+                                </div>
+                                <i class="fas fa-heart heart-sm"></i>
+                            </div>
+                            <div class="d-flex flex-row align-items-center mt-md-0 mt-4">
+                                <a href="{{ path("profile_show", {username: user.username}) }}" class="btn btn-warning fw-bolder">Voir le profil</a>
+                                <i class="fas fa-heart text-white heart-md ms-3"></i>
+                            </div>
+                        </div>
+
+                        <div class="permut-body row row-cols-1 row-cols-md-2 mb-4">
+                            <div id="map-before" class="map col ps-3 pe-2">
+                                <img src="https://70stma.co.uk/wp-content/uploads/map-placeholder.jpg" alt="map" class="shadow">
+                                <div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center text-danger">
+                                    <i class="fas fa-times-circle me-2"></i>
+                                    <h3 class="m-0">Vos trajets actuels</h3>
                                 </div>
                             </div>
-                            <a href="{{ path("profile_show", {username: user.username}) }}" class="btn btn-lg btn-warning">Voir le profil</a>
+                            <div id="map-after" class="map col pe-3 ps-2">
+                                <img src="https://70stma.co.uk/wp-content/uploads/map-placeholder.jpg" alt="map" class="shadow">
+                                <div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center text-success">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    <h3 class="m-0">Vos futurs trajets</h3>
+                                </div>
+                            </div>
                         </div>
-                        <div class="permut-body"></div>
                     </div>
                 {% endif %}
             {% endfor %}
