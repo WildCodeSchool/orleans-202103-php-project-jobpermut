@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * @Route("/profile", name="profile_")
+ * @Route("/profil", name="profile_")
  */
 class ProfileController extends AbstractController
 {

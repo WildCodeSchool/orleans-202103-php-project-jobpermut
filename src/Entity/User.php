@@ -58,9 +58,19 @@ class User implements UserInterface
     private string $username;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private bool $isVisible;
+
+     /*
      * @ORM\OneToOne(targetEntity=Testimony::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private ?Testimony $testimony;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="user")
+     */
+    private ?Company $company;
 
     public function getId(): ?int
     {
@@ -174,6 +184,20 @@ class User implements UserInterface
         return $this;
     }
 
+    public function getIsVisible(): ?bool
+    {
+        return $this->isVisible;
+    }
+
+    public function setIsVisible(?bool $isVisible): self
+    {
+        if ($isVisible !== null) {
+            $this->isVisible = $isVisible;
+        }
+
+        return $this;
+    }
+
     public function getTestimony(): ?Testimony
     {
         return $this->testimony;
@@ -192,6 +216,18 @@ class User implements UserInterface
         }
 
         $this->testimony = $testimony;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
