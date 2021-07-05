@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\TestimonyRepository;
+use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -29,7 +30,7 @@ class Testimony
     private DateTimeInterface $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="testimony", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, inversedBy="testimony")
      */
     private ?User $user;
 

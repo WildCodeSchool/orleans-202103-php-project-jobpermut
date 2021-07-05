@@ -1,30 +1,41 @@
 {% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('testimony') }}
+{% endblock %}
 
-{% block title %}Testimony{% endblock %}
+{% block title %}Testimony
+{% endblock %}
 
 {% block body %}
-    <h1>Testimony</h1>
-
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ testimony.id }}</td>
-            </tr>
-            <tr>
-                <th>Commentary</th>
-                <td>{{ testimony.commentary }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
-                <td>{{ testimony.createdAt ? testimony.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('testimony_index') }}">back to list</a>
-
-    <a href="{{ path('testimony_edit', {'id': testimony.id}) }}">edit</a>
-
-    {{ include('testimony/_delete_form.html.twig') }}
+    <div class="page-title">
+        <h1 class="h1 text-center py-1">Testimony</h1>
+    </div>
+    <div class="testimony">
+    <div class="d-flex flex-direction-row testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
+        <div class="col testimony-card p-4 p-sm-5 mx-3">
+            <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+                <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                <div class="ms-3 mb-1 testimony-titles">
+                    <h4 class="m-0 text-warning">{{testimony.user.username}}</h4>
+                    <h5 class="m-0">
+                        {% if testimony.user.registeredUser is defined %}
+                            {{ testimony.user.registeredUser.rome|rome_name }}
+                        {% else %}
+                            Pas d'emploi renseigné
+                        {% endif %}
+                    </h5>
+                    <p class="m-0">ID :
+                        {{ testimony.id }}</p>
+                    <p class="m-0">
+                        {{ testimony.createdAt ? testimony.createdAt|date('Y-m-d H:i:s') : '' }}</p>
+                </div>
+            </div>
+            <p class="mb-1">{{ testimony.commentary }}</p>
+            <a href="{{ path('testimony_index') }}" class="btn btn-primary m-2">back to list</a>
+            <a href="{{ path('testimony_edit', {'id': testimony.id}) }}" class="btn btn-primary m-2">edit</a>
+            {{ include('testimony/_delete_form.html.twig') }}
+        </div>
+    </div>
+    </div>
 {% endblock %}

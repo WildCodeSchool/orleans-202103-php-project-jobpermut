@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Testimony;
 use App\Form\TestimonyType;
 use App\Repository\TestimonyRepository;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,14 +32,15 @@ class TestimonyController extends AbstractController
     /**
      * @Route("/new", name="new", methods={"GET","POST"})
      */
-    public function new(Request $request): Response
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $testimony = new Testimony();
         $form = $this->createForm(TestimonyType::class, $testimony);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
+            $testimony->setCreatedAt(new DateTime('now'));
+            $testimony->setUser($this->getUser());
             $entityManager->persist($testimony);
             $entityManager->flush();
 

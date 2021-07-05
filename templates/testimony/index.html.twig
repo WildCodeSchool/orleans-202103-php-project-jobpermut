@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('admin') }}
+{% endblock %}
+
 {% block title %}Gestion commentaires
 {% endblock %}
 
@@ -9,9 +14,8 @@
             Gestion des commentaires</h1>
         <h2 class="h3 text-center py-1">Supprimer ou accéder aux commentaires</h2>
     </div>
-
+    <a href="{{ path('admin_index') }}" class="btn btn-primary m-2">index</a>
     <table class="table table-hover">
-        <a href="{{ path('testimony_new') }}" class="btn btn-primary">Create new</a>
         <thead class="table-dark">
             <tr>
                 <th>Utilisateurs</th>
