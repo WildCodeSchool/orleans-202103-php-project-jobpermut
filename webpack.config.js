@@ -43,6 +43,7 @@ Encore
     .addStyleEntry('error', './assets/styles/error.scss')
     .addStyleEntry('testimony', './assets/styles/testimony.scss')
     .addStyleEntry('setting', './assets/styles/setting.scss')
+    .addStyleEntry('permutsearch', './assets/styles/permutsearch.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')

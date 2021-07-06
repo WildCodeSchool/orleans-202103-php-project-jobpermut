@@ -1,16 +1,16 @@
-@import 'variables';
+@import "variables";
 
 .navbar {
-    $height: 100px;
+    $height: 90px;
     $font-size-navbar: 1.3em;
 
     font-family: $title-font;
     font-size: $font-size-navbar;
 
     .logo-navbar {
-        $width-logo: 80px;
+        $width-logo: 70px;
         width: $width-logo;
-        font-size: 30px;
+        font-size: 25px;
         @media screen and (max-width: 768px) {
             width: 60px;
             font-size: 20px;
@@ -43,6 +43,7 @@
         $duration: 0.5s;
         transition: $duration ease-out;
         z-index: 1;
+        font-size: 19px;
 
         img {
             transition: $duration ease-out;
