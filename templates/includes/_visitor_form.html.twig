@@ -1,7 +1,7 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {{ form_start(form, {'attr': {'id': 'button-visitor'}}) }}
-<div class="visitorForm d-flex flex-column justify-content-center text-dark bg-light rounded-5 col-12 p-4">
-    <h2 class="text-warning text-center col-12 h1">Evaluez votre trajet</h2>
+<div class="visitorForm d-flex flex-column justify-content-center text-dark bg-light rounded-5 p-4">
+    <h2 class="text-warning text-center mb-1 h1">Evaluez votre trajet</h2>
     <h3 class="h3 fw-light text-center">Analysez votre trajet!</h3>
     {% for message in app.flashes('geocode') %}
         <div class="alert alert-warning">
