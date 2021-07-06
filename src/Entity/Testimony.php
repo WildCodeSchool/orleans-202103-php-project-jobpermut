@@ -75,5 +75,4 @@ class Testimony
 
         return $this;
     }
-    
 }
