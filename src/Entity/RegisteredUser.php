@@ -44,11 +44,6 @@ class RegisteredUser
     private string $cityJob;
 
     /**
-     * @ORM\Column(type="string", length=5)
-     */
-    private string $rome;
-
-    /**
      * @ORM\OneToOne(targetEntity=User::class, inversedBy="registeredUser", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
@@ -91,6 +86,11 @@ class RegisteredUser
      * @ORM\Column(type="string", length=255)
      */
     private string $jobZipcode;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Rome::class, inversedBy="registeredUsers")
+     */
+    private ?Rome $rome;
 
     public function getId(): ?int
     {
@@ -155,18 +155,6 @@ class RegisteredUser
     public function setCityJob(string $cityJob): self
     {
         $this->cityJob = $cityJob;
-
-        return $this;
-    }
-
-    public function getRome(): ?string
-    {
-        return $this->rome;
-    }
-
-    public function setRome(string $rome): self
-    {
-        $this->rome = $rome;
 
         return $this;
     }
@@ -265,6 +253,18 @@ class RegisteredUser
     public function setJobZipcode(string $jobZipcode): self
     {
         $this->jobZipcode = $jobZipcode;
+
+        return $this;
+    }
+
+    public function getRome(): ?Rome
+    {
+        return $this->rome;
+    }
+
+    public function setRome(?Rome $rome): self
+    {
+        $this->rome = $rome;
 
         return $this;
     }

@@ -3,20 +3,21 @@
 namespace App\Form;
 
 use App\Entity\RegisteredUser;
-use App\Service\ApiRome\ApiRome;
+use App\Entity\Rome;
+use App\Repository\RomeRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class RegisteredUserType extends AbstractType
 {
-    private ApiRome $apiRome;
+    private RomeRepository $romeRepository;
 
-    public function __construct(ApiRome $apiRome)
+    public function __construct(RomeRepository $romeRepository)
     {
-        $this->apiRome = $apiRome;
+        $this->romeRepository = $romeRepository;
     }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -26,9 +27,16 @@ class RegisteredUserType extends AbstractType
             ->add('phone', TextType::class, ['attr' => ['placeholder' => '06 56 86 98 09']])
             ->add('city', TextType::class, ['attr' => ['placeholder' => 'Orléans']])
             ->add('cityJob', TextType::class, ['attr' => ['placeholder' => 'Tours']])
-            ->add('rome', ChoiceType::class, [
-                'choices' => $this->apiRome->sortResponseByName($this->apiRome->getAllJobs()),
-                'attr' => ['placeholder' => 'Développeur Web']
+            ->add('rome', EntityType::class, [
+                'class' => Rome::class,
+                'query_builder' => function () {
+                    return $this->romeRepository->createQueryBuilder('r')
+                        ->orderBy('r.name', 'ASC');
+                },
+                'choice_label' => 'name',
+                'placeholder' => 'Choisissez votre métier:',
+                'empty_data' => null,
+                'required' => false,
             ])
             ->add('street', TextType::class, ['attr' => ['placeholder' => 'Rue des Lumières']])
             ->add('streetNumber', TextType::class, ['attr' => ['placeholder' => '67']])
