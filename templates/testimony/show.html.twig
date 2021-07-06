@@ -1,15 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('testimony') }}
 {% endblock %}
 
-{% block title %}Testimony
+{% block title %}Gestion commentaires
 {% endblock %}
 
 {% block body %}
     <div class="page-title">
-        <h1 class="h1 text-center py-1">Testimony</h1>
+        <h1 class="h1 text-center py-1">Commentaires</h1>
     </div>
     <div class="testimony">
     <div class="d-flex flex-direction-row testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
@@ -17,10 +17,10 @@
             <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
                 <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
                 <div class="ms-3 mb-1 testimony-titles">
-                    <h4 class="m-0 text-warning">{{ testimony.users.username }}</h4>
+                    <h4 class="m-0 text-warning">{{ testimony.user.username }}</h4>
                     <h5 class="m-0">
-                        {% if testimony.users.registeredUser.rome is defined %}
-                            {{ testimony.users.registeredUser.rome.name }}
+                        {% if testimony.user.registeredUser.rome is defined %}
+                            {{ testimony.user.registeredUser.rome.name }}
                         {% else %}
                             Pas d'emploi renseigné
                         {% endif %}
@@ -32,8 +32,7 @@
                 </div>
             </div>
             <p class="mb-1">{{ testimony.commentary }}</p>
-            <a href="{{ path('testimony_index') }}" class="btn btn-primary m-2">back to list</a>
-            <a href="{{ path('testimony_edit', {'id': testimony.id}) }}" class="btn btn-primary m-2">edit</a>
+            <a href="{{ path('testimony_index') }}" class="btn btn-primary m-2">Retour à la liste</a>
             {{ include('testimony/_delete_form.html.twig') }}
         </div>
     </div>

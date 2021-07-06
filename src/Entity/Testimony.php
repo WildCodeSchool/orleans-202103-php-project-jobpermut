@@ -30,9 +30,8 @@ class Testimony
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="testimonies")
-     * @ORM\JoinColumn(nullable=false)
      */
-    private ?User $users;
+    private ?User $user;
 
 
     public function getId(): ?int
@@ -64,15 +63,16 @@ class Testimony
         return $this;
     }
 
-    public function getUsers(): ?User
+    public function getUser(): ?User
     {
-        return $this->users;
+        return $this->user;
     }
 
-    public function setUsers(?User $users): self
+    public function setUser(?User $user): self
     {
-        $this->users = $users;
+        $this->user = $user;
 
         return $this;
     }
+
 }

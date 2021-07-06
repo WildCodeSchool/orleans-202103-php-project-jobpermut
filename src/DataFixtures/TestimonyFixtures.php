@@ -24,7 +24,7 @@ class TestimonyFixtures extends Fixture
             $testimony = new Testimony();
             $testimony->setCommentary($this->faker->realText(150, 2));
             $testimony->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
-            $testimony->setUsers($this->getReference('user_' . $i));
+            $testimony->setUser($this->getReference('user_' . $i));
             $manager->persist($testimony);
         }
 

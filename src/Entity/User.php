@@ -70,7 +70,7 @@ class User implements UserInterface
     private ?Company $company;
 
     /**
-     * @ORM\OneToMany(targetEntity=Testimony::class, mappedBy="users", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Testimony::class, mappedBy="user")
      */
     private Collection $testimonies;
 
@@ -229,7 +229,7 @@ class User implements UserInterface
     {
         if (!$this->testimonies->contains($testimony)) {
             $this->testimonies[] = $testimony;
-            $testimony->setUsers($this);
+            $testimony->setUser($this);
         }
 
         return $this;
@@ -239,11 +239,12 @@ class User implements UserInterface
     {
         if ($this->testimonies->removeElement($testimony)) {
             // set the owning side to null (unless already changed)
-            if ($testimony->getUsers() === $this) {
-                $testimony->setUsers(null);
+            if ($testimony->getUser() === $this) {
+                $testimony->setUser(null);
             }
         }
 
         return $this;
     }
+
 }
