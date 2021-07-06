@@ -14,9 +14,20 @@ const bootstrap = require('bootstrap');
 
 window.addEventListener('load', (event) => {
     if (document.querySelector('.error')) {
-        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        const loginModal = new bootstrap.Modal(
+            document.getElementById('loginModal')
+        );
         loginModal.show();
     }
+});
+
+const enterSite = document.getElementById('enter-site');
+enterSite.addEventListener('click', (event) => {
+    event.preventDefault();
+    const loginModal = new bootstrap.Modal(
+        document.getElementById('loginModal')
+    );
+    loginModal.show();
 });
 
 AOS.init();
