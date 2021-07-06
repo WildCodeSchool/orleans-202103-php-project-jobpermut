@@ -28,7 +28,7 @@
                                     <h3 class="h2 mb-1 text-warning">{{ user.username }}</h3>
                                     <h4 class="h3">
                                         {% if user.registeredUser.rome is defined %}
-                                            {{ user.registeredUser.rome }}
+                                            {{ user.registeredUser.rome.name }}
                                         {% else %}
                                             Secteur d'activité non renseigné
                                         {% endif %}
