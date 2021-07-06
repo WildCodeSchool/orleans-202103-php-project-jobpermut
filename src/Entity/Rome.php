@@ -39,6 +39,11 @@ class Rome
         $this->registeredUsers = new ArrayCollection();
     }
 
+    public function __serialize(): array
+    {
+        return [];
+    }
+
     public function getId(): ?int
     {
         return $this->id;
