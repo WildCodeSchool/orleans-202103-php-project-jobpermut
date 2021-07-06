@@ -17,10 +17,10 @@
             <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
                 <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
                 <div class="ms-3 mb-1 testimony-titles">
-                    <h4 class="m-0 text-warning">{{ testimony.user.username }}</h4>
+                    <h4 class="m-0 text-warning">{{ testimony.users.username }}</h4>
                     <h5 class="m-0">
-                        {% if testimony.user.registeredUser.rome is defined %}
-                            {{ testimony.user.registeredUser.rome|rome_name }}
+                        {% if testimony.users.registeredUser.rome is defined %}
+                            {{ testimony.users.registeredUser.rome|rome_name }}
                         {% else %}
                             Pas d'emploi renseigné
                         {% endif %}

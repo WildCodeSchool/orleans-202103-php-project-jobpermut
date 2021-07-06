@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\TestimonyRepository;
-use App\Entity\User;
-use DateTime;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -31,9 +29,11 @@ class Testimony
     private DateTimeInterface $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="testimony")
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="testimonies")
+     * @ORM\JoinColumn(nullable=false)
      */
-    private User $user;
+    private ?User $users;
+
 
     public function getId(): ?int
     {
@@ -64,15 +64,16 @@ class Testimony
         return $this;
     }
 
-    public function getUser(): User
+    public function getUsers(): ?User
     {
-        return $this->user;
+        return $this->users;
     }
 
-    public function setUser(User $user): self
+    public function setUsers(?User $users): self
     {
-        $this->user = $user;
+        $this->users = $users;
 
         return $this;
     }
+    
 }

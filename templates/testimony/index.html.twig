@@ -27,7 +27,7 @@
         <tbody>
             {% for testimony in testimonies %}
                 <tr>
-                    <td>{{ testimony.user.username }}</td>
+                    <td>{{ testimony.users.username }}</td>
                     <td>{{ testimony.commentary }}</td>
                     <td>{{ testimony.createdAt ? testimony.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>

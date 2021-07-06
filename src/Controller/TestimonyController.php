@@ -44,7 +44,7 @@ class TestimonyController extends AbstractController
              * @var User
              */
             $user = $this->getUser();
-            $testimony->setUser($user);
+            $testimony->setUsers($user);
 
             $entityManager->persist($testimony);
             $entityManager->flush();
