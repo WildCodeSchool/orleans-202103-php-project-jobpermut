@@ -34,6 +34,7 @@ Encore
     .addEntry('app', './assets/app.js')
 
     .addEntry('freeMap', './assets/freeMap.js')
+    .addEntry('permutMap', './assets/permutMap.js')
 
     .addStyleEntry('navbar', './assets/styles/navbar.scss')
     .addStyleEntry('footer', './assets/styles/footer.scss')
