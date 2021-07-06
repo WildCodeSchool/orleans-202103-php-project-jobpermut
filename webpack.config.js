@@ -42,6 +42,7 @@ Encore
     .addStyleEntry('admin', './assets/styles/admin.scss')
     .addStyleEntry('error', './assets/styles/error.scss')
     .addStyleEntry('setting', './assets/styles/setting.scss')
+    .addStyleEntry('permutsearch', './assets/styles/permutsearch.scss')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
