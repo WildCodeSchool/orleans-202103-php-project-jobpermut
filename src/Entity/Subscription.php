@@ -60,6 +60,16 @@ class Subscription
      */
     private ?Company $company;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private ?int $ogrCode;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $ogrName;
+
     public function __serialize(): array
     {
         return [];
@@ -156,6 +166,30 @@ class Subscription
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    public function getOgrCode(): ?int
+    {
+        return $this->ogrCode;
+    }
+
+    public function setOgrCode(?int $ogrCode): self
+    {
+        $this->ogrCode = $ogrCode;
+
+        return $this;
+    }
+
+    public function getOgrName(): ?string
+    {
+        return $this->ogrName;
+    }
+
+    public function setOgrName(?string $ogrName): self
+    {
+        $this->ogrName = $ogrName;
 
         return $this;
     }
