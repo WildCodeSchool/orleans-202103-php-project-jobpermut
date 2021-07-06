@@ -34,7 +34,7 @@ class SecurityController extends AbstractController
 
         $session->set('error', $error ?
             'Email ou mot de passe incorrect.' :
-            'Vous êtes déconnecté.');
+            'Connection requise.');
 
         if (!$lastRoute) {
             return $this->redirectToRoute('home');
