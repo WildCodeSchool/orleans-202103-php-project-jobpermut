@@ -20,7 +20,7 @@
                     <h4 class="m-0 text-warning">{{ testimony.users.username }}</h4>
                     <h5 class="m-0">
                         {% if testimony.users.registeredUser.rome is defined %}
-                            {{ testimony.users.registeredUser.rome|rome_name }}
+                            {{ testimony.users.registeredUser.rome.name }}
                         {% else %}
                             Pas d'emploi renseigné
                         {% endif %}
