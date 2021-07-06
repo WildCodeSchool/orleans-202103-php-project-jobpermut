@@ -35,7 +35,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setJobStreet($this->faker->streetName());
             $registeredUser->setJobZipcode($this->faker->postcode());
             $registeredUser->setCityJob($this->faker->city());
-            $registeredUser->setRome(self::ROME[rand(0, 2)]);
+            $registeredUser->setRome($this->getReference(self::ROME[rand(0, 2)]));
             $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));
 
@@ -50,6 +50,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         return [
             UserFixtures::class,
             SubscriptionFixtures::class,
+            RomeFixtures::class,
         ];
     }
 }

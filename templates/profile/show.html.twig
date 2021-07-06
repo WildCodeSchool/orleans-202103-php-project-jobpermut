@@ -33,7 +33,7 @@
                         </div>
                         <h2 class="h3 m-0">
                             {% if user.registeredUser.rome is defined %}
-                                {{ user.registeredUser.rome|rome_name }}
+                                {{ user.registeredUser.rome.name }}
                             {% else %}
                                 Non renseigné
                             {% endif %}
