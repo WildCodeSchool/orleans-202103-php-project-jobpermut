@@ -185,7 +185,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setJobZipcode($this->faker->postcode());
             $registeredUser->setCityJob($this->faker->city());
             $registeredUser->setRome($this->getReference(self::ROME[rand(0, 2)]));
-            $registeredUser->setUser($this->getReference('user_' . $i+10));
+            $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));
 
             $manager->persist($registeredUser);
