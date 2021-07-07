@@ -20,7 +20,7 @@ class SubscriptionType extends AbstractType
         $this->apiRome = $apiRome;
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('curriculumFile', VichFileType::class, [
@@ -45,7 +45,7 @@ class SubscriptionType extends AbstractType
             ]);
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Subscription::class,

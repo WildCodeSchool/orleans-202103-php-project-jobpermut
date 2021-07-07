@@ -199,7 +199,7 @@ class Subscription
     /**
      * Get the value of compagnyCode
      */
-    public function getCompagnyCode(): string
+    public function getCompagnyCode(): ?string
     {
         return $this->compagnyCode;
     }
