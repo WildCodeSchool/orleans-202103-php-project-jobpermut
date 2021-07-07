@@ -1,4 +1,9 @@
 <div class="visitorForm d-flex flex-column justify-content-center text-dark bg-light rounded-5 col-12 p-4">
+    {% if app.request.get('tripSummary').duration.hours is not empty%}
+        {% set hours = app.request.get('tripSummary').duration.hours ~ ' heures' %}
+    {% else %}
+        {% set hours = '' %}
+    {% endif %}
     <h2 class="text-warning text-center h1 mb-4">Evaluation de votre trajet</h2>
     <h3 class="h3 fw-light text-center mb-3">Vous faites en moyenne<br>
         <span class="text-primary fw-bold">{{ app.request.get('tripSummary').distance }}
@@ -8,8 +13,7 @@
         soit
         <br>
         <span class="text-primary fw-bold">
-            {{ app.request.get('tripSummary').duration.hours }}
-            heures
+            {{ hours }} 
             {{ app.request.get('tripSummary').duration.minutes }}
             minutes
         </span>
