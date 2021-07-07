@@ -30,9 +30,9 @@ class Company
     private string $address;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private int $code;
+    private string $code;
 
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="company")
@@ -79,12 +79,12 @@ class Company
         return $this;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): self
+    public function setCode(string $code): self
     {
         $this->code = $code;
 

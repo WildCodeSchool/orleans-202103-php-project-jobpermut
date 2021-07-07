@@ -31,7 +31,7 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $curriculum;
+    private ?string $curriculum = null;
 
     /**
      * @Vich\UploadableField(mapping="curriculum", fileNameProperty="curriculum")
@@ -42,7 +42,7 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $jobDescription;
+    private ?string $jobDescription = null;
 
     /**
      * @Vich\UploadableField(mapping="job_description", fileNameProperty="jobDescription")
@@ -64,6 +64,8 @@ class Subscription
      * @ORM\Column(type="integer", nullable=true)
      */
     private ?int $ogrCode;
+
+    private ?string $compagnyCode;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -192,5 +194,21 @@ class Subscription
         $this->ogrName = $ogrName;
 
         return $this;
+    }
+
+    /**
+     * Get the value of compagnyCode
+     */
+    public function getCompagnyCode(): string
+    {
+        return $this->compagnyCode;
+    }
+
+    /**
+     * Set the value of compagnyCode
+     */
+    public function setCompagnyCode(?string $compagnyCode): void
+    {
+        $this->compagnyCode = $compagnyCode;
     }
 }
