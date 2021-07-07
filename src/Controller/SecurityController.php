@@ -92,7 +92,7 @@ class SecurityController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'Votre inscription c\'est bien deroulé, un mail de confirmation vous sera envoyé'
+                'Votre inscription s\'est bien deroulé, un mail de confirmation vous sera envoyé'
             );
 
             return $guardHandler->authenticateUserAndHandleSuccess(
