@@ -1,0 +1,23 @@
+<div class="visitorForm d-flex flex-column justify-content-center col-12 p-4">
+    {% if app.request.get('tripSummary') %}
+        {% set hours = app.request.get('tripSummary').duration.hours ~ ' heures' %}
+    {% else %}
+        {% set hours = '' %}
+    {% endif %}
+    <h2 class="text-center h1 mb-4">Evaluation de votre trajet</h2>
+    <h3 class="h3 fw-light text-center mb-3">Vous faites en moyenne<br>
+        <span class="fw-bold">{{ app.request.get('tripSummary').distance ?? "Non renseigné" }}
+            kilomètres</span>
+        <span class="fw-bold">par jour</span>,
+        <br>
+        soit
+        <br>
+        <span class="fw-bold">
+            {{ hours }}
+            {{ app.request.get('tripSummary').duration.minutes ?? "Non renseigné" }}
+            minutes
+        </span>
+        <br>
+        passés dans votre voiture.
+    </h3>
+</div>

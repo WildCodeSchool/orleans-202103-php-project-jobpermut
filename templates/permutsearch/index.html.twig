@@ -38,7 +38,9 @@
                                             Secteur d'activité non renseigné
                                         {% endif %}
                                     </h4>
-                                    <h5 class="mb-0"><i class="fas fa-map-marker-alt me-1"></i> {{ user.registeredUser.city ?? "Localisation non renseignée" }}</h5>
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-map-marker-alt me-1"></i>
+                                        {{ user.registeredUser.city ?? "Localisation non renseignée" }}</h5>
                                 </div>
                                 <i class="fas fa-heart heart-sm"></i>
                             </div>
@@ -51,16 +53,28 @@
                         <div class="permut-body row row-cols-1 row-cols-md-2 mb-4">
                             <div class="map col ps-3 pe-2">
                                 <div id="map-before-{{ user.id }}" class="permutMap"></div>
-                                <div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center text-danger">
-                                    <i class="fas fa-times-circle me-2"></i>
-                                    <h3 class="m-0">Vos trajets actuels</h3>
+                                <div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <a class="text-danger trajet">
+                                        <i class="fas fa-times-circle me-2"></i>Vos trajets actuels
+                                    </a>
+                                </div>
+                                <div class="collapse mt-3" id="collapseExample">
+                                    <div class="card card-body bg-dark text-white">
+                                        {% include "permutsearch/_tripSummary.html.twig" %}
+                                    </div>
                                 </div>
                             </div>
                             <div class="map col pe-3 ps-2">
                                 <div id="map-after-{{ user.id }}" class="permutMap"></div>
-                                <div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center text-success">
-                                    <i class="fas fa-check-circle me-2"></i>
-                                    <h3 class="m-0">Vos futurs trajets</h3>
+                                <div class="title-courses bg-white p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                    <a class="text-success trajet">
+                                        <i class="fas fa-check-circle me-2"></i>Vos futurs trajets
+                                    </a>
+                                </div>
+                                <div class="collapse mt-3" id="collapseExample">
+                                    <div class="card card-body">
+                                        {% include "permutsearch/_tripSummary.html.twig" %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
