@@ -34,6 +34,7 @@ Encore
     .addEntry('app', './assets/app.js')
 
     .addEntry('freeMap', './assets/freeMap.js')
+    .addEntry('permutMap', './assets/permutMap.js')
 
     .addStyleEntry('navbar', './assets/styles/navbar.scss')
     .addStyleEntry('footer', './assets/styles/footer.scss')
@@ -41,6 +42,7 @@ Encore
     .addStyleEntry('profile', './assets/styles/profile.scss')
     .addStyleEntry('admin', './assets/styles/admin.scss')
     .addStyleEntry('error', './assets/styles/error.scss')
+    .addStyleEntry('testimony', './assets/styles/testimony.scss')
     .addStyleEntry('setting', './assets/styles/setting.scss')
     .addStyleEntry('permutsearch', './assets/styles/permutsearch.scss')
     .addStyleEntry('admincompany', './assets/styles/adminCompany.scss')
