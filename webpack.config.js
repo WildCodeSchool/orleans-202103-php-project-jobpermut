@@ -42,6 +42,7 @@ Encore
     .addStyleEntry('profile', './assets/styles/profile.scss')
     .addStyleEntry('admin', './assets/styles/admin.scss')
     .addStyleEntry('error', './assets/styles/error.scss')
+    .addStyleEntry('testimony', './assets/styles/testimony.scss')
     .addStyleEntry('setting', './assets/styles/setting.scss')
     .addStyleEntry('permutsearch', './assets/styles/permutsearch.scss')
 
