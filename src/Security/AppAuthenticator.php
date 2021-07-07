@@ -126,7 +126,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
                 $username = $request->request->get("registration_form")['username'];
                 return new RedirectResponse($this->urlGenerator->generate('profile_edit', ['username' => $username]));
             } else {
-                return new RedirectResponse('home');
+                return new RedirectResponse($this->urlGenerator->generate('home'));
             }
         } else {
             return new RedirectResponse($this->urlGenerator->generate($lastRoute['route'], $lastRoute['params']));
