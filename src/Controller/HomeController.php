@@ -21,8 +21,13 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home", methods={"POST", "GET"})
      */
-    public function index(Request $request, Geocode $geocode, SessionInterface $session, Direction $direction, TestimonyRepository $testimonyRepository): Response
-    {
+    public function index(
+        Request $request,
+        Geocode $geocode,
+        SessionInterface $session,
+        Direction $direction,
+        TestimonyRepository $testimonyRepository
+    ): Response {
         $visitorTrip = new VisitorTrip();
         $form = $this->createForm(VisitorTripType::class, $visitorTrip);
         $form->handleRequest($request);
@@ -60,10 +65,12 @@ class HomeController extends AbstractController
             ]);
         }
 
-            $testimonies = array();
-            $keys = array_keys($testimonyRepository->findAll());
-            shuffle($keys);
-               foreach($keys as $key) $testimonies[] = $testimonyRepository->findAll()[$key];
+        $testimonies = array();
+        $keys = array_keys($testimonyRepository->findAll());
+        shuffle($keys);
+        foreach ($keys as $key) {
+            $testimonies[] = $testimonyRepository->findAll()[$key];
+        }
 
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
