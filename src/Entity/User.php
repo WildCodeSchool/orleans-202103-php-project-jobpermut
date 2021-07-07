@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTimeInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -62,15 +64,20 @@ class User implements UserInterface
      */
     private bool $isVisible;
 
-     /*
-     * @ORM\OneToOne(targetEntity=Testimony::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private ?Testimony $testimony;
-
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="user")
      */
     private ?Company $company;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Testimony::class, mappedBy="user")
+     */
+    private Collection $testimonies;
+
+    public function __construct()
+    {
+        $this->testimonies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -198,28 +205,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getTestimony(): ?Testimony
-    {
-        return $this->testimony;
-    }
-
-    public function setTestimony(?Testimony $testimony): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($testimony === null && $this->testimony !== null) {
-            $this->testimony->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($testimony !== null && $testimony->getUser() !== $this) {
-            $testimony->setUser($this);
-        }
-
-        $this->testimony = $testimony;
-
-        return $this;
-    }
-
     public function getCompany(): ?Company
     {
         return $this->company;
@@ -228,6 +213,36 @@ class User implements UserInterface
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Testimony[]
+     */
+    public function getTestimonies(): Collection
+    {
+        return $this->testimonies;
+    }
+
+    public function addTestimony(Testimony $testimony): self
+    {
+        if (!$this->testimonies->contains($testimony)) {
+            $this->testimonies[] = $testimony;
+            $testimony->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTestimony(Testimony $testimony): self
+    {
+        if ($this->testimonies->removeElement($testimony)) {
+            // set the owning side to null (unless already changed)
+            if ($testimony->getUser() === $this) {
+                $testimony->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -29,9 +29,10 @@ class Testimony
     private DateTimeInterface $createdAt;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="testimony", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="testimonies")
      */
     private ?User $user;
+
 
     public function getId(): ?int
     {
