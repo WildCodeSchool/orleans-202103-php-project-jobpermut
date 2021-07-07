@@ -60,9 +60,9 @@ class User implements UserInterface
     private string $username;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
-    private bool $isVisible;
+    private bool $isVisible = true;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="user")
@@ -191,20 +191,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getIsVisible(): ?bool
-    {
-        return $this->isVisible;
-    }
-
-    public function setIsVisible(?bool $isVisible): self
-    {
-        if ($isVisible !== null) {
-            $this->isVisible = $isVisible;
-        }
-
-        return $this;
-    }
-
     public function getCompany(): ?Company
     {
         return $this->company;
@@ -245,5 +231,21 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Get the value of isVisible
+     */
+    public function getIsVisible(): bool
+    {
+        return $this->isVisible;
+    }
+
+    /**
+     * Set the value of isVisible
+     */
+    public function setIsVisible(bool $isVisible): void
+    {
+        $this->isVisible = $isVisible;
     }
 }

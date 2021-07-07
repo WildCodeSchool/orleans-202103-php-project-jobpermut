@@ -24,7 +24,7 @@
 
         <div class="px-lg-5 px-2">
             {% for user in users %}
-                {% if user.isVisible == true %}
+                {% if user.isVisible != false %}
                     <div class="permut-card mb-5">
                         <div class="permut-header mb-3 d-flex flex-row align-items-center justify-content-between">
                             <div class="d-flex flex-row align-items-center text-white">
