@@ -48,7 +48,12 @@
     </header>
 
     <section class="freeMap">
-        {{ include('includes/_visitor_form.html.twig') }}
+        {% if app.request.get('tripSummary') is null %}
+            {{ include('includes/_visitor_form.html.twig') }}
+        {% else %}
+            {{ include('includes/_tripSummary.html.twig') }}
+        {% endif %}
+
         <div id="map"></div>
         <div class="TripEvaluation"></div>
     </section>
@@ -171,6 +176,6 @@
             </div>
         </div>
 
-        <a href="#loginModal" class="btn btn-lg btn-primary mx-auto">Faîtes comme eux !</a>
+        <a id="enter-site" href="#" class="btn btn-lg btn-primary mx-auto">Faîtes comme eux !</a>
     </section>
 {% endblock %}

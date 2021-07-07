@@ -5,14 +5,20 @@ namespace App\Controller;
 use DateTime;
 use LogicException;
 use App\Entity\User;
+use App\Entity\ChangePassword;
+use App\Form\ChangePasswordType;
 use Symfony\Component\Mime\Email;
 use App\Form\RegistrationFormType;
+use App\Security\AppAuthenticator;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -30,7 +36,7 @@ class SecurityController extends AbstractController
 
         $session->set('error', $error ?
             'Email ou mot de passe incorrect.' :
-            'Vous êtes déconnecté.');
+            'Connection requise.');
 
         if (!$lastRoute) {
             return $this->redirectToRoute('home');
@@ -54,8 +60,10 @@ class SecurityController extends AbstractController
     public function register(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        MailerInterface $mailer
-    ): Response {
+        MailerInterface $mailer,
+        GuardAuthenticatorHandler $guardHandler,
+        AppAuthenticator $authenticator
+    ): ?Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -82,7 +90,17 @@ class SecurityController extends AbstractController
 
             $mailer->send($email);
 
-            return $this->redirectToRoute('home');
+            $this->addFlash(
+                'success',
+                'Votre inscription s\'est bien deroulée, un mail de confirmation vous sera envoyé'
+            );
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
         }
 
         return $this->render('security/register.html.twig', [
@@ -101,6 +119,43 @@ class SecurityController extends AbstractController
 
         return $this->render('includes/_login.html.twig', [
             'error' => $error
+        ]);
+    }
+
+    /**
+     * @Route("parametres/{username}/mot-de-passe", name="change_password")
+     * @ParamConverter("user", class="App\Entity\User"),
+     * options={"mapping": {"username": "username"}})
+     */
+    public function changePassword(
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        EntityManagerInterface $entityManager,
+        User $user
+    ): Response {
+
+        $changePassword = new ChangePassword();
+
+        $form = $this->createForm(ChangePasswordType::class, $changePassword);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $user->setPassword(
+                $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('newPassword')->getData()
+                )
+            );
+
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre mot de passe a bien été modifié.');
+
+            return $this->redirectToRoute('setting');
+        }
+
+        return $this->render('setting/change_password.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
