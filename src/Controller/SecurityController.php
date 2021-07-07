@@ -2,21 +2,23 @@
 
 namespace App\Controller;
 
-use App\Entity\ChangePassword;
 use DateTime;
 use LogicException;
 use App\Entity\User;
+use App\Entity\ChangePassword;
 use App\Form\ChangePasswordType;
 use Symfony\Component\Mime\Email;
 use App\Form\RegistrationFormType;
+use App\Security\AppAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Guard\GuardAuthenticatorHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
@@ -58,8 +60,10 @@ class SecurityController extends AbstractController
     public function register(
         Request $request,
         UserPasswordEncoderInterface $passwordEncoder,
-        MailerInterface $mailer
-    ): Response {
+        MailerInterface $mailer,
+        GuardAuthenticatorHandler $guardHandler,
+        AppAuthenticator $authenticator
+    ): ?Response {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -86,7 +90,17 @@ class SecurityController extends AbstractController
 
             $mailer->send($email);
 
-            return $this->redirectToRoute('home');
+            $this->addFlash(
+                'success',
+                'Votre inscription c\'est bien deroulé, un mail de confirmation vous sera envoyé'
+            );
+
+            return $guardHandler->authenticateUserAndHandleSuccess(
+                $user,
+                $request,
+                $authenticator,
+                'main' // firewall name in security.yaml
+            );
         }
 
         return $this->render('security/register.html.twig', [
