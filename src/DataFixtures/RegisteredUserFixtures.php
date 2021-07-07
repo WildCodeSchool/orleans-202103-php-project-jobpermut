@@ -142,7 +142,9 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
     ];
 
 
-    public const MAX_FIXTURES = 10;
+    public const MAX_REALISTIC_FIXTURES = 10;
+
+    public const MAX_FICTIONAL_FIXTURES = 20;
 
     public function __construct()
     {
@@ -151,7 +153,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
 
     public function load(ObjectManager $manager)
     {
-        for ($i = 0; $i < self::MAX_FIXTURES; $i++) {
+        for ($i = 0; $i < self::MAX_REALISTIC_FIXTURES; $i++) {
             $registeredUser = new RegisteredUser();
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
@@ -171,7 +173,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $manager->persist($registeredUser);
         }
 
-        for ($i = 0; $i < self::MAX_FIXTURES; $i++) {
+        for ($i = 10; $i < self::MAX_FICTIONAL_FIXTURES; $i++) {
             $registeredUser = new RegisteredUser();
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
@@ -186,7 +188,6 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setCityJob($this->faker->city());
             $registeredUser->setRome($this->getReference(self::ROME[rand(0, 2)]));
             $registeredUser->setUser($this->getReference('user_' . $i));
-            $registeredUser->setSubscription($this->getReference('subscription_' . $i));
 
             $manager->persist($registeredUser);
         }
