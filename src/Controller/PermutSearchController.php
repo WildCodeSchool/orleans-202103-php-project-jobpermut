@@ -15,7 +15,7 @@ class PermutSearchController extends AbstractController
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('permutsearch/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $userRepository->findby([], [], 5),
         ]);
     }
 }

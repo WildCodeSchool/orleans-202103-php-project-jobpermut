@@ -19,11 +19,13 @@ window.addEventListener('load', (event) => {
     }
 });
 
-const enterSite = document.getElementById('enter-site');
-enterSite.addEventListener('click', (event) => {
-    event.preventDefault();
-    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-    loginModal.show();
-});
+if (document.getElementById('enter-site')) {
+    const enterSite = document.getElementById('enter-site');
+    enterSite.addEventListener('click', (event) => {
+        event.preventDefault();
+        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+        loginModal.show();
+    });
+}
 
 AOS.init();
