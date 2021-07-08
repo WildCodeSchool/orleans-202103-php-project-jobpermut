@@ -15,7 +15,7 @@ function initMap(
     userWorkLong = 2.765796,
     userWorkLat = 48.878462,
     lat = 48.852969,
-    lon = 2.2
+    lon = 2.2,
 ) {
     permutMap.forEach((element) => {
         if (element.classList.contains('map-before')) {
@@ -31,9 +31,9 @@ function initMap(
             L.tileLayer(
                 'https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=99affac52963476dbbf2ed20db232af9',
                 {
-                    attribution:
+                    attributuion:
                         'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-                }
+                },
             ).addTo(mapBefore);
 
             // Init Markers
@@ -43,48 +43,46 @@ function initMap(
                 className: 'fas fa-briefcase',
                 iconAnchor: [12, 25],
             });
+
             L.marker([workLat, workLong], { icon: workIcon }).addTo(mapBefore);
+
             const homeIcon = L.divIcon({
                 className: 'fas fa-home',
                 iconAnchor: [12, 25],
             });
+
             L.marker([homeLat, homeLong], { icon: homeIcon }).addTo(mapBefore);
 
             const userWorkIcon = L.divIcon({
                 className: 'fas fa-briefcase user',
                 iconAnchor: [12, 25],
             });
-            L.marker([userWorkLat, userWorkLong], { icon: userWorkIcon }).addTo(
-                mapBefore
-            );
+
+            L.marker([userWorkLat, userWorkLong], { icon: userWorkIcon }).addTo(mapBefore);
+
             const userHomeIcon = L.divIcon({
                 className: 'fas fa-home user',
                 iconAnchor: [12, 25],
             });
-            L.marker([userHomeLat, userHomeLong], { icon: userHomeIcon }).addTo(
-                mapBefore
-            );
 
-            fetch(
-                `/leaflet/direction/${homeLong}/${homeLat}/${workLong}/${workLat}`
-            )
+            L.marker([userHomeLat, userHomeLong], { icon: userHomeIcon }).addTo(mapBefore);
+
+            fetch(`/leaflet/direction/${homeLong}/${homeLat}/${workLong}/${workLat}`)
                 .then((response) => response.json())
-                .then((data) => {
-                    data = data.geometry.coordinates;
-                    data.forEach((element) => {
-                        element = element.reverse();
+                .then((datas) => {
+                    const data = datas.geometry.coordinates;
+                    data.forEach((elements) => {
+                        elements = elements.reverse();
                     });
                     L.polyline(data, { color: '#ed9f1a' }).addTo(mapBefore);
                 });
 
-            fetch(
-                `/leaflet/direction/${userHomeLong}/${userHomeLat}/${userWorkLong}/${userWorkLat}`
-            )
+            fetch(`/leaflet/direction/${userHomeLong}/${userHomeLat}/${userWorkLong}/${userWorkLat}`)
                 .then((response) => response.json())
-                .then((data) => {
-                    data = data.geometry.coordinates;
-                    data.forEach((element) => {
-                        element = element.reverse();
+                .then((datas) => {
+                    const data = datas.geometry.coordinates;
+                    data.forEach((elements) => {
+                        elements = elements.reverse();
                     });
                     L.polyline(data, { color: '#00636f' }).addTo(mapBefore);
                 });
@@ -109,16 +107,12 @@ function initMap(
                 center: [48.852969, 2.2],
             }).setView([lat, lon], 10);
 
-            // Init Tiles
-            // Tiles on mapBefore
-
-            // Tiles on mapAfter
             L.tileLayer(
                 'https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=99affac52963476dbbf2ed20db232af9',
                 {
                     attribution:
                         'données © <a href="//osm.org/copyright">OpenStreetMap</a>/ODbL - rendu <a href="//openstreetmap.fr">OSM France</a>',
-                }
+                },
             ).addTo(mapAfter);
 
             // on mapAfter
@@ -126,58 +120,48 @@ function initMap(
                 className: 'fas fa-briefcase',
                 iconAnchor: [12, 25],
             });
-            L.marker([userWorkLat, userWorkLong], { icon: newWorkIcon }).addTo(
-                mapAfter
-            );
+
+            L.marker([userWorkLat, userWorkLong], { icon: newWorkIcon }).addTo(mapAfter);
+
             const newHomeIcon = L.divIcon({
                 className: 'fas fa-home',
                 iconAnchor: [12, 25],
             });
-            L.marker([homeLat, homeLong], { icon: newHomeIcon }).addTo(
-                mapAfter
-            );
+
+            L.marker([homeLat, homeLong], { icon: newHomeIcon }).addTo(mapAfter);
 
             const NewUserWorkIcon = L.divIcon({
                 className: 'fas fa-briefcase user',
                 iconAnchor: [12, 25],
             });
-            L.marker([workLat, workLong], { icon: NewUserWorkIcon }).addTo(
-                mapAfter
-            );
+
+            L.marker([workLat, workLong], { icon: NewUserWorkIcon }).addTo(mapAfter);
+
             const NewUserHomeIcon = L.divIcon({
                 className: 'fas fa-home user',
                 iconAnchor: [12, 25],
             });
+
             L.marker([userHomeLat, userHomeLong], {
                 icon: NewUserHomeIcon,
             }).addTo(mapAfter);
 
-            // Init Routes
-
-            // on map Before
-
-            // on mapAfter
-
-            fetch(
-                `/leaflet/direction/${homeLong}/${homeLat}/${userWorkLong}/${userWorkLat}`
-            )
+            fetch(`/leaflet/direction/${homeLong}/${homeLat}/${userWorkLong}/${userWorkLat}`)
                 .then((response) => response.json())
-                .then((data) => {
-                    data = data.geometry.coordinates;
-                    data.forEach((element) => {
-                        element = element.reverse();
+                .then((datas) => {
+                    const data = datas.geometry.coordinates;
+                    data.forEach((elements) => {
+                        elements = elements.reverse();
                     });
                     L.polyline(data, { color: '#ed9f1a' }).addTo(mapAfter);
                 });
 
-            fetch(
-                `/leaflet/direction/${userHomeLong}/${userHomeLat}/${workLong}/${workLat}`
-            )
+            fetch(`/leaflet/direction/${userHomeLong}/${userHomeLat}/${workLong}/${workLat}`)
                 .then((response) => response.json())
-                .then((data) => {
-                    data = data.geometry.coordinates;
-                    data.forEach((element) => {
-                        element = element.reverse();
+                .then((datas) => {
+                    const data = datas.geometry.coordinates;
+                    data.forEach((elements) => {
+                        elements = elements.reverse();
                     });
                     L.polyline(data, { color: '#00636f' }).addTo(mapAfter);
                 });
