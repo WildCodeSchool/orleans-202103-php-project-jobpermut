@@ -1,10 +1,10 @@
 <div class="visitorForm d-flex flex-column justify-content-center col-12 p-4">
 	{% if tripSummary2.duration.hours %}
-		{% set hours = tripSummary2.duration.hours ~ ' heures' %}
+		{% set hours = tripSummary2.duration.hours ~ ' heure(s)' %}
 	{% else %}
 		{% set hours = '' %}
 	{% endif %}
-	<h4 class="text-center h1 mb-4 text-success">Evaluation de votre trajet actuel</h2>
+	<h4 class="text-center h1 mb-4 text-success">Evaluation de votre futur trajet</h2>
 	<h5 class="h3 fw-bold text-center text-dark mb-3">
 		<i class="fas fa-car"></i>
 		{{ tripSummary2.distance }}
