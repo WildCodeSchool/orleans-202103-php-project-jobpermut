@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Testimony;
 use LogicException;
 use RuntimeException;
 use App\Service\Geocode;
 use App\Entity\VisitorTrip;
 use App\Form\VisitorTripType;
+use App\Repository\TestimonyRepository;
 use App\Service\Direction;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +21,13 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home", methods={"POST", "GET"})
      */
-    public function index(Request $request, Geocode $geocode, SessionInterface $session, Direction $direction): Response
-    {
+    public function index(
+        Request $request,
+        Geocode $geocode,
+        SessionInterface $session,
+        Direction $direction,
+        TestimonyRepository $testimonyRepository
+    ): Response {
         $visitorTrip = new VisitorTrip();
         $form = $this->createForm(VisitorTripType::class, $visitorTrip);
         $form->handleRequest($request);
@@ -58,9 +65,16 @@ class HomeController extends AbstractController
             ]);
         }
 
+        $testimonies = array();
+        $keys = array_keys($testimonyRepository->findAll());
+        shuffle($keys);
+        foreach ($keys as $key) {
+            $testimonies[] = $testimonyRepository->findAll()[$key];
+        }
 
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
+            'testimonies' => $testimonies,
         ]);
     }
 }
