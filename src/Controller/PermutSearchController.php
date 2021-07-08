@@ -27,7 +27,7 @@ class PermutSearchController extends AbstractController
         $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
 
         return $this->render('permutsearch/index.html.twig', [
-            'user' => $userRepository->findOneById(1),
+            'users' => $userRepository->findby([], [], 5),
             'tripSummary1' => $tripSummary1,
             'tripSummary2' => $tripSummary2
         ]);
