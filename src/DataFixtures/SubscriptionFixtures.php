@@ -22,9 +22,6 @@ class SubscriptionFixtures extends Fixture
         for ($i = 0; $i < UserFixtures::MAX_FIXTURES; $i++) {
             $subscription = new Subscription();
             $subscription->setSubscriptionAt($this->faker->dateTimeBetween('-2 week', 'now'));
-            $subscription->setCurriculum($this->faker->mimeType());
-            $subscription->setJobDescription($this->faker->sentence(4));
-
             $manager->persist($subscription);
             $this->addReference('subscription_' . $i, $subscription);
         }

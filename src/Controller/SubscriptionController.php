@@ -7,6 +7,8 @@ use App\Entity\Subscription;
 use App\Entity\RegisteredUser;
 use App\Form\SubscriptionType;
 use App\Repository\CompanyRepository;
+use App\Repository\RegisteredUserRepository;
+use App\Service\ApiRome\ApiRome;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,20 +22,29 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class SubscriptionController extends AbstractController
 {
     /**
-     * @Route("/", name="index")
+     * @Route("/new", name="new")
      */
-    public function index(
+    public function new(
         Request $request,
         EntityManagerInterface $entityManager,
-        CompanyRepository $companyRepository
+        CompanyRepository $companyRepository,
+        ApiRome $apiRome
     ): Response {
-        $subscription = new Subscription();
         /** @var User */
         $user = $this->getUser();
+
+        $subscription = new Subscription();
+
         /** @var RegisteredUser */
         $registeredUser = $user->getRegisteredUser();
+
+        if ($registeredUser->getSubscription()) {
+            return $this->redirectToRoute('subscription_edit', ['registeredUser' => $registeredUser->getId()]);
+        }
+
         $rome = $registeredUser != null ? $registeredUser->getRome() : null;
         $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -42,7 +53,51 @@ class SubscriptionController extends AbstractController
             }
 
             $subscription->setSubscriptionAt(new DateTimeImmutable());
+            $entityManager->persist($subscription);
+            $entityManager->flush();
+        }
 
+        return $this->render('subscription/index.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/{subscription}/edit", name="edit")
+     */
+    public function edit(
+        Subscription $subscription,
+        RegisteredUserRepository $registeredUserRepository,
+        Request $request,
+        EntityManagerInterface $entityManager,
+        CompanyRepository $companyRepository,
+        ApiRome $apiRome
+    ): Response {
+
+        /** @var RegisteredUser */
+        $registeredUser = $registeredUserRepository->findOneBy([
+            'subscription' => $subscription
+        ]);
+
+        $rome = $registeredUser->getRome();
+
+        $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($subscription->getCompagnyCode()) {
+                $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
+            }
+
+            if ($subscription->getOgrCode()) {
+                $ogrName = $apiRome->getDetailsOfAppellation($subscription->getOgrCode())['libelleCourt'];
+                if ($ogrName !== $subscription->getOgrName()) {
+                    $subscription->setOgrName($ogrName);
+                }
+            }
+
+            $subscription->setUpdatedAt(new DateTimeImmutable());
             $entityManager->persist($subscription);
             $entityManager->flush();
         }
