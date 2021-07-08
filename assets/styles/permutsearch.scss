@@ -1,5 +1,5 @@
-@import "variables";
-@import "~leaflet/dist/leaflet.css";
+@import 'variables';
+@import '~leaflet/dist/leaflet.css';
 
 .permutsearch {
     h2 {
@@ -92,7 +92,7 @@
                         display: none;
                     }
 
-                    &[aria-expanded="false"] {
+                    &[aria-expanded='false'] {
                         .fa-arrow-down {
                             display: inline-block;
                         }
@@ -109,11 +109,12 @@
                                 transform: translateY(-10px);
                             }
                         }
+
                         @keyframes action {
                             0% {
                                 transform: translateY(0);
                             }
-                            
+
                             100% {
                                 transform: translateY(-10px);
                             }
