@@ -99,7 +99,7 @@ class Subscription
         return $this->curriculum;
     }
 
-    public function setCurriculum(string $curriculum): self
+    public function setCurriculum(?string $curriculum): self
     {
         $this->curriculum = $curriculum;
 

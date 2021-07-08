@@ -38,8 +38,8 @@ class SubscriptionController extends AbstractController
         /** @var RegisteredUser */
         $registeredUser = $user->getRegisteredUser();
 
-        if ($registeredUser->getSubscription()) {
-            return $this->redirectToRoute('subscription_edit', ['registeredUser' => $registeredUser->getId()]);
+        if ($registeredUser && $registeredUser->getSubscription()) {
+            return $this->redirectToRoute('subscription_edit', ['subscription' => $registeredUser->getSubscription()->getId()]);
         }
 
         $rome = $registeredUser != null ? $registeredUser->getRome() : null;
@@ -52,10 +52,19 @@ class SubscriptionController extends AbstractController
                 $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
             }
 
+            $ogr = strval($subscription->getOgrCode());
+
+            if ($ogr !== $subscription->getOgrCode()) {
+                $ogrName = $apiRome->getDetailsOfAppellation($ogr)['libelleCourt'];
+                $subscription->setOgrName($ogrName);
+            }
+
             $subscription->setSubscriptionAt(new DateTimeImmutable());
             $entityManager->persist($subscription);
             $entityManager->flush();
 
+            $registeredUser->setSubscription($subscription);
+            $entityManager->flush();
             return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }
 

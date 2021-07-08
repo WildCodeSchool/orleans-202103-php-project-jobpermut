@@ -68,19 +68,37 @@
                     </div>
                     <div class="d-flex flex-direction-column align-items-center mb-4">
                         <i class="fas fa-wrench me-4"></i>
-                        <p class="m-0 p-0">Programmation informatique</p>
+                        <p class="m-0 p-0">{{ user.registeredUser.subscription.ogrName ?? "Non renseigné" }}</p>
                     </div>
                 </div>
-                <div class="mt-5 ms-1">
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-file me-4"></i>
-                        <p class="m-0 p-0 fst-italic text-decoration-underline">Voir le CV</p>
+                {% if user.registeredUser.subscription %}
+                    <div class="mt-5 ms-1">
+                        {% if user.registeredUser.subscription.curriculum %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file me-4"></i>
+                                <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'curriculumFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir le CV</a>
+                            </div>
+                        {% else %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file me-4"></i>
+                                <p class="m-0 p-0 fst-italic text-decoration-underline">CV non transmis</p>
+                            </div>
+                        {% endif %}
+                        {% if user.registeredUser.subscription.jobDescription %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file-alt me-4"></i>
+                                <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'jobDescriptionFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir la fiche de poste</a>
+                            </div>
+                        {% else %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file-alt me-4"></i>
+                                <p class="m-0 p-0 fst-italic text-decoration-underline">Fiche de poste non transmise</p>
+                            </div>
+                        {% endif %}
                     </div>
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-file-alt me-4"></i>
-                        <p class="m-0 p-0 fst-italic text-decoration-underline">Voir la fiche de poste</p>
-                    </div>
-                </div>
+                {% else %}
+                    <a href="{{ path('subscription_new') }}" class="btn btn-primary">Passer Premium</a>
+                {% endif %}
             </div>
         </div>
     </main>
