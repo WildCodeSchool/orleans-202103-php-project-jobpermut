@@ -1,6 +1,5 @@
 @import "variables";
-@import '~leaflet/dist/leaflet.css';
-
+@import "~leaflet/dist/leaflet.css";
 
 .permutsearch {
     h2 {
@@ -83,8 +82,40 @@
                 .title-courses {
                     border-radius: 20px;
 
-                    i {
+                    .fa-times-circle,
+                    .fa-check-circle {
                         font-size: 20px;
+                        display: inline-block;
+                    }
+
+                    .fa-arrow-down {
+                        display: none;
+                    }
+
+                    &[aria-expanded="false"] {
+                        .fa-arrow-down {
+                            display: inline-block;
+                        }
+
+                        -webkit-animation: action 1s infinite alternate;
+                        animation: action 1s infinite alternate;
+
+                        @-webkit-keyframes action {
+                            0% {
+                                transform: translateY(0);
+                            }
+                            100% {
+                                transform: translateY(-10px);
+                            }
+                        }
+                        @keyframes action {
+                            0% {
+                                transform: translateY(0);
+                            }
+                            100% {
+                                transform: translateY(-10px);
+                            }
+                        }
                     }
                 }
 
@@ -103,11 +134,38 @@
                 .user {
                     color: $primary;
                 }
+
+                .visitorForm {
+                    h4 {
+                        font-weight: 300;
+                    }
+
+                    h5 {
+                        i {
+                            font-size: 1.2em;
+                        }
+
+                        font-family: $font-p;
+                        font-weight: normal;
+                        font-size: 1.5em;
+
+                        span {
+                            font-weight: 300;
+                        }
+                    }
+                }
             }
 
             .collapse {
                 .card {
-                    border-radius: 25px;
+                    border-radius: 20px;
+                    border: $light;
+                }
+            }
+
+            .collapsing {
+                .card {
+                    border-radius: 20px;
                     border: $light;
                 }
             }
