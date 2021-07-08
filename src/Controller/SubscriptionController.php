@@ -2,16 +2,16 @@
 
 namespace App\Controller;
 
-use App\Entity\RegisteredUser;
-use App\Entity\Subscription;
 use App\Entity\User;
+use App\Entity\Subscription;
+use App\Entity\RegisteredUser;
 use App\Form\SubscriptionType;
 use App\Repository\CompanyRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @Route("/subscription", name="subscription_")
@@ -30,7 +30,8 @@ class SubscriptionController extends AbstractController
         /** @var User */
         $user = $this->getUser();
         /** @var RegisteredUser */
-        $rome = $user->getRegisteredUser() ? $user->getRegisteredUser()->getRome() : null;
+        $registeredUser = $user->getRegisteredUser();
+        $rome = $registeredUser != null ? $registeredUser->getRome() : null;
         $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
         $form->handleRequest($request);
 

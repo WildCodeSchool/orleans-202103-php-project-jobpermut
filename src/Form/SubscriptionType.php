@@ -22,7 +22,8 @@ class SubscriptionType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-        $choices = $options['rome'] ? $this->apiRome->sortResponseByName($this->apiRome->getAppelationsByJob($options['rome'])) :
+        $choices = $options['rome'] ?
+        $this->apiRome->sortResponseByName($this->apiRome->getAppelationsByJob($options['rome'])) :
         ['Votre profession n\'est pas définie' => null];
 
         $builder
