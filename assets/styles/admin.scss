@@ -7,6 +7,10 @@ $spacing: 3vh;
 body {
     height: 100vh;
 
+    a {
+        text-decoration: none;
+    }
+
     .page-title {
         margin: $spacing;
         $font-weight-light: 300;

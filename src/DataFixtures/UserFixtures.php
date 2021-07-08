@@ -26,7 +26,7 @@ class UserFixtures extends Fixture
         ],
     ];
 
-    public const MAX_FIXTURES = 10;
+    public const MAX_FIXTURES = 25;
 
     private UserPasswordEncoderInterface $passwordEncoder;
     private Generator $faker;
