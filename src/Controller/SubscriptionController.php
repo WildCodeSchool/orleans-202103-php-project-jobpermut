@@ -55,6 +55,8 @@ class SubscriptionController extends AbstractController
             $subscription->setSubscriptionAt(new DateTimeImmutable());
             $entityManager->persist($subscription);
             $entityManager->flush();
+
+            return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }
 
         return $this->render('subscription/index.html.twig', [
@@ -67,15 +69,18 @@ class SubscriptionController extends AbstractController
      */
     public function edit(
         Subscription $subscription,
-        RegisteredUserRepository $registeredUserRepository,
+        RegisteredUserRepository $registeredRepository,
         Request $request,
         EntityManagerInterface $entityManager,
         CompanyRepository $companyRepository,
         ApiRome $apiRome
     ): Response {
 
+        /** @var User */
+        $user = $this->getUser();
+
         /** @var RegisteredUser */
-        $registeredUser = $registeredUserRepository->findOneBy([
+        $registeredUser = $registeredRepository->findOneBy([
             'subscription' => $subscription
         ]);
 
@@ -90,16 +95,18 @@ class SubscriptionController extends AbstractController
                 $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
             }
 
-            if ($subscription->getOgrCode()) {
-                $ogrName = $apiRome->getDetailsOfAppellation($subscription->getOgrCode())['libelleCourt'];
-                if ($ogrName !== $subscription->getOgrName()) {
-                    $subscription->setOgrName($ogrName);
-                }
+            $ogr = strval($subscription->getOgrCode());
+
+            if ($ogr !== $subscription->getOgrCode()) {
+                $ogrName = $apiRome->getDetailsOfAppellation($ogr)['libelleCourt'];
+                $subscription->setOgrName($ogrName);
             }
 
             $subscription->setUpdatedAt(new DateTimeImmutable());
             $entityManager->persist($subscription);
             $entityManager->flush();
+
+            return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }
 
         return $this->render('subscription/index.html.twig', [
