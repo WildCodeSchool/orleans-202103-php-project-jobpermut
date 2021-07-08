@@ -30,8 +30,8 @@ class SubscriptionController extends AbstractController
         /** @var User */
         $user = $this->getUser();
         /** @var RegisteredUser */
-        $registeredUser = $user->getRegisteredUser();
-        $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $registeredUser->getRome()]);
+        $rome = $user->getRegisteredUser() ? $user->getRegisteredUser()->getRome() : null;
+        $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

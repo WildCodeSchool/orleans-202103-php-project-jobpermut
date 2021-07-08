@@ -22,6 +22,9 @@ class SubscriptionType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $choices = $options['rome'] ? $this->apiRome->sortResponseByName($this->apiRome->getAppelationsByJob($options['rome'])) :
+        ['Votre profession n\'est pas définie' => null];
+
         $builder
             ->add('curriculumFile', VichFileType::class, [
                 'label' => 'Curriculum',
@@ -32,7 +35,7 @@ class SubscriptionType extends AbstractType
                 'required' => false,
             ])
             ->add('ogrCode', ChoiceType::class, [
-                'choices' => $this->apiRome->sortResponseByName($this->apiRome->getAppelationsByJob($options['rome'])),
+                'choices' => $choices,
                 'label' => 'Spécialité Métier',
                 'placeholder' => 'Choisissez votre spécialité:',
                 'empty_data' => null,
