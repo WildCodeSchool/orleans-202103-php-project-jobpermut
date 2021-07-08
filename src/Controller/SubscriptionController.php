@@ -7,6 +7,7 @@ use App\Entity\Subscription;
 use App\Entity\RegisteredUser;
 use App\Form\SubscriptionType;
 use App\Repository\CompanyRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,6 +40,9 @@ class SubscriptionController extends AbstractController
             if ($subscription->getCompagnyCode()) {
                 $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
             }
+
+            $subscription->setSubscriptionAt(new DateTimeImmutable());
+
             $entityManager->persist($subscription);
             $entityManager->flush();
         }

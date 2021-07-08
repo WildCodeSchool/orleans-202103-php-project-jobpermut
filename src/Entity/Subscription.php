@@ -53,7 +53,7 @@ class Subscription
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="subscription")
@@ -65,7 +65,7 @@ class Subscription
      */
     private ?int $ogrCode;
 
-    private ?string $compagnyCode;
+    private ?string $compagnyCode = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
