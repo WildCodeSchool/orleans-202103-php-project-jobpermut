@@ -144,36 +144,18 @@
         <h3 class="h3 text-center">Ils ont essayé Jobpermut et ils ont aimé !</h3>
 
         <div class="d-flex flex-direction-row testimony-container mt-lg-3 mt-0 mb-lg-5 mb-4 row g-4 px-lg-5">
-            <div data-aos="fade-up" data-aos-delay="100" class="col testimony-card p-4 p-sm-5 mx-3">
-                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-                    <div class="ms-3 mb-1 testimony-titles">
-                        <h4 class="m-0 text-warning">Sophie</h4>
-                        <h5 class="m-0">Comptable</h5>
+        {% for testimony in testimonies|slice(random(5), 3) %}
+                <div data-aos="fade-up" data-aos-delay="100" class="col testimony-card p-4 p-sm-5 mx-3">
+                    <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
+                        <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+                        <div class="ms-3 mb-1 testimony-titles">
+                            <h4 class="m-0 text-warning">{{ testimony.user.username }}</h4>
+                            <h5 class="m-0">{{ testimony.createdAt|date('d/m/Y') }}</h5>
+                        </div>
                     </div>
+                    <p class="m-0">{{ testimony.commentary }}</p>
                 </div>
-                <p class="m-0">Je ne connaissais pas Jobpermut, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-            </div>
-            <div data-aos="fade-up" data-aos-delay="200" class="col testimony-card p-4 p-sm-5 mx-3">
-                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-                    <div class="ms-3 mb-1 testimony-titles">
-                        <h4 class="m-0 text-warning">Sophie</h4>
-                        <h5 class="m-0">Comptable</h5>
-                    </div>
-                </div>
-                <p class="m-0">Je ne connaissais pas Jobpermut, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-            </div>
-            <div data-aos="fade-up" data-aos-delay="300" class="col testimony-card p-4 p-sm-5 mx-3">
-                <div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-                    <img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
-                    <div class="ms-3 mb-1 testimony-titles">
-                        <h4 class="m-0 text-warning">Sophie</h4>
-                        <h5 class="m-0">Comptable</h5>
-                    </div>
-                </div>
-                <p class="m-0">Je ne connaissais pas Jobpermut, j’ai essayé, et j’ai gagné un temps fou dans ma vie ! N’hésitez plus, vous économiserez de votre temps !</p>
-            </div>
+        {% endfor %}
         </div>
 
         <a id="enter-site" href="#" class="btn btn-lg btn-primary mx-auto">Faîtes comme eux !</a>
