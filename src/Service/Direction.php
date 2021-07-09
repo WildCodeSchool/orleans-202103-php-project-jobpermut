@@ -59,7 +59,7 @@ class Direction
         $durationCalc = new FormatDuration();
 
         $trip = $this->getDirection($firstCoordinate, $secondCoordinate);
-
+        assert($trip !== null);
         $durationToGo = $trip['properties']['summary']['duration'];
         $duration = intval(strval(($durationToGo * 2)));
         $duration = $durationCalc->duration($duration);
@@ -68,10 +68,10 @@ class Direction
 
         $distance = number_format((intval(round($distanceToGo * 2) / 1000)), 0, '', ' ');
 
-        $annualDuration = intval(strval(302 * ($durationToGo *2)));
+        $annualDuration = intval(strval(302 * ($durationToGo * 2)));
         $annualDuration = $durationCalc->duration($annualDuration);
 
-        $annualDistance = number_format((302 * $distance), 0, '', ' ');
+        $annualDistance = number_format((302 * (intval(round($distanceToGo * 2) / 1000))), 0, '', ' ');
 
         $summary = array(
             'duration' => $duration,
@@ -83,4 +83,3 @@ class Direction
         return $summary;
     }
 }
-
