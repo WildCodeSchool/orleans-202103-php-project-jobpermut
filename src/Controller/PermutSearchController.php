@@ -2,19 +2,29 @@
 
 namespace App\Controller;
 
-use App\Repository\UserRepository;
+use App\Entity\User;
 use App\Service\Direction;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\UserRepository;
+use App\Repository\RegisteredUserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PermutSearchController extends AbstractController
 {
     /**
      * @Route("permutsearch", name="permutsearch")
      */
-    public function index(UserRepository $userRepository, Direction $direction): Response
+    public function index(RegisteredUserRepository $RegUserRepo, Direction $direction): Response
     {
+        if(!empty($this->getUser())) {
+            /** @var User */
+            $user = $this->getUser();
+            $user = $user->getRegisteredUser();
+            $rome = $user->getRome();
+        }
+        
+
         $homeCityCoordinate = [2.8884689, 48.9562087];
         $workCityCoordinate = [2.3478, 48.8554];
 
@@ -39,7 +49,7 @@ class PermutSearchController extends AbstractController
         $timeGained = $duration1 - $duration2;
 
         return $this->render('permutsearch/index.html.twig', [
-            'users' => $userRepository->findby([], [], 5),
+            'users' => $RegUserRepo->findby([], [], 5),
             'tripSummary1' => $tripSummary1,
             'tripSummary2' => $tripSummary2,
             'timeGained' => $timeGained,

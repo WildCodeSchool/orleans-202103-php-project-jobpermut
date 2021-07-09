@@ -21,26 +21,25 @@
 			<h1 class="h1 text-center text-dark">Permut Search</h1>
 			<h2 class="h2 text-center text-dark">Retrouvez vos différentes permutations potentielles</h2>
 		</header>
-
 		<div class="px-lg-5 px-2">
 			{% for user in users %}
-				{% if user.isVisible == true %}
+				{% if user.user.isVisible == true %}
 					<div class="permut-card mb-2">
 						<div class="permut-header mb-3 d-flex flex-row align-items-center justify-content-between">
 							<div class="d-flex flex-row align-items-center text-white">
 								<img class="rounded-circle me-4" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
 								<div class="title-card">
-									<h3 class="h2 mb-1 text-warning">{{ user.username }}</h3>
+									<h3 class="h2 mb-1 text-warning">{{ user.user.username }}</h3>
 									<h4 class="h3">
-										{% if user.registeredUser.rome is defined %}
-											{{ user.registeredUser.rome.name }}
+										{% if user.rome is defined %}
+											{{ user.rome.name }}
 										{% else %}
 											Secteur d'activité non renseigné
 										{% endif %}
 									</h4>
 									<h5 class="mb-0">
 										<i class="fas fa-map-marker-alt me-1"></i>
-										{{ user.registeredUser.city ?? "Localisation non renseignée" }}
+										{{ user.city ?? "Localisation non renseignée" }}
 									</h5>
 								</div>
 								<i class="fas fa-heart heart-sm"></i>
@@ -51,37 +50,37 @@
 									{{ timeGained }}
 									min
 								</div>
-								<a id="button-{{ user.id }}" data-bs-toggle="collapse" href="#collapse-main-{{ user.id }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-warning fw-bold">Voir plus</a>
-								<a href="{{ path("profile_show", {username: user.username}) }}" class="btn btn-warning fw-bold ms-3">Voir le profil</a>
+								<a id="button-{{ user.user.id }}" data-bs-toggle="collapse" href="#collapse-main-{{ user.user.id }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-warning fw-bold">Voir plus</a>
+								<a href="{{ path("profile_show", {username: user.user.username}) }}" class="btn btn-warning fw-bold ms-3">Voir le profil</a>
 								<i class="fas fa-heart text-white heart-md ms-3"></i>
 							</div>
 						</div>
-						<div class="collapse permut-body row row-cols-1 row-cols-md-2 mb-4" id="collapse-main-{{ user.id }}">
+						<div class="collapse permut-body row row-cols-1 row-cols-md-2 mb-4" id="collapse-main-{{ user.user.id }}">
 							<div class="map col ps-3 pe-2">
-								<div id="map-before-{{ user.id }}" class="permutMap map-before shadow"></div>
-								<div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ user.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+								<div id="map-before-{{ user.user.id }}" class="permutMap map-before shadow"></div>
+								<div class="title-courses bg-dark p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ user.user.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
 									<a class="text-danger trajet">
 										<i class="fas fa-times-circle me-2"></i>
 										Vos trajets actuels
 										<i class="fas fa-arrow-down ms-3"></i>
 									</a>
 								</div>
-								<div class="collapse mt-2" id="collapse-{{ user.id }}">
+								<div class="collapse mt-2" id="collapse-{{ user.user.id }}">
 									<div class="card card-body bg-dark text-white">
 										{% include "permutsearch/_tripSummary1.html.twig" %}
 									</div>
 								</div>
 							</div>
 							<div class="map col pe-3 ps-2">
-								<div id="map-after-{{ user.id }}" class="permutMap map-after shadow"></div>
-								<div class="title-courses bg-white p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ user.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+								<div id="map-after-{{ user.user.id }}" class="permutMap map-after shadow"></div>
+								<div class="title-courses bg-white p-4 w-100 mt-3 d-flex flex-row align-items-center justify-content-center" data-bs-toggle="collapse" href="#collapse-{{ user.user.id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
 									<a class="text-success trajet">
 										<i class="fas fa-check-circle me-2"></i>
 										Vos futurs trajets
 										<i class="fas fa-arrow-down ms-3"></i>
 									</a>
 								</div>
-								<div class="collapse mt-2" id="collapse-{{ user.id }}">
+								<div class="collapse mt-2" id="collapse-{{ user.user.id }}">
 									<div class="card card-body">
 										{% include "permutsearch/_tripSummary2.html.twig" %}
 									</div>
