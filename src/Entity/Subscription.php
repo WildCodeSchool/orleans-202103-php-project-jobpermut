@@ -63,7 +63,7 @@ class Subscription
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private ?int $ogrCode;
+    private ?int $ogrCode = null;
 
     private ?string $compagnyCode = null;
 

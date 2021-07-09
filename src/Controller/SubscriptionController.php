@@ -56,10 +56,10 @@ class SubscriptionController extends AbstractController
                 $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
             }
 
-            $ogr = strval($subscription->getOgrCode());
+            $ogr = $subscription->getOgrCode();
 
-            if ($ogr !== $subscription->getOgrCode()) {
-                $ogrName = $apiRome->getDetailsOfAppellation($ogr)['libelleCourt'];
+            if ($ogr && strval($ogr) !== $subscription->getOgrCode()) {
+                $ogrName = $apiRome->getDetailsOfAppellation(strval($ogr))['libelleCourt'];
                 $subscription->setOgrName($ogrName);
             }
 

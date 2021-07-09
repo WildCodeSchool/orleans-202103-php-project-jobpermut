@@ -95,6 +95,7 @@
                                 <p class="m-0 p-0 fst-italic text-decoration-underline">Fiche de poste non transmise</p>
                             </div>
                         {% endif %}
+                        <a href="{{ path('subscription_edit', {subscription: user.registeredUser.subscription.id}) }}">Modifier mes documents</a>
                     </div>
                 {% else %}
                     <a href="{{ path('subscription_new') }}" class="btn btn-warning">Devenir Premium</a>
