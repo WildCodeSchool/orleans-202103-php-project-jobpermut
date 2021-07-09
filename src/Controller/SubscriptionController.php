@@ -33,13 +33,17 @@ class SubscriptionController extends AbstractController
         /** @var User */
         $user = $this->getUser();
 
-        $subscription = new Subscription();
-
         /** @var RegisteredUser */
         $registeredUser = $user->getRegisteredUser();
+        $subscription = $registeredUser->getSubscription();
 
-        if ($registeredUser && $registeredUser->getSubscription()) {
-            return $this->redirectToRoute('subscription_edit', ['subscription' => $registeredUser->getSubscription()->getId()]);
+        if ($subscription) {
+            return $this->redirectToRoute(
+                'subscription_edit',
+                ['subscription' => $subscription->getId()]
+            );
+        } else {
+            $subscription = new Subscription();
         }
 
         $rome = $registeredUser != null ? $registeredUser->getRome() : null;

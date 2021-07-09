@@ -1,9 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 {% block body %}
+    <main class="p-5 edit-profile">
+        <h1 class="h1 text-center text-dark">Affiner votre profil</h1>
+        <h2 class="h3 text-center text-dark">Ajoutez et mettez à jour vos informations personnelles en y apportant plus de précisions</h2>
+    </main>
     {{ form_start(form) }}
-    {{ form_widget(form) }}
+    {{ form_label(form.curriculumFile, {'attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.curriculumFile, {'attr': {'class': 'form-control'}}) }}
     <button>send</button>
     {{ form_end(form) }}
 {% endblock %}
