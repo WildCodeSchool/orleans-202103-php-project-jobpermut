@@ -7,8 +7,17 @@
         <h2 class="h3 text-center text-dark">Ajoutez et mettez à jour vos informations personnelles en y apportant plus de précisions</h2>
     </main>
     {{ form_start(form) }}
-    {{ form_label(form.curriculumFile, {'attr': {'class': 'form-label'}}) }}
-    {{ form_widget(form.curriculumFile, {'attr': {'class': 'form-control'}}) }}
+    <div class="form-row d-flex flex-md-row flex-column justify-content-around mt-2">
+        <div class="col-md-3 col-12">
+            {{ form_label(form.curriculumFile, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.curriculumFile, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-md-3 col-12">
+            {{ form_label(form.jobDescriptionFile, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.jobDescriptionFile, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    {{ form_widget(form) }}
     <button>send</button>
     {{ form_end(form) }}
 {% endblock %}
