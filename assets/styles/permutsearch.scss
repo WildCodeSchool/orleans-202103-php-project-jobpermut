@@ -45,7 +45,12 @@
             }
 
             .fa-heart {
-                font-size: 40px;
+                font-size: 35px;
+                transition: 0.3s ease-in-out;
+
+                &:hover {
+                    font-weight: bold;
+                }
             }
 
             .heart-sm {
