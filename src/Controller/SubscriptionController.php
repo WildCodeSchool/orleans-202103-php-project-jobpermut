@@ -52,7 +52,7 @@ class SubscriptionController extends AbstractController
             $subscription = new Subscription();
         }
 
-        $rome = $registeredUser != null ? $registeredUser->getRome() : null;
+        $rome = $registeredUser->getId() ? $registeredUser->getRome() : null;
         $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
 
         $form->handleRequest($request);
@@ -71,9 +71,8 @@ class SubscriptionController extends AbstractController
 
             $subscription->setSubscriptionAt(new DateTimeImmutable());
             $entityManager->persist($subscription);
-            $entityManager->flush();
-
             $registeredUser->setSubscription($subscription);
+
             $entityManager->flush();
             return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }
