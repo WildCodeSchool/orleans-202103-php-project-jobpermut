@@ -3,7 +3,7 @@
 
 {% block body %}
     <main class="p-5 edit-profile">
-        <h1 class="h1 text-center text-dark">Affiner votre profil</h1>
+        <h1 class="h1 text-center text-dark">Compte Premium</h1>
         <h2 class="h3 text-center text-dark">Ajoutez et mettez à jour vos informations personnelles en y apportant plus de précisions</h2>
     </main>
     {{ form_start(form) }}
@@ -18,6 +18,6 @@
         </div>
     </div>
     {{ form_widget(form) }}
-    <button>send</button>
+    <button class="btn btn-primary">{{ edit ?? 'Enregistrer' }}</button>
     {{ form_end(form) }}
 {% endblock %}

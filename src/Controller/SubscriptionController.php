@@ -30,12 +30,18 @@ class SubscriptionController extends AbstractController
         CompanyRepository $companyRepository,
         ApiRome $apiRome
     ): Response {
+
         /** @var User */
         $user = $this->getUser();
 
         /** @var RegisteredUser */
         $registeredUser = $user->getRegisteredUser();
-        $subscription = $registeredUser->getSubscription();
+
+        if ($registeredUser->getId()) {
+            $subscription = $registeredUser->getSubscription();
+        } else {
+            return $this->redirectToRoute('profile_edit', ['username' => $user->getUsername(), 'premium' => true]);
+        }
 
         if ($subscription) {
             return $this->redirectToRoute(
@@ -123,7 +129,8 @@ class SubscriptionController extends AbstractController
         }
 
         return $this->render('subscription/index.html.twig', [
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'edit' => 'Modifier'
         ]);
     }
 }

@@ -33,7 +33,7 @@
                                 <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('profile_edit', {username: app.user.username}) }}">
                                     <i class="fas fa-pen me-2"></i>Editer mon profil</a>
                             </li>
-                            {% if app.user and app.user.registeredUser.subscription is not defined and not is_granted('ROLE_ADMIN') %}
+                            {% if app.user and not is_granted('ROLE_ADMIN') and app.user.registeredUser and app.user.registeredUser.subscription is null %}
                                 <li>
                                     <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('subscription_new') }}">
                                         <i class="fas fa-user-tie me-2"></i>Devenir Preminum</a>
