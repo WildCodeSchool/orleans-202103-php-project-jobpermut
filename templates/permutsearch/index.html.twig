@@ -13,6 +13,7 @@
 {% block javascripts %}
 	{{ parent() }}
 	{{ encore_entry_script_tags('permutMap') }}
+	{{ encore_entry_script_tags('like') }}
 {% endblock %}
 
 {% block body %}
@@ -43,7 +44,9 @@
 										{{ user.registeredUser.city ?? "Localisation non renseignée" }}
 									</h5>
 								</div>
-								<i class="fas fa-heart heart-sm"></i>
+								<a href="{{ path('like', {user: user.id}) }}" class="heart">
+									<i class="{{ app.user.getOneUserLike(user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-sm"></i>
+								</a>
 							</div>
 							<div class="d-flex flex-row align-items-center mt-md-0 mt-4">
 								<div class="text-info fs-5 fw-bold me-5">
@@ -53,7 +56,9 @@
 								</div>
 								<a id="button-{{ user.id }}" data-bs-toggle="collapse" href="#collapse-main-{{ user.id }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-warning fw-bold">Voir plus</a>
 								<a href="{{ path("profile_show", {username: user.username}) }}" class="btn btn-warning fw-bold ms-3">Voir le profil</a>
-								<i class="fas fa-heart text-white heart-md ms-3"></i>
+								<a href="{{ path('like', {user: user.id}) }}" class="heart">
+									<i class="{{ app.user.getOneUserLike(user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
+								</a>
 							</div>
 						</div>
 						<div class="collapse permut-body row row-cols-1 row-cols-md-2 mb-4" id="collapse-main-{{ user.id }}">

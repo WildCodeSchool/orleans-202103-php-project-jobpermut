@@ -2,15 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\LikeRepository;
+use App\Repository\UserLikeRepository;
 use Doctrine\ORM\Mapping as ORM;
 use App\Entity\User;
 
 /**
- * @ORM\Entity(repositoryClass=LikeRepository::class)
- * @ORM\Table(name="`like`")
+ * @ORM\Entity(repositoryClass=UserLikeRepository::class)
  */
-class Like
+class UserLike
 {
     /**
      * @ORM\Id
