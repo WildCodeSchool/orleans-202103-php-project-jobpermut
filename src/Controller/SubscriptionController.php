@@ -64,7 +64,7 @@ class SubscriptionController extends AbstractController
 
             $ogr = $subscription->getOgrCode();
 
-            if ($ogr && strval($ogr) !== $subscription->getOgrCode()) {
+            if ($ogr && $ogr !== null) {
                 $ogrName = $apiRome->getDetailsOfAppellation(strval($ogr))['libelleCourt'];
                 $subscription->setOgrName($ogrName);
             }
@@ -114,11 +114,15 @@ class SubscriptionController extends AbstractController
                 $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
             }
 
-            $ogr = strval($subscription->getOgrCode());
+            $ogr = $subscription->getOgrCode();
 
-            if ($ogr !== $subscription->getOgrCode()) {
-                $ogrName = $apiRome->getDetailsOfAppellation($ogr)['libelleCourt'];
-                $subscription->setOgrName($ogrName);
+            if (strval($ogr) !== $subscription->getOgrCode()) {
+                if ($ogr !== null) {
+                    $ogrName = $apiRome->getDetailsOfAppellation(strval($ogr))['libelleCourt'];
+                    $subscription->setOgrName($ogrName);
+                } else {
+                    $subscription->setOgrName(null);
+                }
             }
 
             $subscription->setUpdatedAt(new DateTimeImmutable());
