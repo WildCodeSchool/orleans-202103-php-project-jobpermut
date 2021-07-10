@@ -27,7 +27,7 @@
             }
 
             h5 {
-                font-size: 16px;
+                font-size: 15px;
             }
 
             img {
@@ -44,12 +44,18 @@
                 }
             }
 
+            .btn-outline-light {
+                border: 2px solid $light;
+                line-height: 1;
+                padding: 0.8em 1.8em;
+            }
+
             .fa-heart {
                 font-size: 30px;
                 transition: 0.3s ease-in-out;
-                padding: 15px;
+                padding: 14px;
                 vertical-align: middle;
-                
+
                 &:hover {
                     font-weight: bold;
                     background-color: rgba(255, 255, 255, 0.205);
@@ -70,6 +76,12 @@
                 @media screen and (max-width: 430px) {
                     display: none;
                 }
+            }
+
+            .time-gained {
+                font-size: 18px;
+                font-weight: bolder;
+                font-family: $font-p;
             }
         }
 
