@@ -53,8 +53,8 @@ class SubscriptionController extends AbstractController
         }
 
         $rome = $registeredUser->getId() ? $registeredUser->getRome() : null;
-        $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
 
+        $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -105,7 +105,6 @@ class SubscriptionController extends AbstractController
         $rome = $registeredUser->getRome();
 
         $form = $this->createForm(SubscriptionType::class, $subscription, ['rome' => $rome]);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
