@@ -23,7 +23,7 @@
 		</header>
 		<input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
 		<div class="px-lg-5 px-2">
-			{% for reguser in regusersData %}
+			{% for reguser in regUsersData %}
 				{% if reguser.registeredUser.user.isVisible == true %}
 					<div class="permut-card mb-2">
 						<input type="hidden" id="reguser-data-{{ loop.index }}" value="{{ reguser.userHome.0 ~ '/' ~ reguser.userHome.1 ~ '/' ~ reguser.userWork.0 ~ '/' ~ reguser.userWork.1 }}">
