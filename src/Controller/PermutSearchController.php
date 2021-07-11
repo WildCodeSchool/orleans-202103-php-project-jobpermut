@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Rome;
 use App\Entity\User;
 use App\Service\Geocode;
 use App\Service\Direction;
+use App\Entity\RegisteredUser;
 use App\Repository\RegisteredUserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,65 +20,76 @@ class PermutSearchController extends AbstractController
     public function index(RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode): Response
     {
         $regUsersDatas = [];
+        $rome = new Rome();
+        $userId = 0;
+        $tripSummary1 = [];
+        $tripSummary2 = [];
+        $homeCityCoordinate = [];
+        $workCityCoordinate = [];
+
 
         /** @var User */
         $user = $this->getUser();
-        $user = $user->getRegisteredUser();
 
-        if ($user != null) {
+        if ($user !== null) {
+            $user = $user->getRegisteredUser();
+        };
+
+        if ($user !== null) {
+            /** @var RegisteredUser */
             $rome = $user->getRome();
             $userId = $user->getId();
-        }
+            $homeCityCoordinate = $geocode->getCoordinates($user->getCity());
+            $workCityCoordinate = $geocode->getCoordinates($user->getCityJob());
+            $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
+        };
 
-        $homeCityCoordinate = $geocode->getCoordinates($user->getCity());
-        $workCityCoordinate = $geocode->getCoordinates($user->getCityJob());
-        $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
-
-        $userData = [ $userId => [
+        $userData = [
             'homeCity' => $homeCityCoordinate,
             'workCity' => $workCityCoordinate,
             'tripSummary1' => $tripSummary1,
-            ]
         ];
 
-        $usersRome = $regUserRepo->findby(['rome' => $rome], [], 5);
+        $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
 
-        foreach ($usersRome as $regUser) {
-            $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
-            $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
-            $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
+        foreach ($usersByRome as $regUser) {
+            if ($regUser !== $user) {
+                $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
+                $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
+                $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
 
-            $duration1 = 0;
-            $duration2 = 0;
+                $duration1 = 0;
+                $duration2 = 0;
 
-            if ($tripSummary1) {
-                $duration1 = (intval($tripSummary1['duration']['hours']) * 60) +
-                    (intval($tripSummary1['duration']['minutes']));
+                if ($tripSummary1) {
+                    $duration1 = (intval($tripSummary1['duration']['hours']) * 60) +
+                        (intval($tripSummary1['duration']['minutes']));
+                }
+
+                if ($tripSummary2) {
+                    $duration2 = (intval($tripSummary2['duration']['hours']) * 60) +
+                        (intval($tripSummary2['duration']['minutes']));
+                }
+
+                $timeGained = $duration1 - $duration2;
+                
+                if ($timeGained >= 0) {
+                    $regUsersDatas[$regUser->getId()] = [
+                        'registeredUser' => $regUser,
+                        'userHome' => $userHomeCoordinates,
+                        'userWork' => $userWorkCoordinates,
+                        'tripSummary2' => $tripSummary2,
+                        'timeGained' => $timeGained,
+                    ];
+                }
             }
-
-            if ($tripSummary2) {
-                $duration2 = (intval($tripSummary2['duration']['hours']) * 60) +
-                    (intval($tripSummary2['duration']['minutes']));
-            }
-
-            $timeGained = $duration1 - $duration2;
-
-            $regUsersDatas[$regUser->getId()] = [
-                'userHome' => $userHomeCoordinates,
-                'userWork' => $userWorkCoordinates,
-                'tripSummary2' => $tripSummary2,
-                'timeGained' => $timeGained,
-            ];
-
-            unset($regUsersDatas[$userId]);
-
         };
 
-        dd($regUsersDatas);
-
+        usort($regUsersDatas, function($first, $last) {
+            return $last['timeGained'] <=> $first['timeGained'];
+        });
 
         return $this->render('permutsearch/index.html.twig', [
-            'users' => $regUserRepo->findby(['rome' => $rome], [], 5),
             'userData' => $userData,
             'regUsersData' => $regUsersDatas
         ]);
