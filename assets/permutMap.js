@@ -144,11 +144,9 @@ for (let p = 1; p < NbCard; p += 1) {
                             element = element.reverse();
                         });
                         L.polyline(dataRoad, { color: '#00636f' }).addTo(mapBefore);
-                        console.log(data);
                         mapBefore.fitBounds([data, dataRoad]);
                     });
             });
-
 
         // on mapAfter
 

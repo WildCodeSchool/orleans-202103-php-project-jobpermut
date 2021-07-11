@@ -23,25 +23,25 @@
 		</header>
 		<input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
 		<div class="px-lg-5 px-2">
-			{% for regUser in regUsersData %}
-				{% if regUser.registeredUser.user.isVisible == true %}
+			{% for reguser in regusersData %}
+				{% if reguser.registeredUser.user.isVisible == true %}
 					<div class="permut-card mb-2">
-						<input type="hidden" id="regUser-data-{{ loop.index }}" value="{{ regUser.userHome.0 ~ '/' ~ regUser.userHome.1 ~ '/' ~ regUser.userWork.0 ~ '/' ~ regUser.userWork.1 }}">
+						<input type="hidden" id="reguser-data-{{ loop.index }}" value="{{ reguser.userHome.0 ~ '/' ~ reguser.userHome.1 ~ '/' ~ reguser.userWork.0 ~ '/' ~ reguser.userWork.1 }}">
 						<div class="permut-header mb-3 d-flex flex-row align-items-center justify-content-between">
-							<div class="d-flex flex-row align-items-center text-white"> 
+							<div class="d-flex flex-row align-items-center text-white">
 								<img class="rounded-circle me-4" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
 								<div class="title-card">
-									<h3 class="h2 mb-1 text-warning">{{ regUser.registeredUser.user.username }}</h3>
+									<h3 class="h2 mb-1 text-warning">{{ reguser.registeredUser.user.username }}</h3>
 									<h4 class="h3">
-										{% if regUser.registeredUser.rome is defined %}
-											{{ regUser.registeredUser.rome.name }}
+										{% if reguser.registeredUser.rome is defined %}
+											{{ reguser.registeredUser.rome.name }}
 										{% else %}
 											Secteur d'activité non renseigné
 										{% endif %}
 									</h4>
 									<h5 class="mb-0">
 										<i class="fas fa-map-marker-alt me-1"></i>
-										{{ regUser.registeredUser.city ?? "Localisation non renseignée" }}
+										{{ reguser.registeredUser.city ?? "Localisation non renseignée" }}
 									</h5>
 								</div>
 								<i class="fas fa-heart heart-sm"></i>
@@ -49,11 +49,11 @@
 							<div class="d-flex flex-row align-items-center mt-md-0 mt-4">
 								<div class="text-info fs-5 fw-bold me-5">
 									<i class="fas fa-bolt"></i>
-									{{ regUser.timeGained }}
+									{{ reguser.timeGained }}
 									min
 								</div>
 								<a id="button-{{ loop.index }}" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-warning fw-bold">Voir plus</a>
-								<a href="{{ path("profile_show", {username: regUser.registeredUser.user.username}) }}" class="btn btn-warning fw-bold ms-3">Voir le profil</a>
+								<a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning fw-bold ms-3">Voir le profil</a>
 								<i class="fas fa-heart text-white heart-md ms-3"></i>
 							</div>
 						</div>

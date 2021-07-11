@@ -21,7 +21,6 @@ class PermutSearchController extends AbstractController
     {
         $regUsersDatas = [];
         $rome = new Rome();
-        $userId = 0;
         $tripSummary1 = [];
         $tripSummary2 = [];
         $homeCityCoordinate = [];
@@ -38,7 +37,6 @@ class PermutSearchController extends AbstractController
         if ($user !== null) {
             /** @var RegisteredUser */
             $rome = $user->getRome();
-            $userId = $user->getId();
             $homeCityCoordinate = $geocode->getCoordinates($user->getCity());
             $workCityCoordinate = $geocode->getCoordinates($user->getCityJob());
             $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
@@ -72,7 +70,7 @@ class PermutSearchController extends AbstractController
                 }
 
                 $timeGained = $duration1 - $duration2;
-                
+
                 if ($timeGained >= 0) {
                     $regUsersDatas[$regUser->getId()] = [
                         'registeredUser' => $regUser,
@@ -85,7 +83,7 @@ class PermutSearchController extends AbstractController
             }
         };
 
-        usort($regUsersDatas, function($first, $last) {
+        usort($regUsersDatas, function ($first, $last) {
             return $last['timeGained'] <=> $first['timeGained'];
         });
 
