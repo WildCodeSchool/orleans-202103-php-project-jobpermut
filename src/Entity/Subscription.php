@@ -65,7 +65,7 @@ class Subscription
      */
     private ?int $ogrCode = null;
 
-    private ?string $compagnyCode = null;
+    private ?string $companyCode = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -199,16 +199,16 @@ class Subscription
     /**
      * Get the value of compagnyCode
      */
-    public function getCompagnyCode(): ?string
+    public function getCompanyCode(): ?string
     {
-        return $this->compagnyCode;
+        return $this->companyCode;
     }
 
     /**
      * Set the value of compagnyCode
      */
-    public function setCompagnyCode(?string $compagnyCode): void
+    public function setCompanyCode(?string $companyCode): void
     {
-        $this->compagnyCode = $compagnyCode;
+        $this->companyCode = $companyCode;
     }
 }

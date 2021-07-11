@@ -17,7 +17,17 @@
             {{ form_widget(form.jobDescriptionFile, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
+    <div class="form-row d-flex flex-md-row flex-column justify-content-around mt-2">
+        <div class="col-md-3 col-12">
+            {{ form_label(form.ogrCode, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.ogrCode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="col-md-3 col-12">
+            {{ form_label(form.companyCode, null, {'attr': {'class': 'form-label'}}) }}
+            {{ form_widget(form.companyCode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
     {{ form_widget(form) }}
-    <button class="btn btn-primary">{{ edit ?? 'Enregistrer' }}</button>
+    <button class="btn btn-primary mt-5 mb-3 col-10 offset-1">{{ edit ?? 'Enregistrer' }}</button>
     {{ form_end(form) }}
 {% endblock %}

@@ -42,7 +42,7 @@ class SubscriptionType extends AbstractType
                 'empty_data' => null,
                 'required' => false,
             ])
-            ->add('compagnyCode', TextType::class, [
+            ->add('companyCode', TextType::class, [
                 'label' => 'Code Entreprise',
                 'required' => false,
                 'attr' => ['placeholder' => 'Entrez votre code entreprise'],
