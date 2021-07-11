@@ -9,7 +9,7 @@ const userData = document.querySelector('#user-data');
 const userDataValues = userData.value.split('/');
 for (let p = 1; p < NbCard; p += 1) {
     const btn = document.getElementById(`button-${p}`);
-    const regUserData = document.querySelector(`#regUser-data-${p}`);
+    const regUserData = document.querySelector(`#reguser-data-${p}`);
     const regUserDataValues = regUserData.value.split('/');
     const iMap = function initMap(
         homeLong = 2.8884657,
