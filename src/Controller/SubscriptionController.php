@@ -58,8 +58,8 @@ class SubscriptionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($subscription->getCompagnyCode()) {
-                $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
+            if ($subscription->getCompanyCode()) {
+                $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompanyCode()]));
             }
 
             $ogr = $subscription->getOgrCode();
@@ -108,8 +108,8 @@ class SubscriptionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            if ($subscription->getCompagnyCode()) {
-                $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompagnyCode()]));
+            if ($subscription->getCompanyCode()) {
+                $subscription->setCompany($companyRepository->findOneBy(['code' => $subscription->getCompanyCode()]));
             }
 
             $ogr = $subscription->getOgrCode();
