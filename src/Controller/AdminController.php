@@ -28,7 +28,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/add", name="add")
+     * @Route("/creation_compte", name="creation_compte")
      * @IsGranted("ROLE_SUPERADMIN")
      */
     public function add(
@@ -55,7 +55,8 @@ class AdminController extends AbstractController
 
             $this->addFlash(
                 'success',
-                'L\'inscription s\'est bien deroulée, un mail de confirmation a était envoyé à l\'administrateur'
+                'L\'inscription s\'est déroulée avec succès, 
+                votre administrateur peut maintenant se connecter avec son compte'
             );
         }
 
