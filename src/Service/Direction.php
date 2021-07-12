@@ -58,25 +58,20 @@ class Direction
     {
         $durationCalc = new FormatDuration();
 
-        $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['distance'] = 0;
-        $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['distance'] = 0;
-
-
-        $durationToGo = $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['duration'];
-        $durationReturn = $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['duration'];
-        $duration = intval(strval(($durationToGo + $durationReturn)));
-
-
+        $trip = $this->getDirection($firstCoordinate, $secondCoordinate);
+        assert($trip !== null);
+        $durationToGo = $trip['properties']['summary']['duration'];
+        $duration = intval(strval(($durationToGo * 2)));
         $duration = $durationCalc->duration($duration);
 
-        $distanceToGo = $this->getDirection($firstCoordinate, $secondCoordinate)['properties']['summary']['distance'];
-        $distanceReturn = $this->getDirection($secondCoordinate, $firstCoordinate)['properties']['summary']['distance'];
-        $distance = intval(round($distanceToGo + $distanceReturn) / 1000);
+        $distanceToGo = $trip['properties']['summary']['distance'];
 
-        $annualDuration = intval(strval(302 * ($durationToGo + $durationReturn)));
+        $distance = number_format((intval(round($distanceToGo * 2) / 1000)), 0, '', ' ');
+
+        $annualDuration = intval(strval(302 * ($durationToGo * 2)));
         $annualDuration = $durationCalc->duration($annualDuration);
 
-        $annualDistance = 302 * $distance;
+        $annualDistance = number_format((302 * (intval(round($distanceToGo * 2) / 1000))), 0, '', ' ');
 
         $summary = array(
             'duration' => $duration,
