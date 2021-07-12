@@ -31,7 +31,7 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $curriculum;
+    private ?string $curriculum = null;
 
     /**
      * @Vich\UploadableField(mapping="curriculum", fileNameProperty="curriculum")
@@ -42,7 +42,7 @@ class Subscription
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private string $jobDescription;
+    private ?string $jobDescription = null;
 
     /**
      * @Vich\UploadableField(mapping="job_description", fileNameProperty="jobDescription")
@@ -53,7 +53,7 @@ class Subscription
     /**
      * @ORM\Column(type="datetime", nullable=true)
      */
-    private DateTimeInterface $updatedAt;
+    private ?DateTimeInterface $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="subscription")
@@ -63,7 +63,9 @@ class Subscription
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private ?int $ogrCode;
+    private ?int $ogrCode = null;
+
+    private ?string $companyCode = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -97,7 +99,7 @@ class Subscription
         return $this->curriculum;
     }
 
-    public function setCurriculum(string $curriculum): self
+    public function setCurriculum(?string $curriculum): self
     {
         $this->curriculum = $curriculum;
 
@@ -192,5 +194,21 @@ class Subscription
         $this->ogrName = $ogrName;
 
         return $this;
+    }
+
+    /**
+     * Get the value of compagnyCode
+     */
+    public function getCompanyCode(): ?string
+    {
+        return $this->companyCode;
+    }
+
+    /**
+     * Set the value of compagnyCode
+     */
+    public function setCompanyCode(?string $companyCode): void
+    {
+        $this->companyCode = $companyCode;
     }
 }
