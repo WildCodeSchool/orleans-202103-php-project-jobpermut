@@ -21,18 +21,14 @@ class PermutSearchController extends AbstractController
     {
         $regUsersDatas = [];
         $tripSummary1 = [];
-        $tripSummary2 = [];
         $homeCityCoordinate = [];
         $workCityCoordinate = [];
         $rome = new Rome();
-
+        $user = new User();
 
         /** @var User */
         $user = $this->getUser();
-
-        if ($user !== null) {
-            $user = $user->getRegisteredUser();
-        };
+        $user = $user->getRegisteredUser();
 
         if ($user !== null) {
             /** @var RegisteredUser */
@@ -49,6 +45,40 @@ class PermutSearchController extends AbstractController
         ];
         $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
 
+        $regUsersDatas = $this->regUsersDatas(
+            $tripSummary1,
+            $workCityCoordinate,
+            $homeCityCoordinate,
+            $usersByRome,
+            $geocode,
+            $direction
+        );
+
+        usort($regUsersDatas, function ($first, $last) {
+            return $last['timeGained'] <=> $first['timeGained'];
+        });
+
+
+
+        return $this->render('permutsearch/index.html.twig', [
+            'userData' => $userData,
+            'regUsersData' => $regUsersDatas
+        ]);
+    }
+
+
+
+    private function regUsersDatas(
+        ?array $tripSummary1,
+        ?array $workCityCoordinate,
+        ?array $homeCityCoordinate,
+        array $usersByRome,
+        Geocode $geocode,
+        Direction $direction
+    ): array {
+        /** @var User */
+        $user = $this->getUser();
+        $regUsersDatas = [];
         foreach ($usersByRome as $regUser) {
             if ($regUser !== $user) {
                 $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
@@ -76,9 +106,7 @@ class PermutSearchController extends AbstractController
                 $timeGained = $duration1 - $duration2;
                 $otherTimeGained = $duration3 - $duration4;
 
-                //dd($otherTimeGained);
-
-                if ($timeGained >= 0 && $otherTimeGained >= 0) {
+                if ($timeGained > 0 && $otherTimeGained > 0) {
                     $regUsersDatas[$regUser->getId()] = [
                         'registeredUser' => $regUser,
                         'userHome' => $userHomeCoordinates,
@@ -90,15 +118,6 @@ class PermutSearchController extends AbstractController
             }
         };
 
-        usort($regUsersDatas, function ($first, $last) {
-            return $last['timeGained'] <=> $first['timeGained'];
-        });
-
-
-
-        return $this->render('permutsearch/index.html.twig', [
-            'userData' => $userData,
-            'regUsersData' => $regUsersDatas
-        ]);
+        return $regUsersDatas;
     }
 }
