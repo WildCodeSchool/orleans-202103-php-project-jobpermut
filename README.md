@@ -29,11 +29,11 @@ If a route interests them, they can "match" in order to offer the job exchange.
 
 
 ## Installation
-if you meet the prerequisites, you can proceed to the installation of the project 
+If you meet the prerequisites, you can proceed to the installation of the project 
 
 1. Clone the project from [Github](https://github.com/WildCodeSchool/orleans-202103-php-project-jobpermut/)
 2. Go in the project folder
-3. Open with you'r code editor
+3. Open with your code editor
 4. Run `composer install` to install PHP dependencies
 5. Run `yarn install` to install JS dependencies
 6. Copy the `.env` file and fill all informations (Database, Symfony/Mailer, Open Route Service, Pole Emploi Variable)
@@ -42,7 +42,7 @@ if you meet the prerequisites, you can proceed to the installation of the projec
 9. Run `symfony console doctrine:fixtures:load` to load the fixtures in database
 10. Run `yarn encore dev` to build assets
 11. Run `symfony server:start` to launch symfony server
-12. Go to localhost:8000 on you'r browser
+12. Go to localhost:8000 on your browser
 ## Built-With
 
 * [Symfony](https://github.com/symfony/symfony)
