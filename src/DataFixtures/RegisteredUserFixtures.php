@@ -19,7 +19,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         'n0' => [
             'streetNumber' => '4',
             'street' => 'Avenue Pasteur',
-            'city' => 'Montreuil',
+            'city' => 'Vélizy-Villacoublay',
             'zipCode' => '93100'
         ],
         'n1' => [
@@ -31,7 +31,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         'n2' => [
             'streetNumber' => '1',
             'street' => 'Avenue Pasteur',
-            'city' => 'Vitry-Sur-Seine',
+            'city' => 'Arcueil',
             'zipCode' => '93100'
         ],
         'n3' => [
@@ -55,7 +55,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         'n6' => [
             'streetNumber' => '6',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Vincennes',
+            'city' => 'Gagny',
             'zipCode' => '92500'
         ],
         'n7' => [
@@ -67,13 +67,13 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         'n8' => [
             'streetNumber' => '10',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Les Lilas',
+            'city' => 'Drancy',
             'zipCode' => '92500'
         ],
         'n9' => [
             'streetNumber' => '4',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Meudon',
+            'city' => 'Villejuif',
             'zipCode' => '92500'
         ],
     ];
@@ -142,7 +142,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
     ];
 
 
-    public const MAX_REALISTIC_FIXTURES = 10;
+    public const MAX_REALISTIC_FIXTURES = 50;
 
 
     public function __construct()
@@ -157,14 +157,14 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
             $registeredUser->setPhone($this->faker->phoneNumber());
-            $registeredUser->setStreetNumber(self::USERS_POSTAL_ADRESS['n' . $i]['streetNumber']);
-            $registeredUser->setStreet(self::USERS_POSTAL_ADRESS['n' . $i]['street']);
-            $registeredUser->setZipcode(self::USERS_POSTAL_ADRESS['n' . $i]['zipCode']);
-            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . $i]['city']);
-            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . $i]['streetNumber']);
-            $registeredUser->setJobStreet(self::USERS_JOB_ADRESS['n' . $i]['street']);
-            $registeredUser->setJobZipcode(self::USERS_JOB_ADRESS['n' . $i]['zipCode']);
-            $registeredUser->setCityJob(self::USERS_JOB_ADRESS['n' . $i]['city']);
+            $registeredUser->setStreetNumber(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['streetNumber']);
+            $registeredUser->setStreet(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['street']);
+            $registeredUser->setZipcode(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['zipCode']);
+            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['city']);
+            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['streetNumber']);
+            $registeredUser->setJobStreet(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['street']);
+            $registeredUser->setJobZipcode(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['zipCode']);
+            $registeredUser->setCityJob(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['city']);
             $registeredUser->setRome($this->getReference(self::ROME[rand(0, 1)]));
             $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));

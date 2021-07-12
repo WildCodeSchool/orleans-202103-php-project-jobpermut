@@ -30,9 +30,9 @@ class Company
     private string $address;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="integer")
      */
-    private string $code;
+    private int $code;
 
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="company")
@@ -48,6 +48,11 @@ class Company
     {
         $this->subscriptions = new ArrayCollection();
         $this->users = new ArrayCollection();
+    }
+
+    public function __serialize(): array
+    {
+        return [];
     }
 
     public function getId(): ?int
@@ -79,12 +84,12 @@ class Company
         return $this;
     }
 
-    public function getCode(): ?string
+    public function getCode(): ?int
     {
         return $this->code;
     }
 
-    public function setCode(string $code): self
+    public function setCode(int $code): self
     {
         $this->code = $code;
 
