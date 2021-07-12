@@ -32,7 +32,7 @@
                             {% endif %}
                         </div>
                         <h2 class="h3 m-0">
-                            {% if user.registeredUser.rome is defined %}
+                            {% if user.registeredUser.rome is defined and user.registeredUser.rome is not null %}
                                 {{ user.registeredUser.rome.name }}
                             {% else %}
                                 Non renseigné
@@ -66,21 +66,40 @@
                         <i class="fas fa-at me-4"></i>
                         <p class="m-0 p-0">{{ user.registeredUser.user.email ?? "Non renseigné" }}</p>
                     </div>
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-wrench me-4"></i>
-                        <p class="m-0 p-0">Programmation informatique</p>
-                    </div>
                 </div>
-                <div class="mt-5 ms-1">
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-file me-4"></i>
-                        <p class="m-0 p-0 fst-italic text-decoration-underline">Voir le CV</p>
+                {% if user.registeredUser.subscription is defined and user.registeredUser.subscription is not null %}
+                    <div class="mt-5 ms-1">
+                        <div class="d-flex flex-direction-column align-items-center mb-4">
+                            <i class="fas fa-wrench me-4"></i>
+                            <p class="m-0 p-0">{{ user.registeredUser.subscription.ogrName ?? "Non renseigné" }}</p>
+                        </div>
+                        {% if user.registeredUser.subscription.curriculum is defined and user.registeredUser.subscription.curriculum is not null %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file me-4"></i>
+                                <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'curriculumFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir le CV</a>
+                            </div>
+                        {% else %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file me-4"></i>
+                                <p class="m-0 p-0 fst-italic text-decoration-underline">CV non transmis</p>
+                            </div>
+                        {% endif %}
+                        {% if user.registeredUser.subscription.jobDescription is defined and user.registeredUser.subscription.jobDescription is not null %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file-alt me-4"></i>
+                                <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'jobDescriptionFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir la fiche de poste</a>
+                            </div>
+                        {% else %}
+                            <div class="d-flex flex-direction-column align-items-center mb-4">
+                                <i class="fas fa-file-alt me-4"></i>
+                                <p class="m-0 p-0 fst-italic text-decoration-underline">Fiche de poste non transmise</p>
+                            </div>
+                        {% endif %}
+                        <a href="{{ path('subscription_edit', {subscription: user.registeredUser.subscription.id}) }}">Modifier mon compte prémium</a>
                     </div>
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-file-alt me-4"></i>
-                        <p class="m-0 p-0 fst-italic text-decoration-underline">Voir la fiche de poste</p>
-                    </div>
-                </div>
+                {% else %}
+                    <a href="{{ path('subscription_new') }}" class="btn btn-warning">Devenir Premium</a>
+                {% endif %}
             </div>
         </div>
     </main>

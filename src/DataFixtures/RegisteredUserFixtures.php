@@ -19,61 +19,61 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         'n0' => [
             'streetNumber' => '4',
             'street' => 'Avenue Pasteur',
-            'city' => 'Montreuil',
+            'city' => 'Vélizy-Villacoublay',
             'zipCode' => '93100'
         ],
         'n1' => [
             'streetNumber' => '10',
             'street' => 'Avenue Pasteur',
-            'city' => 'Montreuil',
+            'city' => 'Créteil',
             'zipCode' => '93100'
         ],
         'n2' => [
             'streetNumber' => '1',
             'street' => 'Avenue Pasteur',
-            'city' => 'Montreuil',
+            'city' => 'Arcueil',
             'zipCode' => '93100'
         ],
         'n3' => [
             'streetNumber' => '9',
             'street' => 'Avenue Pasteur',
-            'city' => 'Montreuil',
+            'city' => 'Châtillon',
             'zipCode' => '93100'
         ],
         'n4' => [
             'streetNumber' => '11',
             'street' => 'Avenue Pasteur',
-            'city' => 'Montreuil',
+            'city' => 'Montrouge',
             'zipCode' => '93100'
         ],
         'n5' => [
             'streetNumber' => '2',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Sèvres',
             'zipCode' => '92500'
         ],
         'n6' => [
             'streetNumber' => '6',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Gagny',
             'zipCode' => '92500'
         ],
         'n7' => [
             'streetNumber' => '8',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Bagnolet',
             'zipCode' => '92500'
         ],
         'n8' => [
             'streetNumber' => '10',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Drancy',
             'zipCode' => '92500'
         ],
         'n9' => [
             'streetNumber' => '4',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Villejuif',
             'zipCode' => '92500'
         ],
     ];
@@ -82,69 +82,68 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         'n0' => [
             'streetNumber' => '262',
             'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Meudon',
             'zipCode' => '92500'
         ],
         'n1' => [
             'streetNumber' => '262',
             'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Bobigny',
             'zipCode' => '92500'
         ],
         'n2' => [
             'streetNumber' => '262',
             'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Les Lilas',
             'zipCode' => '92500'
         ],
         'n3' => [
             'streetNumber' => '262',
             'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Montreuil',
             'zipCode' => '92500'
         ],
         'n4' => [
             'streetNumber' => '262',
             'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Rueil-Malmaison',
+            'city' => 'Nanterre',
             'zipCode' => '92500'
         ],
         'n5' => [
             'streetNumber' => '110',
             'street' => 'Boulevard de la Boissière',
-            'city' => 'Montreuil',
+            'city' => 'Colombes',
             'zipCode' => '93100'
         ],
         'n6' => [
             'streetNumber' => '110',
             'street' => 'Boulevard de la Boissière',
-            'city' => 'Montreuil',
+            'city' => 'Vitry-sur-seine',
             'zipCode' => '93100'
         ],
         'n7' => [
             'streetNumber' => '110',
             'street' => 'Boulevard de la Boissière',
-            'city' => 'Montreuil',
+            'city' => 'Maisons-Alfort',
             'zipCode' => '93100'
         ],
         'n8' => [
             'streetNumber' => '110',
             'street' => 'Boulevard de la Boissière',
-            'city' => 'Montreuil',
+            'city' => 'Vincennes',
             'zipCode' => '93100'
         ],
         'n9' => [
             'streetNumber' => '110',
             'street' => 'Boulevard de la Boissière',
-            'city' => 'Montreuil',
+            'city' => 'Clamart',
             'zipCode' => '93100'
         ],
     ];
 
 
-    public const MAX_REALISTIC_FIXTURES = 10;
+    public const MAX_REALISTIC_FIXTURES = 30;
 
-    public const MAX_FICTIONAL_FIXTURES = 20;
 
     public function __construct()
     {
@@ -158,36 +157,17 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
             $registeredUser->setPhone($this->faker->phoneNumber());
-            $registeredUser->setStreetNumber(self::USERS_POSTAL_ADRESS['n' . $i]['streetNumber']);
-            $registeredUser->setStreet(self::USERS_POSTAL_ADRESS['n' . $i]['street']);
-            $registeredUser->setZipcode(self::USERS_POSTAL_ADRESS['n' . $i]['zipCode']);
-            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . $i]['city']);
-            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . $i]['streetNumber']);
-            $registeredUser->setJobStreet(self::USERS_JOB_ADRESS['n' . $i]['street']);
-            $registeredUser->setJobZipcode(self::USERS_JOB_ADRESS['n' . $i]['zipCode']);
-            $registeredUser->setCityJob(self::USERS_JOB_ADRESS['n' . $i]['city']);
-            $registeredUser->setRome($this->getReference(self::ROME[1]));
+            $registeredUser->setStreetNumber(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['streetNumber']);
+            $registeredUser->setStreet(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['street']);
+            $registeredUser->setZipcode(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['zipCode']);
+            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . rand(0, 3)]['city']);
+            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . rand(3, 9)]['streetNumber']);
+            $registeredUser->setJobStreet(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['street']);
+            $registeredUser->setJobZipcode(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['zipCode']);
+            $registeredUser->setCityJob(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['city']);
+            $registeredUser->setRome($this->getReference(self::ROME[rand(0, 1)]));
             $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));
-
-            $manager->persist($registeredUser);
-        }
-
-        for ($i = 10; $i < self::MAX_FICTIONAL_FIXTURES; $i++) {
-            $registeredUser = new RegisteredUser();
-            $registeredUser->setFirstname($this->faker->firstName());
-            $registeredUser->setLastname($this->faker->lastName());
-            $registeredUser->setPhone($this->faker->phoneNumber());
-            $registeredUser->setStreetNumber($this->faker->buildingNumber());
-            $registeredUser->setStreet($this->faker->streetName());
-            $registeredUser->setZipcode($this->faker->postcode());
-            $registeredUser->setCity($this->faker->city());
-            $registeredUser->setJobStreetNumber($this->faker->buildingNumber());
-            $registeredUser->setJobStreet($this->faker->streetName());
-            $registeredUser->setJobZipcode($this->faker->postcode());
-            $registeredUser->setCityJob($this->faker->city());
-            $registeredUser->setRome($this->getReference(self::ROME[rand(0, 2)]));
-            $registeredUser->setUser($this->getReference('user_' . $i));
 
             $manager->persist($registeredUser);
         }

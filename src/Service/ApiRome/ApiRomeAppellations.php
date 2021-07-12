@@ -47,4 +47,25 @@ class ApiRomeAppellations extends ApiRomeJobs
 
         return $response->toArray();
     }
+
+    /**
+     * Return more details of appelation
+     *
+     * @param string $appelationCode
+     * @return array
+     */
+    public function getDetailsOfAppellation(string $appelationCode): array
+    {
+        $response = $this->client->request(
+            'GET',
+            self::URL_REQUEST_GET . 'appellation/' . $appelationCode,
+            [
+                'headers' =>  [
+                    'Authorization' => $this->getToken()
+                ],
+            ]
+        );
+
+        return $response->toArray();
+    }
 }

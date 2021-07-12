@@ -53,8 +53,11 @@ class ProfileController extends AbstractController
             }
 
             $entityManager->flush();
-
             $this->addFlash('success', 'Votre profil a bien été modifié.');
+
+            if ($request->get('premium')) {
+                return $this->redirectToRoute('subscription_new');
+            }
 
             return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }

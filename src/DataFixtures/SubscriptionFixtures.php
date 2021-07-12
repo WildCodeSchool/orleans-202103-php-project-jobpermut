@@ -10,6 +10,12 @@ use Faker\Generator;
 
 class SubscriptionFixtures extends Fixture
 {
+
+    private const CV = [
+        'source' => './public/uploads/cv.pdf',
+        'destination' => './public/uploads/curriculums/'
+    ];
+
     private Generator $faker;
 
     public function __construct()
@@ -22,10 +28,9 @@ class SubscriptionFixtures extends Fixture
         for ($i = 0; $i < UserFixtures::MAX_FIXTURES; $i++) {
             $subscription = new Subscription();
             $subscription->setSubscriptionAt($this->faker->dateTimeBetween('-2 week', 'now'));
-            $subscription->setCurriculum($this->faker->mimeType());
-            $subscription->setJobDescription($this->faker->sentence(4));
-
+            $subscription->setCurriculum('cv' . $i . 'pdf');
             $manager->persist($subscription);
+            copy(self::CV['source'], self::CV['destination'] . 'cv' . $i . 'pdf');
             $this->addReference('subscription_' . $i, $subscription);
         }
 
