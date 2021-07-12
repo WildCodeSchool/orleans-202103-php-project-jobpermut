@@ -69,9 +69,21 @@ class User implements UserInterface
      */
     private Collection $testimonies;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UserLike::class, mappedBy="userLiker")
+     */
+    private Collection $userLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserLike::class, mappedBy="userLiked")
+     */
+    private Collection $userLikedBy;
+
     public function __construct()
     {
         $this->testimonies = new ArrayCollection();
+        $this->userLikes = new ArrayCollection();
+        $this->userLikedBy = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,5 +242,81 @@ class User implements UserInterface
     public function setIsVisible(bool $isVisible): void
     {
         $this->isVisible = $isVisible;
+    }
+
+    /**
+     * @return Collection|UserLike[]
+     */
+    public function getUserLikes(): Collection
+    {
+        return $this->userLikes;
+    }
+
+    public function getOneUserLike(User $user): bool
+    {
+        foreach ($this->getUserLikes() as $userLike) {
+            if ($userLike->getUserLiked() === $user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function addUserLike(UserLike $userLike): self
+    {
+        if (!$this->userLikes->contains($userLike)) {
+            $this->userLikes[] = $userLike;
+            $userLike->setUserLiker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLike(UserLike $userLike): self
+    {
+        if ($this->userLikes->removeElement($userLike)) {
+            // set the owning side to null (unless already changed)
+            if ($userLike->getUserLiker() === $this) {
+                $userLike->setUserLiker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isInUserLikeList(UserLike $userLike): bool
+    {
+        return $this->getUserLikes()->contains($userLike) ? true : false;
+    }
+
+    /**
+     * @return Collection|UserLike[]
+     */
+    public function getUserLikedBy(): Collection
+    {
+        return $this->userLikedBy;
+    }
+
+    public function addLikedBy(UserLike $userLikedBy): self
+    {
+        if (!$this->userLikedBy->contains($userLikedBy)) {
+            $this->userLikedBy[] = $userLikedBy;
+            $userLikedBy->setUserLiked($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedBy(UserLike $userLikedBy): self
+    {
+        if ($this->userLikedBy->removeElement($userLikedBy)) {
+            // set the owning side to null (unless already changed)
+            if ($userLikedBy->getUserLiked() === $this) {
+                $userLikedBy->setUserLiked(null);
+            }
+        }
+
+        return $this;
     }
 }
