@@ -142,7 +142,7 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
     ];
 
 
-    public const MAX_REALISTIC_FIXTURES = 50;
+    public const MAX_REALISTIC_FIXTURES = 30;
 
 
     public function __construct()
@@ -160,8 +160,8 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setStreetNumber(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['streetNumber']);
             $registeredUser->setStreet(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['street']);
             $registeredUser->setZipcode(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['zipCode']);
-            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['city']);
-            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['streetNumber']);
+            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . rand(0, 3)]['city']);
+            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . rand(3, 9)]['streetNumber']);
             $registeredUser->setJobStreet(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['street']);
             $registeredUser->setJobZipcode(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['zipCode']);
             $registeredUser->setCityJob(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['city']);

@@ -20,10 +20,11 @@ class PermutSearchController extends AbstractController
     public function index(RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode): Response
     {
         $regUsersDatas = [];
+        $rome = new Rome();
         $tripSummary1 = [];
+        $tripSummary2 = [];
         $homeCityCoordinate = [];
         $workCityCoordinate = [];
-        $rome = new Rome();
 
 
         /** @var User */
@@ -46,70 +47,31 @@ class PermutSearchController extends AbstractController
             'workCity' => $workCityCoordinate,
             'tripSummary1' => $tripSummary1,
         ];
+
         $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
 
-        $this->dataRecup(
-            $usersByRome,
-            $user,
-            $homeCityCoordinate,
-            $workCityCoordinate,
-            $tripSummary1,
-            $geocode,
-            $direction
-        );
-
-        usort($regUsersDatas, function ($first, $last) {
-            return $last['timeGained'] <=> $first['timeGained'];
-        });
-
-        return $this->render('permutsearch/index.html.twig', [
-            'userData' => $userData,
-            'regUsersData' => $regUsersDatas
-        ]);
-    }
-
-    private function dataRecup(
-        array $usersByRome,
-        ?RegisteredUser $user,
-        ?array $homeCityCoordinate,
-        ?array $workCityCoordinate,
-        ?array $tripSummary1,
-        Geocode $geocode,
-        Direction $direction
-    ): array {
-        $regUsersDatas = [];
         foreach ($usersByRome as $regUser) {
             if ($regUser !== $user) {
                 $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
                 $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
                 $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
-                $tripSummary3 = $direction->tripSummary($userHomeCoordinates, $workCityCoordinate);
-                $tripSummary4 = $direction->tripSummary($userHomeCoordinates, $userWorkCoordinates);
 
                 $duration1 = 0;
                 $duration2 = 0;
-                $duration3 = 0;
-                $duration4 = 0;
 
-                if ($tripSummary1 && $tripSummary2 && $tripSummary3 && $tripSummary4) {
+                if ($tripSummary1) {
                     $duration1 = (intval($tripSummary1['duration']['hours']) * 60) +
                         (intval($tripSummary1['duration']['minutes']));
+                }
 
+                if ($tripSummary2) {
                     $duration2 = (intval($tripSummary2['duration']['hours']) * 60) +
                         (intval($tripSummary2['duration']['minutes']));
-
-
-                    $duration3 = (intval($tripSummary3['duration']['hours']) * 60) +
-                        (intval($tripSummary3['duration']['minutes']));
-
-                    $duration4 = (intval($tripSummary4['duration']['hours']) * 60) +
-                        (intval($tripSummary4['duration']['minutes']));
                 }
 
                 $timeGained = $duration1 - $duration2;
-                $otherTimeGained = $duration4 - $duration3;
 
-                if ($timeGained >= 0 && $otherTimeGained >= 0) {
+                if ($timeGained >= 0) {
                     $regUsersDatas[$regUser->getId()] = [
                         'registeredUser' => $regUser,
                         'userHome' => $userHomeCoordinates,
@@ -120,6 +82,14 @@ class PermutSearchController extends AbstractController
                 }
             }
         };
-        return $regUsersDatas;
+
+        usort($regUsersDatas, function ($first, $last) {
+            return $last['timeGained'] <=> $first['timeGained'];
+        });
+
+        return $this->render('permutsearch/index.html.twig', [
+            'userData' => $userData,
+            'regUsersData' => $regUsersDatas
+        ]);
     }
 }
