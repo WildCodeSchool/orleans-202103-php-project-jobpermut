@@ -25,10 +25,6 @@ class SubscriptionFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        if (!is_dir('./public/uploads/curriculums')) {
-            mkdir('./public/uploads/curriculums');
-        }
-
         for ($i = 0; $i < UserFixtures::MAX_FIXTURES; $i++) {
             $subscription = new Subscription();
             $subscription->setSubscriptionAt($this->faker->dateTimeBetween('-2 week', 'now'));
