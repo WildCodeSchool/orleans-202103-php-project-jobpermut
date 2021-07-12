@@ -53,7 +53,7 @@ class RegisteredUser
      * @ORM\OneToOne(targetEntity=Subscription::class, cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=true)
      */
-    private Subscription $subscription;
+    private ?Subscription $subscription;
 
     /**
      * @ORM\Column(type="string", length=255)
