@@ -39,6 +39,6 @@
         passés dans votre voiture.
     </h3>
     <div class="d-flex justify-content-center mt-4">
-        <a href="{{ path("permutsearch") }}" class="btn btn-lg btn-warning w-50">Permutez !</a>
+        <a href="{{ path("permutsearch") }}" class="btn btn-lg btn-warning w-50 {{ app.user ? '' : 'enter-site' }}">Permutez !</a>
     </div>
 </div>
