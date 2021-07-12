@@ -78,7 +78,7 @@ class PermutSearchController extends AbstractController
         Direction $direction
     ): array {
         $regUsersDatas = [];
-        foreach ($this->$usersByRome as $regUser) {
+        foreach ($usersByRome as $regUser) {
             if ($regUser !== $user) {
                 $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
                 $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
