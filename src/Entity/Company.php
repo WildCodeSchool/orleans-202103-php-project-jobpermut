@@ -44,6 +44,11 @@ class Company
      */
     private Collection $users;
 
+    public function __serialize(): array
+    {
+        return [];
+    }
+
     public function __construct()
     {
         $this->subscriptions = new ArrayCollection();
@@ -149,5 +154,10 @@ class Company
         }
 
         return $this;
+    }
+
+    public function __serialize(): array
+    {
+        return [];
     }
 }
