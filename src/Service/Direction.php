@@ -60,12 +60,18 @@ class Direction
 
         $trip = $this->getDirection($firstCoordinate, $secondCoordinate);
         assert($trip !== null);
-        $durationToGo = $trip['properties']['summary']['duration'];
+        if (empty($trip['properties']['summary']['duration'])) {
+            $durationToGo = 0;
+        } else {
+            $durationToGo = $trip['properties']['summary']['duration'];
+        }
         $duration = intval(strval(($durationToGo * 2)));
         $duration = $durationCalc->duration($duration);
-
-        $distanceToGo = $trip['properties']['summary']['distance'];
-
+        if (empty($trip['properties']['summary']['distance'])) {
+            $distanceToGo = 0;
+        } else {
+            $distanceToGo = $trip['properties']['summary']['distance'];
+        }
         $distance = number_format((intval(round($distanceToGo * 2) / 1000)), 0, '', ' ');
 
         $annualDuration = intval(strval(302 * ($durationToGo * 2)));
