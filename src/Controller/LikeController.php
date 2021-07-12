@@ -16,7 +16,7 @@ class LikeController extends AbstractController
     /**
      * @Route("/{user}/like", name="like")
      */
-    public function addLike(
+    public function switchLike(
         User $user,
         UserLikeRepository $userLikeRepository,
         EntityManagerInterface $entityManager
