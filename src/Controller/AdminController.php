@@ -28,7 +28,7 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/creation_compte", name="creation_compte")
+     * @Route("/creation_compte", name="create_admin")
      * @IsGranted("ROLE_SUPERADMIN")
      */
     public function add(
