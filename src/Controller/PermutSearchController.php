@@ -69,7 +69,7 @@ class PermutSearchController extends AbstractController
     }
 
     private function dataRecup(
-        ?array $usersByRome,
+        array $usersByRome,
         ?RegisteredUser $user,
         ?array $homeCityCoordinate,
         ?array $workCityCoordinate,
