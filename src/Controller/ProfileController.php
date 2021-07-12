@@ -67,4 +67,14 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+     /**
+     * @Route("/{username}/liked", name="showLike")
+     */
+    public function showLike(): Response
+    {
+        return $this->render('profile/showLike.html.twig', [
+
+        ]);
+    }
 }
