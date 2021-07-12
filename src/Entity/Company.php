@@ -152,7 +152,6 @@ class Company
                 $user->setCompany(null);
             }
         }
-
         return $this;
     }
 }
