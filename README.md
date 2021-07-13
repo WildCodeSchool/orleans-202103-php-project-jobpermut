@@ -45,15 +45,15 @@ If you meet the prerequisites, you can proceed to the installation of the projec
 11. Run `symfony server:start` to launch symfony server
 12. Go to localhost:8000 on your browser
 ## Users
-In a way to give you a demo user for this prototype, we have already create this one:
+Demo User
 login: john@doe.com
 password: 123456789
 
-The Admin user:
+Admin user:
 login: wildjobexchangeAdmin@gmail.com
 password: admin123456789
 
-The SuperAdmin User:
+SuperAdmin User:
 login: wildjobexchangeSuperAdmin@gmail.com
 password: admin123456789
 ## Built-With
