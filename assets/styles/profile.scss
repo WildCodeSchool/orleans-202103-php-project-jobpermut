@@ -22,6 +22,19 @@
             font-size: 2.5em;
         }
 
+        .fa-heart {
+            font-size: 40px;
+            transition: 0.3s ease-in-out;
+            padding: 14px;
+            vertical-align: middle;
+
+            &:hover {
+                font-weight: bold;
+                background-color: rgba(255, 255, 255, 0.205);
+                border-radius: 50%;
+            }
+        }
+
         .profile-titles {
             .h3 {
                 font-family: $font-p;

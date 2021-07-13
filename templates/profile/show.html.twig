@@ -14,6 +14,7 @@
 {% block javascripts %}
     {{ parent() }}
     {{ encore_entry_script_tags('profileMap') }}
+    {{ encore_entry_script_tags('like') }}
 {% endblock %}
 
 {% block body %}
@@ -45,7 +46,9 @@
                         </h2>
                     </div>
                 </div>
-                <i class="far fa-heart"></i>
+                <a href="{{ path('like', {user: user.registeredUser.id}) }}" class="heart">
+                    <i class="{{ app.user.getOneUserLike(user.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
+                </a>
             </div>
             <div class="profile-body mt-5">
                 <div class="mb-5">
