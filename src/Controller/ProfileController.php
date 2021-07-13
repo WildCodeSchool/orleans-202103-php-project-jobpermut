@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\Rome;
 use App\Entity\User;
 use App\Service\Geocode;
