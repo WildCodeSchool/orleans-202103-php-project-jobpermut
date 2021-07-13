@@ -66,7 +66,7 @@ class Subscription
      *      "application/msword",
      *      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
      *  }
-     * )I
+     * )
      * @var File|null
      */
     private $jobDescriptionFile;
