@@ -46,9 +46,11 @@
                         </h2>
                     </div>
                 </div>
-                <a href="{{ path('like', {user: user.registeredUser.id}) }}" class="heart">
-                    <i class="{{ app.user.getOneUserLike(user.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
-                </a>
+                {% if app.user is not empty and app.user.id != user.id %}
+                    <a href="{{ path('like', {user: user.registeredUser.id}) }}" class="heart">
+                        <i class="{{ app.user.getOneUserLike(user.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
+                    </a>
+                {% endif %}
             </div>
             <div class="profile-body mt-5">
                 <div class="mb-5">

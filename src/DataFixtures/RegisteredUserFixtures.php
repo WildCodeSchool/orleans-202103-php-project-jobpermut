@@ -174,6 +174,24 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $manager->persist($registeredUser);
         }
 
+        // for User in Demo
+        $registeredUser = new RegisteredUser();
+        $registeredUser->setFirstname('John');
+        $registeredUser->setLastname('Doe');
+        $registeredUser->setPhone($this->faker->phoneNumber());
+        $registeredUser->setStreetNumber(3);
+        $registeredUser->setStreet('rue des Oiseaux');
+        $registeredUser->setZipcode(45000);
+        $registeredUser->setCity('Orléans');
+        $registeredUser->setJobStreetNumber(4);
+        $registeredUser->setJobStreet('rue du Pont');
+        $registeredUser->setJobZipcode(45640);
+        $registeredUser->setCityJob('Sandillon');
+        $registeredUser->setRome($this->getReference(self::ROME[rand(0, 1)]));
+        $registeredUser->setUser($this->getReference('user_demo'));
+
+        $manager->persist($registeredUser);
+
         $manager->flush();
     }
 

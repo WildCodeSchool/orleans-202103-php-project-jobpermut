@@ -40,6 +40,12 @@
                                 </li>
                             {% endif %}
                             <li>
+                                <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('match') }}">
+                                    <i class="fas fa-hand-holding-heart me-2"></i>Vos matchs
+                                    {{ render(controller('App\\Controller\\LikeController::matchCount')) }}
+                                </a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('setting', {username: app.user.username}) }}">
                                     <i class="fas fa-cog me-2"></i>Paramètres</a>
                             </li>
