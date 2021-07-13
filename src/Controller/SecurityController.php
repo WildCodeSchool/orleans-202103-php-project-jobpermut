@@ -64,43 +64,47 @@ class SecurityController extends AbstractController
         GuardAuthenticatorHandler $guardHandler,
         AppAuthenticator $authenticator
     ): ?Response {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        } else {
+            $user = new User();
+            $form = $this->createForm(RegistrationFormType::class, $user);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword(
-                $passwordEncoder->encodePassword(
+            if ($form->isSubmitted() && $form->isValid()) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('plainPassword')->getData()
+                    )
+                );
+
+                $user->setCreatedAt(new DateTime('now'));
+                $user->setRoles('ROLE_USER');
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                $email = (new Email())
+                ->from(strval($this->getParameter('mailer_from')))
+                ->to($form->get('email')->getData())
+                ->subject('Confirmation de votre inscription')
+                ->html($this->renderView('mail/confirmationMail.html.twig', ['user' => $user]));
+
+                $mailer->send($email);
+
+                $this->addFlash(
+                    'success',
+                    'Votre inscription s\'est bien deroulée, un mail de confirmation vous sera envoyé'
+                );
+
+                return $guardHandler->authenticateUserAndHandleSuccess(
                     $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $user->setCreatedAt(new DateTime('now'));
-            $user->setRoles('ROLE_USER');
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            $email = (new Email())
-            ->from(strval($this->getParameter('mailer_from')))
-            ->to($form->get('email')->getData())
-            ->subject('Confirmation de votre inscription')
-            ->html($this->renderView('mail/confirmationMail.html.twig', ['user' => $user]));
-
-            $mailer->send($email);
-
-            $this->addFlash(
-                'success',
-                'Votre inscription s\'est bien deroulée, un mail de confirmation vous sera envoyé'
-            );
-
-            return $guardHandler->authenticateUserAndHandleSuccess(
-                $user,
-                $request,
-                $authenticator,
-                'main' // firewall name in security.yaml
-            );
+                    $request,
+                    $authenticator,
+                    'main' // firewall name in security.yaml
+                );
+            }
         }
 
         return $this->render('security/register.html.twig', [

@@ -19,12 +19,14 @@ window.addEventListener('load', (event) => {
     }
 });
 
-if (document.getElementById('enter-site')) {
-    const enterSite = document.getElementById('enter-site');
-    enterSite.addEventListener('click', (event) => {
-        event.preventDefault();
-        const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
-        loginModal.show();
+if (document.getElementsByClassName('enter-site')) {
+    const enterSites = document.getElementsByClassName('enter-site');
+    enterSites.forEach((enterSite) => {
+        enterSite.addEventListener('click', (event) => {
+            event.preventDefault();
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            loginModal.show();
+        });
     });
 }
 

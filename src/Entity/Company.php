@@ -30,24 +30,23 @@ class Company
     private string $address;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255)
      */
-    private int $code;
+    private string $code;
 
     /**
      * @ORM\OneToMany(targetEntity=Subscription::class, mappedBy="company")
      */
     private Collection $subscriptions;
 
-    /**
-     * @ORM\OneToMany(targetEntity=User::class, mappedBy="company")
-     */
-    private Collection $users;
+    public function __serialize(): array
+    {
+        return [];
+    }
 
     public function __construct()
     {
         $this->subscriptions = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,12 +78,12 @@ class Company
         return $this;
     }
 
-    public function getCode(): ?int
+    public function getCode(): ?string
     {
         return $this->code;
     }
 
-    public function setCode(int $code): self
+    public function setCode(string $code): self
     {
         $this->code = $code;
 
@@ -115,36 +114,6 @@ class Company
             // set the owning side to null (unless already changed)
             if ($subscription->getCompany() === $this) {
                 $subscription->setCompany(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUser(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->setCompany($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->removeElement($user)) {
-            // set the owning side to null (unless already changed)
-            if ($user->getCompany() === $this) {
-                $user->setCompany(null);
             }
         }
 

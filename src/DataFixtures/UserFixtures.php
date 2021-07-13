@@ -26,7 +26,7 @@ class UserFixtures extends Fixture
         ],
     ];
 
-    public const MAX_FIXTURES = 25;
+    public const MAX_FIXTURES = 10;
 
     private UserPasswordEncoderInterface $passwordEncoder;
     private Generator $faker;
@@ -61,8 +61,8 @@ class UserFixtures extends Fixture
 
         //for use in demo
         $user = new User();
-        $user->setEmail('wildjobexchangeUser@gmail.com');
-        $user->setUsername('WildUSER');
+        $user->setEmail('john@doe.com');
+        $user->setUsername('John');
         $user->setRoles(self::USERS_PASSWORDS['user']['role']);
         $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
         $user->setIsVisible(true);
@@ -72,6 +72,7 @@ class UserFixtures extends Fixture
                 ->encodePassword($user, self::USERS_PASSWORDS['user']['password'])
         );
         $manager->persist($user);
+        $this->addReference('user_demo', $user);
 
         //for ROLE_ADMIN
         $user = new User();

@@ -36,7 +36,6 @@ class RegisteredUserType extends AbstractType
                 'choice_label' => 'name',
                 'placeholder' => 'Choisissez votre métier:',
                 'empty_data' => null,
-                'required' => false,
             ])
             ->add('street', TextType::class, ['attr' => ['placeholder' => 'Rue des Lumières']])
             ->add('streetNumber', TextType::class, ['attr' => ['placeholder' => '67']])

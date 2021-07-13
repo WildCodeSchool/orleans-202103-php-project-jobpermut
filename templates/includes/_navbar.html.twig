@@ -34,6 +34,22 @@
                                     <i class="fas fa-pen me-2"></i>Editer mon profil</a>
                             </li>
                             <li>
+                                <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('profile_showLike', {username: app.user.username}) }}">
+                                    <i class="fas fa-heart me-2"></i>Voir mes likes</a>
+                            </li>
+                            {% if app.user and not is_granted('ROLE_ADMIN') and app.user.registeredUser and app.user.registeredUser.subscription is null %}
+                                <li>
+                                    <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('subscription_new') }}">
+                                        <i class="fas fa-user-tie me-2"></i>Devenir Preminum</a>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('match') }}">
+                                    <i class="fas fa-hand-holding-heart me-2"></i>Vos matchs
+                                    {{ render(controller('App\\Controller\\LikeController::matchCount')) }}
+                                </a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item text-wrap text-dark py-2" href="{{ path('setting', {username: app.user.username}) }}">
                                     <i class="fas fa-cog me-2"></i>Paramètres</a>
                             </li>

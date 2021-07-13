@@ -24,12 +24,12 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         for ($i = 5; $i < UserFixtures::MAX_FIXTURES; $i++) {
+            $code = $i - 4;
             $company = new Company();
             $company->setName($this->faker->company());
             $company->setAddress($this->faker->address());
-            $company->setCode($this->faker->randomNumber(5, true));
+            $company->setCode('C0000' . $code);
             $company->addSubscription($this->getReference('subscription_' . $i));
-            $company->addUser($this->getReference('user_' . $i));
 
             $manager->persist($company);
         }

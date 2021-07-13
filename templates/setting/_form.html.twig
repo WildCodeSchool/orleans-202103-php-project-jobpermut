@@ -3,13 +3,17 @@
 {{ form_start(form) }}
 
 <div class="form row m-0 container p-lg-5 p-0 mt-3 mt-lg-0">
-	<div class="col-12 mt-2">
-		{{ form_label(form.username, null, {label: 'Nom d\'utilisateur'}) }}
+    <div class="col-12 mt-2">
+        {{ form_label(form.username, null, {label: 'Nom d\'utilisateur'}) }}
 		{{ form_widget(form.username, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
 	</div>
 	<div class="col-12 mt-2">
 		{{ form_label(form.email, null, {label: 'Email'}) }}
 		{{ form_widget(form.email, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
+	</div>
+	<div class="col-12 mt-2">
+		{{ form_label(form.avatarFile) }}
+		{{ form_widget(form.avatarFile, {'attr': {'class': 'form-control shadow-sm p-3 mb-1 bg-white rounded'}}) }}
 	</div>
 	<div class="col-12 mt-2">
 		<a class="fw-light text-primary" href="{{ path('change_password', {username: app.user.username}) }}">Modifiez votre mot de passe</a>

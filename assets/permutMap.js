@@ -5,10 +5,12 @@ const L = window.L;
 
 const NbUser = document.getElementsByClassName('permutMap').length + 1;
 const NbCard = document.getElementsByClassName('permut-card').length + 1;
-
+const userData = document.querySelector('#user-data');
+const userDataValues = userData.value.split('/');
 for (let p = 1; p < NbCard; p += 1) {
     const btn = document.getElementById(`button-${p}`);
-
+    const regUserData = document.querySelector(`#reguser-data-${p}`);
+    const regUserDataValues = regUserData.value.split('/');
     const iMap = function initMap(
         homeLong = 2.8884657,
         homeLat = 48.9562018,
@@ -132,18 +134,18 @@ for (let p = 1; p < NbCard; p += 1) {
                     element = element.reverse();
                 });
                 L.polyline(data, { color: '#ed9f1a' }).addTo(mapBefore);
-            });
-
-        fetch(
-            `/leaflet/direction/${userHomeLong}/${userHomeLat}/${userWorkLong}/${userWorkLat}`,
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                data = data.geometry.coordinates;
-                data.forEach((element) => {
-                    element = element.reverse();
-                });
-                L.polyline(data, { color: '#00636f' }).addTo(mapBefore);
+                fetch(
+                    `/leaflet/direction/${userHomeLong}/${userHomeLat}/${userWorkLong}/${userWorkLat}`,
+                )
+                    .then((response) => response.json())
+                    .then((dataRoad) => {
+                        dataRoad = dataRoad.geometry.coordinates;
+                        dataRoad.forEach((element) => {
+                            element = element.reverse();
+                        });
+                        L.polyline(dataRoad, { color: '#00636f' }).addTo(mapBefore);
+                        mapBefore.fitBounds([data, dataRoad]);
+                    });
             });
 
         // on mapAfter
@@ -158,37 +160,31 @@ for (let p = 1; p < NbCard; p += 1) {
                     element = element.reverse();
                 });
                 L.polyline(data, { color: '#ed9f1a' }).addTo(mapAfter);
+                fetch(
+                    `/leaflet/direction/${userHomeLong}/${userHomeLat}/${workLong}/${workLat}`,
+                )
+                    .then((response) => response.json())
+                    .then((dataRoad) => {
+                        dataRoad = dataRoad.geometry.coordinates;
+                        dataRoad.forEach((element) => {
+                            element = element.reverse();
+                        });
+                        L.polyline(dataRoad, { color: '#00636f' }).addTo(mapAfter);
+                        mapAfter.fitBounds([data, dataRoad]);
+                    });
             });
-
-        fetch(
-            `/leaflet/direction/${userHomeLong}/${userHomeLat}/${workLong}/${workLat}`,
-        )
-            .then((response) => response.json())
-            .then((data) => {
-                data = data.geometry.coordinates;
-                data.forEach((element) => {
-                    element = element.reverse();
-                });
-                L.polyline(data, { color: '#00636f' }).addTo(mapAfter);
-            });
-
-        // Centrer les cartes sur les trajets
-        mapBefore.fitBounds([
-            [workLat, workLong],
-            [homeLat, homeLong],
-            [userWorkLat, userWorkLong],
-            [userHomeLat, userHomeLong],
-        ]);
-
-        mapAfter.fitBounds([
-            [workLat, workLong],
-            [homeLat, homeLong],
-            [userWorkLat, userWorkLong],
-            [userHomeLat, userHomeLong],
-        ]);
     };
 
     btn.onclick = function () {
-        iMap();
+        iMap(
+            userDataValues[0],
+            userDataValues[1],
+            userDataValues[2],
+            userDataValues[3],
+            regUserDataValues[0],
+            regUserDataValues[1],
+            regUserDataValues[2],
+            regUserDataValues[3],
+        );
     };
 }

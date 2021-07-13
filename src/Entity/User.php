@@ -2,19 +2,24 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="Cet email est déjà utilisé. Veuillez en essayer un autre.")
  * @UniqueEntity(fields={"username"}, message="Ce pseudonyme est déjà utilisé. Veuillez en essayer un autre.")
+ * @Vich\Uploadable
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class User implements UserInterface
 {
@@ -65,18 +70,60 @@ class User implements UserInterface
     private bool $isVisible = true;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Company::class, inversedBy="user")
-     */
-    private ?Company $company;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Testimony::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Testimony::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private Collection $testimonies;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserLike::class, mappedBy="userLiker")
+     */
+    private Collection $userLikes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UserLike::class, mappedBy="userLiked")
+     */
+    private Collection $userLikedBy;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $avatar = null;
+
+    /**
+     * @Vich\UploadableField(mapping="avatar", fileNameProperty="avatar")
+     * @Assert\File(
+     *  maxSize="2M",
+     *  mimeTypes={
+     *      "image/jpeg",
+     *      "image/jpg",
+     *      "image/png",
+     *      "image/webp"
+     *  }
+     * )
+     * @var File|null
+     */
+    private $avatarFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?DateTimeInterface $updatedAt;
+
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'email' => $this->email,
+            'password' => $this->password
+        ];
+    }
 
     public function __construct()
     {
         $this->testimonies = new ArrayCollection();
+        $this->userLikes = new ArrayCollection();
+        $this->userLikedBy = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -191,18 +238,6 @@ class User implements UserInterface
         return $this;
     }
 
-    public function getCompany(): ?Company
-    {
-        return $this->company;
-    }
-
-    public function setCompany(?Company $company): self
-    {
-        $this->company = $company;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Testimony[]
      */
@@ -247,5 +282,119 @@ class User implements UserInterface
     public function setIsVisible(bool $isVisible): void
     {
         $this->isVisible = $isVisible;
+    }
+
+    /**
+     * @return Collection|UserLike[]
+     */
+    public function getUserLikes(): Collection
+    {
+        return $this->userLikes;
+    }
+
+    public function getOneUserLike(User $user): bool
+    {
+        foreach ($this->getUserLikes() as $userLike) {
+            if ($userLike->getUserLiked() === $user) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function addUserLike(UserLike $userLike): self
+    {
+        if (!$this->userLikes->contains($userLike)) {
+            $this->userLikes[] = $userLike;
+            $userLike->setUserLiker($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLike(UserLike $userLike): self
+    {
+        if ($this->userLikes->removeElement($userLike)) {
+            // set the owning side to null (unless already changed)
+            if ($userLike->getUserLiker() === $this) {
+                $userLike->setUserLiker(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function isInUserLikeList(UserLike $userLike): bool
+    {
+        return $this->getUserLikes()->contains($userLike) ? true : false;
+    }
+
+    /**
+     * @return Collection|UserLike[]
+     */
+    public function getUserLikedBy(): Collection
+    {
+        return $this->userLikedBy;
+    }
+
+    public function addLikedBy(UserLike $userLikedBy): self
+    {
+        if (!$this->userLikedBy->contains($userLikedBy)) {
+            $this->userLikedBy[] = $userLikedBy;
+            $userLikedBy->setUserLiked($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedBy(UserLike $userLikedBy): self
+    {
+        if ($this->userLikedBy->removeElement($userLikedBy)) {
+            // set the owning side to null (unless already changed)
+            if ($userLikedBy->getUserLiked() === $this) {
+                $userLikedBy->setUserLiked(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $avatarFile = null): void
+    {
+        $this->avatarFile = $avatarFile;
+
+        if (null !== $avatarFile) {
+            $this->updatedAt = new DateTimeImmutable();
+        }
     }
 }
