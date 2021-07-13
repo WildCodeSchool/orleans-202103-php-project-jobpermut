@@ -100,4 +100,20 @@ class LikeController extends AbstractController
             $entityManager->remove($match);
         }
     }
+
+    public function matchCount(MatchByLikeRepository $matchRepo): Response
+    {
+        /** @var User */
+        $userLiker = $this->getUser();
+
+        $match = $matchRepo->findBy([
+            'userLiker' => $userLiker
+        ]);
+
+        $matchCount = count($match);
+
+        return $this->render('includes/_matchCount.html.twig', [
+            'matchCount' => $matchCount
+        ]);
+    }
 }
