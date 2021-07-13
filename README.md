@@ -5,7 +5,7 @@
 ## index
 1. [Description](#Description)
 2. [Prerequisites](#Prerequisites)
-3. [Demo User](#DemoUser)
+3. [Users](#Users)
 4. [Installation](#Installation)
 5. [Built-With](#Built-With)
 6. [Authors](#Authors)
@@ -44,10 +44,18 @@ If you meet the prerequisites, you can proceed to the installation of the projec
 10. Run `yarn encore dev` to build assets
 11. Run `symfony server:start` to launch symfony server
 12. Go to localhost:8000 on your browser
-## DemoUser
+## Users
 In a way to give you a demo user for this prototype, we have already create this one:
 login: john@doe.com
 password: 123456789
+
+The Admin user:
+login: wildjobexchangeAdmin@gmail.com
+password: admin123456789
+
+The SuperAdmin User:
+login: wildjobexchangeSuperAdmin@gmail.com
+password: admin123456789
 ## Built-With
 
 * [Symfony](https://github.com/symfony/symfony)
