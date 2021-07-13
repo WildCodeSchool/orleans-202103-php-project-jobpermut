@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Company;
 use App\Form\CompanyType;
 use App\Repository\CompanyRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,10 +64,14 @@ class CompanyController extends AbstractController
     /**
      * @Route("/{id}", name="delete", methods={"POST"})
      */
-    public function delete(Request $request, Company $company): Response
+    public function delete(Request $request, Company $company, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $company->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
+            $subscriptions = $company->getSubscription();
+            foreach ($subscriptions as $subscriptions) {
+                $subscriptions->setCompany(null);
+            }
             $entityManager->remove($company);
             $entityManager->flush();
         }
