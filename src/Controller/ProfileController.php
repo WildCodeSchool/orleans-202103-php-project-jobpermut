@@ -80,8 +80,6 @@ class ProfileController extends AbstractController
             return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
         }
 
-        dd($user);
-
         return $this->render('profile/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
