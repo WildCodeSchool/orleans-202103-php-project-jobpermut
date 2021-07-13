@@ -80,7 +80,6 @@ class ProfileController extends AbstractController
     {
         $regUsersDatas = [];
         $regUsersDatas2 = [];
-        $rome = new Rome();
         $user = new User();
         $tripSummary1 = [];
         $tripSummary2 = [];
@@ -97,7 +96,7 @@ class ProfileController extends AbstractController
 
         if ($regUser !== null) {
             /** @var RegisteredUser */
-            $rome = $regUser;
+            $regUser = $regUser;
             $homeCityCoordinate = $geocode->getCoordinates($regUser->getCity());
             $workCityCoordinate = $geocode->getCoordinates($regUser->getCityJob());
             $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
@@ -111,14 +110,17 @@ class ProfileController extends AbstractController
 
         if ($user !== null) {
             $userLikes = $user->getUserLikes();
+            $userLiked = $user->getUserLikedBy();
         }
 
-
-        if ($user !== null) {
-            $userLiked = $user->getUserLikedBy();
-        };
-
-        $regUsersDatas = $this->getLikedUsers($userLikes, $regUserRepo, $direction, $geocode, $homeCityCoordinate, $tripSummary1, $tripSummary2);
+        $regUsersDatas = $this->getLikedUsers(
+            $userLikes,
+            $direction,
+            $geocode,
+            $homeCityCoordinate,
+            $tripSummary1,
+            $tripSummary2
+        );
 
         foreach ($userLiked as $regUser) {
             /** @var User */
@@ -167,8 +169,16 @@ class ProfileController extends AbstractController
             'regUsersData2' => $regUsersDatas2
         ]);
     }
-    public function getLikedUsers(Collection $userLikes, RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode, $homeCityCoordinate, $tripSummary1, $tripSummary2)
-    {
+
+    public function getLikedUsers(
+        Collection $userLikes,
+        Direction $direction,
+        Geocode $geocode,
+        ?array $homeCityCoordinate,
+        ?array $tripSummary1,
+        ?array $tripSummary2
+    ): array {
+        $regUsersDatas = [];
         $user = $this->getUser();
         foreach ($userLikes as $regUser) {
             /** @var User */
@@ -176,10 +186,10 @@ class ProfileController extends AbstractController
             /** @var RegisteredUser */
             $regUser = $likedUser->getRegisteredUser();
             if ($regUser !== $user) {
-                $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
+                $usersHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
 
-                $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
-                $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
+                $usersWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
+                $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $usersWorkCoordinates);
 
                 $duration1 = 0;
                 $duration2 = 0;
@@ -199,8 +209,8 @@ class ProfileController extends AbstractController
                 if ($timeGained >= 0) {
                     $regUsersDatas[$regUser->getId()] = [
                         'registeredUser' => $regUser,
-                        'userHome' => $userHomeCoordinates,
-                        'userWork' => $userWorkCoordinates,
+                        'userHome' => $usersHomeCoordinates,
+                        'userWork' => $usersWorkCoordinates,
                         'tripSummary2' => $tripSummary2,
                         'timeGained' => $timeGained,
                     ];
@@ -211,6 +221,7 @@ class ProfileController extends AbstractController
         usort($regUsersDatas, function ($first, $last) {
             return $last['timeGained'] <=> $first['timeGained'];
         });
+
         return $regUsersDatas;
     }
 }
