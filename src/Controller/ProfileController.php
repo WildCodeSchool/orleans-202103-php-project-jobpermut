@@ -36,10 +36,7 @@ class ProfileController extends AbstractController
         if ($user !== null) {
             $homeCityCoordinate = $geocode->getCoordinates($regUser->getCity());
             $workCityCoordinate = $geocode->getCoordinates($regUser->getCityJob());
-
-
         };
-
         $userData = [
             'homeCity' => $homeCityCoordinate,
             'workCity' => $workCityCoordinate

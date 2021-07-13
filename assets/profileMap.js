@@ -53,8 +53,6 @@ function initMap(
             L.polyline(data, { color: '#00636f' }).addTo(map);
             map.fitBounds(data);
         });
-
-
 }
 
 window.onload = function () {
