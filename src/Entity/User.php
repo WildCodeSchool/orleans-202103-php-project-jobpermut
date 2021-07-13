@@ -2,19 +2,24 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-use Symfony\Component\Security\Core\User\UserInterface;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="Cet email est déjà utilisé. Veuillez en essayer un autre.")
  * @UniqueEntity(fields={"username"}, message="Ce pseudonyme est déjà utilisé. Veuillez en essayer un autre.")
+ * @Vich\Uploadable
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class User implements UserInterface
 {
@@ -78,6 +83,41 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity=UserLike::class, mappedBy="userLiked")
      */
     private Collection $userLikedBy;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private ?string $avatar = null;
+
+    /**
+     * @Vich\UploadableField(mapping="avatar", fileNameProperty="avatar")
+     * @Assert\File(
+     *  maxSize="2M",
+     *  mimeTypes={
+     *      "image/jpeg",
+     *      "image/jpg",
+     *      "image/png",
+     *      "image/webp"
+     *  }
+     * )
+     * @var File|null
+     */
+    private $avatarFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private ?DateTimeInterface $updatedAt;
+
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'email' => $this->email,
+            'password' => $this->password
+        ];
+    }
 
     public function __construct()
     {
@@ -318,5 +358,43 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getAvatarFile(): ?File
+    {
+        return $this->avatarFile;
+    }
+
+    public function setAvatarFile(?File $avatarFile = null): void
+    {
+        $this->avatarFile = $avatarFile;
+
+        if (null !== $avatarFile) {
+            $this->updatedAt = new DateTimeImmutable();
+        }
     }
 }
