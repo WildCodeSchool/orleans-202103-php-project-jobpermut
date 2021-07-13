@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Rome;
 use App\Entity\User;
 use App\Service\Geocode;
@@ -28,10 +29,26 @@ class ProfileController extends AbstractController
      * @ParamConverter("user", class="App\Entity\User"),
      * options={"mapping": {"username": "username"}})
      */
-    public function show(User $user): Response
+    public function show(User $user, Geocode $geocode, Direction $direction): Response
     {
+        $homeCityCoordinate = [];
+        $workCityCoordinate = [];
+
+        /** @var RegisteredUser */
+        $regUser = $user->getRegisteredUser();
+
+        if ($user !== null) {
+            $homeCityCoordinate = $geocode->getCoordinates($regUser->getCity());
+            $workCityCoordinate = $geocode->getCoordinates($regUser->getCityJob());
+        };
+        $userData = [
+            'homeCity' => $homeCityCoordinate,
+            'workCity' => $workCityCoordinate
+        ];
+
         return $this->render('profile/show.html.twig', [
             'user' => $user,
+            'userData' => $userData,
         ]);
     }
 

@@ -1,3 +1,5 @@
+const bootstrap = require('bootstrap');
+
 const hearts = document.getElementsByClassName('heart');
 
 hearts.forEach((heart) => {
@@ -22,6 +24,13 @@ hearts.forEach((heart) => {
                     userLikeIcon.classList.add('text-white');
                     userLikeIcon.classList.remove('fas');
                     userLikeIcon.classList.remove('text-danger');
+                }
+
+                if (userLike.match === true) {
+                    const matchModal = new bootstrap.Modal(
+                        document.getElementById('matchModal'),
+                    );
+                    matchModal.show();
                 }
             });
     });

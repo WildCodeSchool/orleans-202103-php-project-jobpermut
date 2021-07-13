@@ -9,6 +9,7 @@ use App\Repository\SubscriptionRepository;
 use DateTimeImmutable;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
@@ -35,6 +36,16 @@ class Subscription
 
     /**
      * @Vich\UploadableField(mapping="curriculum", fileNameProperty="curriculum")
+     * @Assert\File(
+     *  maxSize="2M",
+     *  mimeTypes={
+     *      "image/jpeg",
+     *      "application/pdf",
+     *      "application/x-pdf",
+     *      "application/msword",
+     *      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+     *  }
+     * )
      * @var File|null
      */
     private $curriculumFile;
@@ -46,6 +57,16 @@ class Subscription
 
     /**
      * @Vich\UploadableField(mapping="job_description", fileNameProperty="jobDescription")
+     * @Assert\File(
+     *  maxSize="2M",
+     *  mimeTypes={
+     *      "image/jpeg",
+     *      "application/pdf",
+     *      "application/x-pdf",
+     *      "application/msword",
+     *      "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+     *  }
+     * )
      * @var File|null
      */
     private $jobDescriptionFile;

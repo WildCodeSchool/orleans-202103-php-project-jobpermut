@@ -20,19 +20,15 @@ class PermutSearchController extends AbstractController
     public function index(RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode): Response
     {
         $regUsersDatas = [];
-        $rome = new Rome();
         $tripSummary1 = [];
-        $tripSummary2 = [];
         $homeCityCoordinate = [];
         $workCityCoordinate = [];
-
+        $rome = new Rome();
+        $user = new User();
 
         /** @var User */
         $user = $this->getUser();
-
-        if ($user !== null) {
-            $user = $user->getRegisteredUser();
-        };
+        $user = $user->getRegisteredUser();
 
         if ($user !== null) {
             /** @var RegisteredUser */
@@ -47,31 +43,70 @@ class PermutSearchController extends AbstractController
             'workCity' => $workCityCoordinate,
             'tripSummary1' => $tripSummary1,
         ];
-
         $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
 
+        $regUsersDatas = $this->regUsersDatas(
+            $tripSummary1,
+            $workCityCoordinate,
+            $homeCityCoordinate,
+            $usersByRome,
+            $geocode,
+            $direction
+        );
+
+        usort($regUsersDatas, function ($first, $last) {
+            return $last['timeGained'] <=> $first['timeGained'];
+        });
+
+
+
+        return $this->render('permutsearch/index.html.twig', [
+            'userData' => $userData,
+            'regUsersData' => $regUsersDatas
+        ]);
+    }
+
+
+
+    private function regUsersDatas(
+        ?array $tripSummary1,
+        ?array $workCityCoordinate,
+        ?array $homeCityCoordinate,
+        array $usersByRome,
+        Geocode $geocode,
+        Direction $direction
+    ): array {
+        /** @var User */
+        $user = $this->getUser();
+        $regUsersDatas = [];
         foreach ($usersByRome as $regUser) {
             if ($regUser !== $user) {
                 $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
                 $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
                 $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
+                $tripSummary3 = $direction->tripSummary($userHomeCoordinates, $userWorkCoordinates);
+                $tripSummary4 = $direction->tripSummary($userHomeCoordinates, $workCityCoordinate);
 
                 $duration1 = 0;
                 $duration2 = 0;
+                $duration3 = 0;
+                $duration4 = 0;
 
-                if ($tripSummary1) {
+                if ($tripSummary1 && $tripSummary2 && $tripSummary3 && $tripSummary4) {
                     $duration1 = (intval($tripSummary1['duration']['hours']) * 60) +
                         (intval($tripSummary1['duration']['minutes']));
-                }
-
-                if ($tripSummary2) {
                     $duration2 = (intval($tripSummary2['duration']['hours']) * 60) +
                         (intval($tripSummary2['duration']['minutes']));
+                    $duration3 = (intval($tripSummary3['duration']['hours']) * 60) +
+                        (intval($tripSummary3['duration']['minutes']));
+                    $duration4 = (intval($tripSummary4['duration']['hours']) * 60) +
+                        (intval($tripSummary4['duration']['minutes']));
                 }
 
                 $timeGained = $duration1 - $duration2;
+                $otherTimeGained = $duration3 - $duration4;
 
-                if ($timeGained >= 0) {
+                if ($timeGained > 0 && $otherTimeGained > 0) {
                     $regUsersDatas[$regUser->getId()] = [
                         'registeredUser' => $regUser,
                         'userHome' => $userHomeCoordinates,
@@ -83,13 +118,6 @@ class PermutSearchController extends AbstractController
             }
         };
 
-        usort($regUsersDatas, function ($first, $last) {
-            return $last['timeGained'] <=> $first['timeGained'];
-        });
-
-        return $this->render('permutsearch/index.html.twig', [
-            'userData' => $userData,
-            'regUsersData' => $regUsersDatas
-        ]);
+        return $regUsersDatas;
     }
 }

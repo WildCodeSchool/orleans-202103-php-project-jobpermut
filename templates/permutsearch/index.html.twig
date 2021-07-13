@@ -22,7 +22,12 @@
             <h1 class="h1 text-center text-dark">Permut Search</h1>
             <h2 class="h2 text-center text-dark">Retrouvez vos différentes permutations potentielles</h2>
         </header>
-        <input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
+        {% if app.user.registeredUser %}
+            <input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
+        {% else %}
+            {% set profile = false %}
+            <div class="alert alert-danger">Votre profil n'est pas complet.</div>
+        {% endif %}
         <div>
             {% for reguser in regUsersData %}
                 {% if reguser.registeredUser.user.isVisible == true %}
@@ -108,7 +113,28 @@
                         </div>
                     </div>
                 {% endif %}
+            {% else %}
+                {% if profile is not defined %}
+                    <div class="alert alert-warning">Aucun utilisateur ne match avec votre profil</div>
+                {% endif %}
             {% endfor %}
         </div>
     </main>
+
+    <div class="modal fade" id="matchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Vous avez match !</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Vous avez match avec un autre utilisateur, l'équipe Jobpermut prendra contact avec vous pour la suite des démarches !
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cool !</button>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

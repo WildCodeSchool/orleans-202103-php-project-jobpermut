@@ -30,7 +30,6 @@ class CompanyFixtures extends Fixture implements DependentFixtureInterface
             $company->setAddress($this->faker->address());
             $company->setCode('C0000' . $code);
             $company->addSubscription($this->getReference('subscription_' . $i));
-            $company->addUser($this->getReference('user_' . $i));
 
             $manager->persist($company);
         }
