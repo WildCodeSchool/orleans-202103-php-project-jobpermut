@@ -11,6 +11,11 @@
     {{ user.username }}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('profileMap') }}
+{% endblock %}
+
 {% block body %}
     <main class="p-lg-5 p-3">
         <div class="profile bg-dark p-lg-5 p-4">
@@ -101,6 +106,8 @@
                     <a href="{{ path('subscription_new') }}" class="btn btn-warning">Devenir Premium</a>
                 {% endif %}
             </div>
+            <input type="hidden" id="userData" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
+            <div id="map"></div>
         </div>
     </main>
 {% endblock %}

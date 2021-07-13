@@ -1,5 +1,6 @@
 @import 'variables';
 @import 'app';
+@import '~leaflet/dist/leaflet.css';
 
 .profile {
     $font-weight-light: 300;
@@ -52,6 +53,24 @@
                 font-size: 1em;
             }
         }
+    }
+
+    #map {
+        height: 373px;
+        border-radius: 30px;
+    }
+
+    .fas {
+        font-size: 20px;
+    }
+
+    .fa-home {
+        color: $warning;
+
+    }
+
+    .fa-briefcase {
+        color: $primary;
     }
 }
 
