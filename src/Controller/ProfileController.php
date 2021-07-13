@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\RegisteredUser;
+use App\Entity\Rome;
 use App\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\Request;
+use App\Service\Geocode;
+use App\Service\Direction;
+use App\Entity\RegisteredUser;
 use App\Form\RegisteredUserType;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Common\Collections\Collection;
+use App\Repository\RegisteredUserRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 /**
  * @Route("/profil", name="profile_")
@@ -68,13 +73,144 @@ class ProfileController extends AbstractController
         ]);
     }
 
-     /**
-     * @Route("/{username}/liked", name="showLike")
+    /**
+     * @Route("/{username}/like", name="showLike")
      */
-    public function showLike(): Response
+    public function showLike(RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode): Response
     {
-        return $this->render('profile/showLike.html.twig', [
+        $regUsersDatas = [];
+        $regUsersDatas2 = [];
+        $rome = new Rome();
+        $user = new User();
+        $tripSummary1 = [];
+        $tripSummary2 = [];
+        $homeCityCoordinate = [];
+        $workCityCoordinate = [];
 
+
+        /** @var User */
+        $user = $this->getUser();
+
+        if ($user !== null) {
+            $regUser = $user->getRegisteredUser();
+        };
+
+        if ($regUser !== null) {
+            /** @var RegisteredUser */
+            $rome = $regUser;
+            $homeCityCoordinate = $geocode->getCoordinates($regUser->getCity());
+            $workCityCoordinate = $geocode->getCoordinates($regUser->getCityJob());
+            $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
+        };
+
+        $userData = [
+            'homeCity' => $homeCityCoordinate,
+            'workCity' => $workCityCoordinate,
+            'tripSummary1' => $tripSummary1,
+        ];
+
+        if ($user !== null) {
+            $userLikes = $user->getUserLikes();
+        }
+
+
+        if ($user !== null) {
+            $userLiked = $user->getUserLikedBy();
+        };
+
+        $regUsersDatas = $this->getLikedUsers($userLikes, $regUserRepo, $direction, $geocode, $homeCityCoordinate, $tripSummary1, $tripSummary2);
+
+        foreach ($userLiked as $regUser) {
+            /** @var User */
+            $likedUser = $regUser->getUserLiker();
+            /** @var RegisteredUser */
+            $regUser = $likedUser->getRegisteredUser();
+            if ($regUser !== $user) {
+                $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
+                $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
+                $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
+
+                $duration1 = 0;
+                $duration2 = 0;
+
+                if ($tripSummary1) {
+                    $duration1 = (intval($tripSummary1['duration']['hours']) * 60) +
+                        (intval($tripSummary1['duration']['minutes']));
+                }
+
+                if ($tripSummary2) {
+                    $duration2 = (intval($tripSummary2['duration']['hours']) * 60) +
+                        (intval($tripSummary2['duration']['minutes']));
+                }
+
+                $timeGained = $duration1 - $duration2;
+
+                if ($timeGained >= 0) {
+                    $regUsersDatas2[$regUser->getId()] = [
+                        'registeredUser' => $regUser,
+                        'userHome' => $userHomeCoordinates,
+                        'userWork' => $userWorkCoordinates,
+                        'tripSummary2' => $tripSummary2,
+                        'timeGained' => $timeGained,
+                    ];
+                }
+            }
+        };
+
+        usort($regUsersDatas2, function ($first, $last) {
+            return $last['timeGained'] <=> $first['timeGained'];
+        });
+
+        return $this->render('profile/showLike.html.twig', [
+            'userData' => $userData,
+            'regUsersData' => $regUsersDatas,
+            'regUsersData2' => $regUsersDatas2
         ]);
+    }
+    public function getLikedUsers(Collection $userLikes, RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode, $homeCityCoordinate, $tripSummary1, $tripSummary2)
+    {
+        $user = $this->getUser();
+        foreach ($userLikes as $regUser) {
+            /** @var User */
+            $likedUser = $regUser->getUserLiked();
+            /** @var RegisteredUser */
+            $regUser = $likedUser->getRegisteredUser();
+            if ($regUser !== $user) {
+                $userHomeCoordinates = $geocode->getCoordinates($regUser->getCity());
+
+                $userWorkCoordinates = $geocode->getCoordinates($regUser->getCityJob());
+                $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
+
+                $duration1 = 0;
+                $duration2 = 0;
+
+                if ($tripSummary1) {
+                    $duration1 = (intval($tripSummary1['duration']['hours']) * 60) +
+                        (intval($tripSummary1['duration']['minutes']));
+                }
+
+                if ($tripSummary2) {
+                    $duration2 = (intval($tripSummary2['duration']['hours']) * 60) +
+                        (intval($tripSummary2['duration']['minutes']));
+                }
+
+                $timeGained = $duration1 - $duration2;
+
+                if ($timeGained >= 0) {
+                    $regUsersDatas[$regUser->getId()] = [
+                        'registeredUser' => $regUser,
+                        'userHome' => $userHomeCoordinates,
+                        'userWork' => $userWorkCoordinates,
+                        'tripSummary2' => $tripSummary2,
+                        'timeGained' => $timeGained,
+                    ];
+                }
+            }
+        };
+
+        usort($regUsersDatas, function ($first, $last) {
+            return $last['timeGained'] <=> $first['timeGained'];
+        });
+        return $regUsersDatas;
     }
 }

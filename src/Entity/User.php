@@ -90,6 +90,15 @@ class User implements UserInterface
         $this->userLikes = new ArrayCollection();
         $this->userLikedBy = new ArrayCollection();
     }
+    public function __serialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'email' => $this->email,
+            'password' => $this->password,
+            'username' => $this->username,
+        ];
+    }
 
     public function getId(): ?int
     {
