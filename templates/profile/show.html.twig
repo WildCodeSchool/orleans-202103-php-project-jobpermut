@@ -40,7 +40,9 @@
                         </h2>
                     </div>
                 </div>
-                <i class="far fa-heart"></i>
+                {% if app.user is not empty and app.user.id != user.id %}
+                    <i class="far fa-heart"></i>
+                {% endif %}
             </div>
             <div class="profile-body mt-5">
                 <div class="mb-5">
