@@ -9,9 +9,13 @@
                     <div class="mb-0 d-flex flex-column justify-content-start align-items-start text-decoration-none">
                         <h2 class="mb-4 title">Liens</h2>
                         <a class="mb-2" href="{{ path('home') }}">Accueil</a>
-                        <a class="mb-2" href="#">A propos</a>
-                        <a class="mb-2" href="#">Connexion</a>
-                        <a class="mb-2" href="#">Inscription</a>
+                        <a class="mb-2" href="{{ path('home', {'_fragment': 'presentation'}) }}">A propos</a>
+                        {% if app.user is empty %}
+                            <a class="mb-2" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
+                                Connexion
+                            </a>
+                            <a class="mb-2" href="{{ path('app_register') }}">Inscription</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
