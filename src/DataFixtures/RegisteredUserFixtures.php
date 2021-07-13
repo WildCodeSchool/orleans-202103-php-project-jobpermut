@@ -19,130 +19,132 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
         'n0' => [
             'streetNumber' => '4',
             'street' => 'Avenue Pasteur',
-            'city' => 'Vélizy-Villacoublay',
-            'zipCode' => '93100'
+            'city' => 'Saran',
+            'zipCode' => '	45770'
         ],
         'n1' => [
             'streetNumber' => '10',
             'street' => 'Avenue Pasteur',
-            'city' => 'Créteil',
-            'zipCode' => '93100'
+            'city' => 'Olivet',
+            'zipCode' => '45160'
         ],
         'n2' => [
             'streetNumber' => '1',
             'street' => 'Avenue Pasteur',
-            'city' => 'Arcueil',
-            'zipCode' => '93100'
+            'city' => 'Chécy',
+            'zipCode' => '45430'
         ],
         'n3' => [
             'streetNumber' => '9',
             'street' => 'Avenue Pasteur',
-            'city' => 'Châtillon',
-            'zipCode' => '93100'
+            'city' => 'Saint Pryvé Saint Mesmin',
+            'zipCode' => '45750'
         ],
         'n4' => [
             'streetNumber' => '11',
             'street' => 'Avenue Pasteur',
-            'city' => 'Montrouge',
-            'zipCode' => '93100'
+            'city' => 'Ingré',
+            'zipCode' => '45140'
         ],
         'n5' => [
             'streetNumber' => '2',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Sèvres',
-            'zipCode' => '92500'
+            'city' => 'Saint Cyr en Val',
+            'zipCode' => '45590'
         ],
         'n6' => [
             'streetNumber' => '6',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Gagny',
-            'zipCode' => '92500'
+            'city' => 'Orléans',
+            'zipCode' => '45000'
         ],
         'n7' => [
             'streetNumber' => '8',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Bagnolet',
-            'zipCode' => '92500'
+            'city' => 'Paris',
+            'zipCode' => '75000'
         ],
         'n8' => [
             'streetNumber' => '10',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Drancy',
-            'zipCode' => '92500'
+            'city' => 'Mareau-aux-près',
+            'zipCode' => '45370'
         ],
         'n9' => [
             'streetNumber' => '4',
             'street' => 'Avenue de Bois Preau',
-            'city' => 'Villejuif',
-            'zipCode' => '92500'
+            'city' => 'Saint Jean de Braye',
+            'zipCode' => '45800'
         ],
     ];
 
     private const USERS_JOB_ADRESS = [
         'n0' => [
-            'streetNumber' => '262',
-            'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Meudon',
-            'zipCode' => '92500'
+            'streetNumber' => '4',
+            'street' => 'Avenue Pasteur',
+            'city' => 'Olivet',
+            'zipCode' => '45160'
         ],
         'n1' => [
-            'streetNumber' => '262',
-            'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Bobigny',
-            'zipCode' => '92500'
+            'streetNumber' => '10',
+            'street' => 'Avenue Pasteur',
+            'city' => 'Saran',
+            'zipCode' => '	45770'
         ],
         'n2' => [
-            'streetNumber' => '262',
-            'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Les Lilas',
-            'zipCode' => '92500'
+            'streetNumber' => '1',
+            'street' => 'Avenue Pasteur',
+            'city' => 'Saint Pryvé Saint Mesmin',
+            'zipCode' => '45750'
         ],
         'n3' => [
-            'streetNumber' => '262',
-            'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Montreuil',
-            'zipCode' => '92500'
+            'streetNumber' => '9',
+            'street' => 'Avenue Pasteur',
+            'city' => 'Chécy',
+            'zipCode' => '45430'
         ],
         'n4' => [
-            'streetNumber' => '262',
-            'street' => 'Avenue Napoléon Bonaparte',
-            'city' => 'Nanterre',
-            'zipCode' => '92500'
+            'streetNumber' => '11',
+            'street' => 'Avenue Pasteur',
+            'city' => 'Saint Cyr en Val',
+            'zipCode' => '45590'
         ],
         'n5' => [
-            'streetNumber' => '110',
-            'street' => 'Boulevard de la Boissière',
-            'city' => 'Colombes',
-            'zipCode' => '93100'
+            'streetNumber' => '2',
+            'street' => 'Avenue de Bois Preau',
+            'city' => 'Ingré',
+            'zipCode' => '45140'
+
         ],
         'n6' => [
-            'streetNumber' => '110',
-            'street' => 'Boulevard de la Boissière',
-            'city' => 'Vitry-sur-seine',
-            'zipCode' => '93100'
+            'streetNumber' => '6',
+            'street' => 'Avenue de Bois Preau',
+            'city' => 'Paris',
+            'zipCode' => '75000'
+
         ],
         'n7' => [
-            'streetNumber' => '110',
-            'street' => 'Boulevard de la Boissière',
-            'city' => 'Maisons-Alfort',
-            'zipCode' => '93100'
+            'streetNumber' => '8',
+            'street' => 'Avenue de Bois Preau',
+            'city' => 'Orléans',
+            'zipCode' => '45000'
         ],
         'n8' => [
-            'streetNumber' => '110',
-            'street' => 'Boulevard de la Boissière',
-            'city' => 'Vincennes',
-            'zipCode' => '93100'
+            'streetNumber' => '10',
+            'street' => 'Avenue de Bois Preau',
+            'city' => 'Saint Jean de Braye',
+            'zipCode' => '45800'
         ],
         'n9' => [
-            'streetNumber' => '110',
-            'street' => 'Boulevard de la Boissière',
-            'city' => 'Clamart',
-            'zipCode' => '93100'
+            'streetNumber' => '4',
+            'street' => 'Avenue de Bois Preau',
+            'city' => 'Mareau-aux-près',
+            'zipCode' => '45370'
         ],
     ];
 
 
-    public const MAX_REALISTIC_FIXTURES = 30;
+    public const MAX_REALISTIC_FIXTURES = 10;
 
 
     public function __construct()
@@ -157,14 +159,14 @@ class RegisteredUserFixtures extends Fixture implements DependentFixtureInterfac
             $registeredUser->setFirstname($this->faker->firstName());
             $registeredUser->setLastname($this->faker->lastName());
             $registeredUser->setPhone($this->faker->phoneNumber());
-            $registeredUser->setStreetNumber(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['streetNumber']);
-            $registeredUser->setStreet(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['street']);
-            $registeredUser->setZipcode(self::USERS_POSTAL_ADRESS['n' . rand(0, 9)]['zipCode']);
-            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . rand(0, 3)]['city']);
-            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . rand(3, 9)]['streetNumber']);
-            $registeredUser->setJobStreet(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['street']);
-            $registeredUser->setJobZipcode(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['zipCode']);
-            $registeredUser->setCityJob(self::USERS_JOB_ADRESS['n' . rand(0, 9)]['city']);
+            $registeredUser->setStreetNumber(self::USERS_POSTAL_ADRESS['n' . $i]['streetNumber']);
+            $registeredUser->setStreet(self::USERS_POSTAL_ADRESS['n' . $i]['street']);
+            $registeredUser->setZipcode(self::USERS_POSTAL_ADRESS['n' . $i]['zipCode']);
+            $registeredUser->setCity(self::USERS_POSTAL_ADRESS['n' . $i]['city']);
+            $registeredUser->setJobStreetNumber(self::USERS_JOB_ADRESS['n' . $i]['streetNumber']);
+            $registeredUser->setJobStreet(self::USERS_JOB_ADRESS['n' . $i]['street']);
+            $registeredUser->setJobZipcode(self::USERS_JOB_ADRESS['n' . $i]['zipCode']);
+            $registeredUser->setCityJob(self::USERS_JOB_ADRESS['n' . $i]['city']);
             $registeredUser->setRome($this->getReference(self::ROME[rand(0, 1)]));
             $registeredUser->setUser($this->getReference('user_' . $i));
             $registeredUser->setSubscription($this->getReference('subscription_' . $i));

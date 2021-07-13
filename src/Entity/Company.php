@@ -116,6 +116,7 @@ class Company
                 $subscription->setCompany(null);
             }
         }
+
         return $this;
     }
 }
