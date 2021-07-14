@@ -67,6 +67,7 @@ class HomeController extends AbstractController
 
         $testimonies = $testimonyRepository->findAll();
         shuffle($testimonies);
+
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
             'testimonies' => $testimonies,
