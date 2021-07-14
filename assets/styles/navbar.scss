@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 .navbar {
     $height: 90px;
@@ -69,15 +69,25 @@
         font-family: $font-p;
     }
 
-    .dropdown {
-        ul {
-            border: none;
+    ul {
+        border: none;
+        width: 120%;
 
-            a {
-                font-size: 16px;
-                font-weight: 300;
-                font-family: $font-p;
-            }
+        @media screen and (max-width: 768px) {
+            width: 100%;
         }
+
+        a {
+            font-size: 16px;
+            font-weight: 300;
+        }
+    }
+
+    .disabled {
+        cursor: not-allowed;
+    }
+
+    .dropdown-menu[data-bs-popper] {
+        left: -30px;
     }
 }
