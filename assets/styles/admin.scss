@@ -39,7 +39,9 @@ body {
                 background-color: $primary;
                 border-radius: 30px;
                 margin-top: $spacing;
-                height: 35vh;
+                .card-body {
+                    height: 35vh;
+                }
 
                 .logoAdmin {
                     font-size: 10vh;
