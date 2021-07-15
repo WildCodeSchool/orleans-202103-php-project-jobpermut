@@ -13,7 +13,7 @@
 						{% if app.user %}
 							<a class="mb-2" href="{{ path('permutsearch') }}">Permut Search</a>
 							<a class="mb-2" href="{{ path('profile_edit', {username: app.user.username}) }}">Mon profil</a>
-							{% if app.user.registeredUser.subscription %}
+							{% if app.user and app.user.registeredUser and app.user.registeredUser.subscription %}
 								<a class="mb-2" href="{{ path('profile_showLike', {username: app.user.username}) }}">Mes likes</a>
 								<a class="mb-2" href="{{ path('match') }}">Mes matchs</a>
 							{% endif %}
