@@ -79,11 +79,17 @@
                             </li>
                         </ul>
                     </div>
-                {% else %}
-                    {{ render(controller('App\\Controller\\SecurityController::modalLogin')) }}
+                    {% else %}
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" href="#">
+                        <i class="fas fa-user"></i>
+                        Connexion
+                    </a>
                 {% endif %}
             </div>
         </div>
     </div>
 </nav>
 {{ app.session.set('last_route', {route: app.request.attributes.get('_route'), params: app.request.attributes.get('_route_params')}) }}
+{% if not app.user %}
+	{{ render(controller('App\\Controller\\SecurityController::modalLogin')) }}
+{% endif %}
