@@ -1,20 +1,20 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	{{ encore_entry_link_tags('profile') }}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
 {% endblock %}
 
 {% block title %}
-	{{ parent() }}
-	-
-	{{ user.username }}
+    {{ parent() }}
+    -
+    {{ user.username }}
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('profileMap') }}
-	{{ encore_entry_script_tags('like') }}
+    {{ parent() }}
+    {{ encore_entry_script_tags('profileMap') }}
+    {{ encore_entry_script_tags('like') }}
 {% endblock %}
 
 {% block body %}
@@ -111,8 +111,10 @@
 					<a href="{{ path('subscription_new') }}" class="btn btn-warning">Devenir Premium</a>
 				{% endif %}
 			</div>
-			<input type="hidden" id="userData" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
-			<div id="map"></div>
+            {% if userData %}
+                <input type="hidden" id="userData" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
+                <div id="map"></div>
+            {% endif %}
 		</div>
 	</main>
 {% endblock %}
