@@ -110,18 +110,14 @@ header {
             background-color: $dark;
             border-radius: 30px;
             $font-weight: 300;
-            $img-width: 75px;
-            $p-font-size: 22px;
+            $img-width: 50px;
+            $p-font-size: 16px;
 
             p {
                 color: $white;
                 font-family: $font-p;
                 font-weight: $font-weight;
                 font-size: $p-font-size;
-
-                @media screen and (max-width: 768px) {
-                    font-size: $p-font-size/1.5;
-                }
             }
 
             .testimony-header {
@@ -131,20 +127,18 @@ header {
                     object-fit: cover;
                     width: $img-width;
                     height: $img-width;
-                    @media screen and (max-width: 768px) {
-                        width: $img-width/1.5;
-                        height: $img-width/1.5;
-                    }
                 }
 
                 .testimony-titles {
                     h4 {
                         font-family: $title-font;
+                        font-size: 20px;
                     }
 
                     h5 {
                         font-family: $font-p;
                         font-weight: $font-weight;
+                        font-size: 16px;
                     }
                 }
             }
@@ -157,7 +151,7 @@ header {
     background-color: $dark;
     color: $secondary;
     $font-weight: 300;
-    $font-size: 30px;
+    $font-size: 24px;
 
     .page-subtitle {
         margin-bottom: $margin-bot;
@@ -188,6 +182,7 @@ header {
         .list-subtitle {
             font-family: $font-p;
             font-weight: $font-weight;
+            font-size: 23px;
 
             @media screen and (max-width: 768px) {
                 font-size: 15px;
@@ -195,7 +190,7 @@ header {
         }
 
         .number {
-            $size: 60px;
+            $size: 45px;
             $inline-spacing: 0;
             $placement: center;
 
@@ -206,7 +201,7 @@ header {
             border: 2px solid $warning;
             color: $dark;
             font-weight: bold;
-            font-size: 35px;
+            font-size: 28px;
             margin: 1em;
             padding: $inline-spacing;
             display: flex;
@@ -231,7 +226,7 @@ header {
         }
 
         .check {
-            $size: 60px;
+            $size: 45px;
             $inline-spacing: 0;
             $placement: center;
 
@@ -242,7 +237,7 @@ header {
             border: 2px solid $warning;
             color: $warning;
             font-weight: bold;
-            font-size: 35px;
+            font-size: 28px;
             margin: 1em;
             padding: $inline-spacing;
             display: flex;
