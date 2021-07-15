@@ -39,10 +39,8 @@
 								<div class="title-card">
 									<div class="d-flex flex-row">
 										<h3 class="h2 mb-1 text-warning">{{ reguser.registeredUser.user.username }}</h3>
-										{% if app.user.registeredUser.subscription %}
-											<a href="{{ path('like', {user: reguser.registeredUser.id}) }}" class="heart">
-												<i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-sm"></i>
-											</a>
+										{% if reguser.registeredUser.subscription is defined and reguser.registeredUser.subscription is not null %}
+											<i class="fas fa-crown ms-2"></i>
 										{% endif %}
 									</div>
 									<h4 class="h3 text-truncate mb-2">
