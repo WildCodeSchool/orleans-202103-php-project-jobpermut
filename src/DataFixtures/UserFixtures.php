@@ -8,6 +8,7 @@ use Faker\Generator;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class UserFixtures extends Fixture
 {
@@ -30,11 +31,13 @@ class UserFixtures extends Fixture
 
     private UserPasswordEncoderInterface $passwordEncoder;
     private Generator $faker;
+    private HttpClientInterface $client;
 
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, HttpClientInterface $client)
     {
         $this->passwordEncoder = $passwordEncoder;
         $this->faker = Factory::create('fr_FR');
+        $this->client = $client;
     }
 
     public function load(ObjectManager $manager)
@@ -43,11 +46,22 @@ class UserFixtures extends Fixture
 
         //for ROLE_USER
         for ($i = 0; $i < self::MAX_FIXTURES; $i++) {
+            $response = $this->client->request(
+                'GET',
+                'https://randomuser.me/api/',
+                [
+                    'query' => [
+                        'nat' => 'fr'
+                    ]
+                ]
+            );
+            $fakeUser = $response->toArray();
             $user = new User();
             $user->setEmail($this->faker->unique()->email());
             $user->setUsername($this->faker->unique()->firstName() . $this->faker->randomNumber(2));
             $user->setRoles(self::USERS_PASSWORDS['user']['role']);
             $user->setCreatedAt($this->faker->dateTimeBetween('-2 week', 'now'));
+            $user->setAvatar($fakeUser['results'][0]['picture']['large']);
             $user->setIsVisible(true);
             $user->setPassword(
                 $this->passwordEncoder->encodePassword(
