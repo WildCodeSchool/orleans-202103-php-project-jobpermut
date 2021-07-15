@@ -70,6 +70,6 @@ password: admin123456789
 
 * [Mael Chariault](https://github.com/bouboumael)
 * [Zurabi Grialat](https://github.com/jaldabaoth-code)
-* [Lochlainn Gadaut](https://github.com/glochlainn)
+* [Lochlainn Gadault](https://github.com/glochlainn)
 * [Raphaël Billet Servoin](https://github.com/RaphaelBS-WCS)
 * [Tennessee Houry](https://github.com/RedPandore)

@@ -1,27 +1,27 @@
 {% extends 'layout.html.twig' %}
 
 {% block stylesheets %}
-	{{ parent() }}
-	{{ encore_entry_link_tags('permutsearch') }}
+    {{ parent() }}
+    {{ encore_entry_link_tags('permutsearch') }}
 {% endblock %}
 
 {% block title %}
-	{{ parent() }}
-	- Permut Search
+    {{ parent() }}
+    - Permut Search
 {% endblock %}
 
 {% block javascripts %}
-	{{ parent() }}
-	{{ encore_entry_script_tags('permutMap') }}
-	{{ encore_entry_script_tags('like') }}
+    {{ parent() }}
+    {{ encore_entry_script_tags('permutMap') }}
+    {{ encore_entry_script_tags('like') }}
 {% endblock %}
 
 {% block body %}
-	<main class="container py-5 permutsearch">
-		<header class="mb-5">
-			<h1 class="h1 text-center text-dark">Vos Permut Likes</h1>
-			<h2 class="h2 text-center text-dark">Retrouvez les personnes que vous avez/vous ont like</h2>
-		</header>
+    <main class="container py-5 permutsearch">
+        <header class="mb-5">
+            <h1 class="h1 text-center text-dark">Vos Permut Likes</h1>
+            <h2 class="h2 text-center text-dark">Retrouvez les personnes que vous avez/vous ont like</h2>
+        </header>
 
 		{% if app.user.registeredUser.subscription %}
 			<input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
