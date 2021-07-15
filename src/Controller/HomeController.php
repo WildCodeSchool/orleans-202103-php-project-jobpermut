@@ -65,12 +65,8 @@ class HomeController extends AbstractController
             ]);
         }
 
-        $testimonies = array();
-        $keys = array_keys($testimonyRepository->findAll());
-        shuffle($keys);
-        foreach ($keys as $key) {
-            $testimonies[] = $testimonyRepository->findAll()[$key];
-        }
+        $testimonies = $testimonyRepository->findAll();
+        shuffle($testimonies);
 
         return $this->render('home/index.html.twig', [
             'form' => $form->createView(),
