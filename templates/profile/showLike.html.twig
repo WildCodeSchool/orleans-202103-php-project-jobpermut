@@ -34,7 +34,7 @@
 								<input type="hidden" id="reguser-data-{{ loop.index }}" value="{{ reguser.userHome.0 ~ '/' ~ reguser.userHome.1 ~ '/' ~ reguser.userWork.0 ~ '/' ~ reguser.userWork.1 }}">
 								<div class="permut-header mb-3 d-flex flex-row align-items-center justify-content-between">
 									<div class="d-flex flex-row align-items-center text-white">
-										<img class="rounded-circle me-4" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+										<img class="rounded-circle me-4" src="{{ reguser.registeredUser.user.avatar ? vich_uploader_asset(reguser.registeredUser.user, 'avatarFile') : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }} " alt="avatar-user">
 										<div class="title-card">
 											<div class="d-flex flex-row">
 												<h3 class="h2 mb-1 text-warning">{{ reguser.registeredUser.user.username }}</h3>
@@ -126,7 +126,7 @@
 								<input type="hidden" id="reguser-data-{{ loop.index }}" value="{{ reguser.userHome.0 ~ '/' ~ reguser.userHome.1 ~ '/' ~ reguser.userWork.0 ~ '/' ~ reguser.userWork.1 }}">
 								<div class="permut-header mb-3 d-flex flex-row align-items-center justify-content-between">
 									<div class="d-flex flex-row align-items-center text-white">
-										<img class="rounded-circle me-4" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+										<img class="rounded-circle me-4" src="{{ reguser.registeredUser.user.avatar ? vich_uploader_asset(reguser.registeredUser.user, 'avatarFile') : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }} " alt="avatar-user">
 										<div class="title-card">
 											<div class="d-flex flex-row">
 												<h3 class="h2 mb-1 text-warning">{{ reguser.registeredUser.user.username }}</h3>
