@@ -33,7 +33,7 @@
 									{{ user.registeredUser.lastname }}
 								{% endif %}
 							</h1>
-							{% if user.registeredUser.subscription is defined %}
+							{% if user.registeredUser.subscription is defined and user.registeredUser.subscription is not null %}
 								<i class="fas fa-crown ms-2 text-warning"></i>
 							{% endif %}
 						</div>
