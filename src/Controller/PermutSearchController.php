@@ -17,7 +17,7 @@ class PermutSearchController extends AbstractController
     /**
      * @Route("permutsearch", name="permutsearch")
      */
-    public function index(RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode): Response
+    public function index(): Response
     {
         return $this->render('permutsearch/index.html.twig');
     }
