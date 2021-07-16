@@ -147,7 +147,7 @@
 			{% for testimony in testimonies|slice(0, 3) %}
 				<div data-aos="fade-up" data-aos-delay="{{ loop.index }}00" class="col testimony-card p-5 mx-1">
 					<div class="testimony-header d-flex flex-direction-row align-items-center mb-4">
-						<img class="rounded-circle" src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png" alt="avatar-user">
+						<img class="rounded-circle" src="{{ testimony.user.avatar ? vich_uploader_asset(testimony.user, 'avatarFile')|src : 'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png' }}" alt="avatar-user">
 						<div class="ms-3 mb-1 testimony-titles">
 							<h4 class="m-0 text-warning">{{ testimony.user.username }}</h4>
 							<h5 class="m-0">{{ testimony.createdAt|date('d/m/Y') }}</h5>

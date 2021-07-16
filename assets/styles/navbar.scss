@@ -45,7 +45,7 @@
         z-index: 1;
         font-size: 19px;
 
-        img {
+        .logo-navbar {
             transition: $duration ease-out;
         }
 
@@ -55,12 +55,16 @@
             filter: brightness($brightness);
             transition: $duration ease-out;
 
-            img {
+            .logo-navbar {
                 transition: $duration ease-out;
                 -webkit-transform: scaleX(-1);
                 transform: scaleX(-1);
             }
         }
+    }
+
+    .profile-avatar {
+        width: 26px;
     }
 
     #inputEmail,
