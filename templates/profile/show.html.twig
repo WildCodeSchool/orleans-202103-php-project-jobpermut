@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block body %}
-    <main class="container">
+    <main class="container p-md-5 p-1">
         <div class="profile bg-dark p-lg-5 p-4">
             <div class="profile-header d-flex justify-content-between">
                 <div class="d-flex flex-direction-row align-items-center">
@@ -54,55 +54,55 @@
             </div>
             <div class="profile-body mt-5">
                 <div class="mb-5">
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-briefcase me-4"></i>
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Ville de domicile">
+                        <i class="fas fa-briefcase me-3"></i>
                         <p class="ms-1 m-0 p-0">{{ user.registeredUser.city ?? "Non renseigné" }}</p>
                     </div>
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-home me-4"></i>
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Ville de travail">
+                        <i class="fas fa-home me-3"></i>
                         <p class="m-0 p-0">{{ user.registeredUser.cityJob ?? "Non renseigné" }}</p>
                     </div>
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-phone-alt me-4"></i>
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Numéro de téléphone">
+                        <i class="fas fa-phone-alt me-3"></i>
                         <p class="m-0 p-0">{{ user.registeredUser.phone ?? "Non renseigné" }}</p>
                     </div>
-                    <div class="d-flex flex-direction-column align-items-center mb-4">
-                        <i class="fas fa-at me-4"></i>
+                    <div class="d-flex flex-direction-column align-items-center mb-3" title="Email">
+                        <i class="fas fa-at me-3"></i>
                         <p class="m-0 p-0">{{ user.registeredUser.user.email ?? "Non renseigné" }}</p>
                     </div>
                 </div>
                 {% if user.registeredUser.subscription is defined and user.registeredUser.subscription is not null %}
                     <div class="mt-5 ms-1">
-                        <div class="d-flex flex-direction-column align-items-center mb-4">
-                            <i class="fas fa-wrench me-4"></i>
-                            <p class="m-0 p-0">{{ user.registeredUser.subscription.ogrName ?? "Non renseigné" }}</p>
+                        <div class="d-flex flex-direction-column align-items-center mb-3" title="Fonction">
+                            <i class="fas fa-wrench me-3"></i>
+                            <p class="m-0 p-0">{{ user.registeredUser.subscription.ogrName ?? "Fonction non renseignée" }}</p>
                         </div>
                         {% if user.registeredUser.subscription.curriculum is defined and user.registeredUser.subscription.curriculum is not null %}
-                            <div class="d-flex flex-direction-column align-items-center mb-4">
-                                <i class="fas fa-file me-4"></i>
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="CV">
+                                <i class="fas fa-file me-3"></i>
                                 <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'curriculumFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir le CV</a>
                             </div>
                         {% else %}
-                            <div class="d-flex flex-direction-column align-items-center mb-4">
-                                <i class="fas fa-file me-4"></i>
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="CV">
+                                <i class="fas fa-file me-3"></i>
                                 <p class="m-0 p-0 fst-italic text-decoration-underline">CV non transmis</p>
                             </div>
                         {% endif %}
                         {% if user.registeredUser.subscription.jobDescription is defined and user.registeredUser.subscription.jobDescription is not null %}
-                            <div class="d-flex flex-direction-column align-items-center mb-4">
-                                <i class="fas fa-file-alt me-4"></i>
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="Fiche de poste">
+                                <i class="fas fa-file-alt me-3"></i>
                                 <a href="{{ vich_uploader_asset(user.registeredUser.subscription, 'jobDescriptionFile') }}" class="m-0 p-0 fst-italic text-decoration-underline">Voir la fiche de poste</a>
                             </div>
                         {% else %}
-                            <div class="d-flex flex-direction-column align-items-center mb-4">
-                                <i class="fas fa-file-alt me-4"></i>
+                            <div class="d-flex flex-direction-column align-items-center mb-3" title="Fiche de poste">
+                                <i class="fas fa-file-alt me-3"></i>
                                 <p class="m-0 p-0 fst-italic text-decoration-underline">Fiche de poste non transmise</p>
                             </div>
                         {% endif %}
-                        <a class="btn btn-light mb-3" href="{{ path('subscription_edit', {subscription: user.registeredUser.subscription.id}) }}">Modifier mon compte premium</a>
+                        <a class="btn btn-light mb-5" href="{{ path('subscription_edit', {subscription: user.registeredUser.subscription.id}) }}">Modifier mon compte premium</a>
                     </div>
                 {% else %}
-                    <a href="{{ path('subscription_new') }}" class="btn btn-warning">
+                    <a href="{{ path('subscription_new') }}" class="btn btn-warning mb-4">
                         <i class="fas fa-crown me-2"></i>Devenir Premium</a>
                 {% endif %}
             </div>
