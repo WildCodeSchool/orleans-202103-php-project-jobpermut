@@ -26,7 +26,6 @@ final class Version20210715100746 extends AbstractMigration
         $this->addSql('ALTER TABLE match_by_like ADD CONSTRAINT FK_EDAA4661260FC79 FOREIGN KEY (user_liked_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user_like ADD CONSTRAINT FK_D6E20C7A7712F43A FOREIGN KEY (user_liker_id) REFERENCES user (id)');
         $this->addSql('ALTER TABLE user_like ADD CONSTRAINT FK_D6E20C7A260FC79 FOREIGN KEY (user_liked_id) REFERENCES user (id)');
-        $this->addSql('ALTER TABLE testimony DROP INDEX UNIQ_523C9487A76ED395, ADD INDEX IDX_523C9487A76ED395 (user_id)');
         $this->addSql('ALTER TABLE user DROP FOREIGN KEY FK_8D93D649979B1AD6');
         $this->addSql('DROP INDEX IDX_8D93D649979B1AD6 ON user');
         $this->addSql('ALTER TABLE user ADD avatar VARCHAR(255) DEFAULT NULL, ADD updated_at DATETIME DEFAULT NULL, DROP company_id, CHANGE is_visible is_visible TINYINT(1) NOT NULL');
@@ -37,7 +36,6 @@ final class Version20210715100746 extends AbstractMigration
         // this down() migration is auto-generated, please modify it to your needs
         $this->addSql('DROP TABLE match_by_like');
         $this->addSql('DROP TABLE user_like');
-        $this->addSql('ALTER TABLE testimony DROP INDEX IDX_523C9487A76ED395, ADD UNIQUE INDEX UNIQ_523C9487A76ED395 (user_id)');
         $this->addSql('ALTER TABLE user ADD company_id INT DEFAULT NULL, DROP avatar, DROP updated_at, CHANGE is_visible is_visible TINYINT(1) DEFAULT NULL');
         $this->addSql('ALTER TABLE user ADD CONSTRAINT FK_8D93D649979B1AD6 FOREIGN KEY (company_id) REFERENCES company (id) ON UPDATE NO ACTION ON DELETE NO ACTION');
         $this->addSql('CREATE INDEX IDX_8D93D649979B1AD6 ON user (company_id)');
