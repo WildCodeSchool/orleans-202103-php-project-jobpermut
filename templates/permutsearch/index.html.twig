@@ -21,13 +21,13 @@
         {% if userData is defined and regregUsersData is defined %}
             {% include "permutsearch/permut.html.twig" %}
         {% else %}
-		<div class="ajax">
-			<h1 class="text-center">Jobpermut recherche pour vous</h1>
-            <div class="text-center align-items-center">
-                <strong>Loading...</strong>
-                <div class="spinner-border ms-auto text-primary" role="status" aria-hidden="true"></div>
+            <div class="ajax">
+                <h1 class="text-center">Jobpermut recherche pour vous</h1>
+                <div class="text-center align-items-center">
+                    <strong>Loading...</strong>
+                    <div class="spinner-border ms-auto text-primary" role="status" aria-hidden="true"></div>
+                </div>
             </div>
-		</div>
         {% endif %}
     </main>
     <div class="modal fade" id="matchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
