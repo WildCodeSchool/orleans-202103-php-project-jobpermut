@@ -45,7 +45,10 @@
 
             i {
                 font-size: 20px;
-                background: -webkit-linear-gradient(rgb(255, 230, 149), $warning);
+                background: -webkit-linear-gradient(
+                    rgb(255, 230, 149),
+                    $warning
+                );
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
             }
@@ -67,6 +70,20 @@
                 font-weight: $font-weight-light;
                 font-style: italic;
                 font-size: 1em;
+            }
+        }
+
+        .btn-light {
+            border: 2px solid $light;
+            color: $dark;
+            border-color: $light;
+            background: {
+                image: linear-gradient(45deg, $dark 50%, transparent 50%);
+            }
+
+            &:hover {
+                color: $light;
+                border-color: $light;
             }
         }
     }
