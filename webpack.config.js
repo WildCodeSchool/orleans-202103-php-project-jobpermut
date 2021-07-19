@@ -37,6 +37,7 @@ Encore
     .addEntry('permutMap', './assets/permutMap.js')
     .addEntry('like', './assets/like.js')
     .addEntry('profileMap', './assets/profileMap.js')
+    .addEntry('permut', './assets/search.js')
 
     .addStyleEntry('navbar', './assets/styles/navbar.scss')
     .addStyleEntry('footer', './assets/styles/footer.scss')
