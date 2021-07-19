@@ -15,7 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
- * @Route("admin/testimony", name="testimony_")
+ * @Route("admin/temoignage", name="testimony_")
  * @IsGranted("ROLE_ADMIN")
  */
 class TestimonyController extends AbstractController
