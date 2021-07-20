@@ -17,53 +17,9 @@ class PermutSearchController extends AbstractController
     /**
      * @Route("permutsearch", name="permutsearch")
      */
-    public function index(RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode): Response
+    public function index(): Response
     {
-        $regUsersDatas = [];
-        $tripSummary1 = [];
-        $homeCityCoordinate = [];
-        $workCityCoordinate = [];
-        $rome = new Rome();
-        $user = new User();
-
-        /** @var User */
-        $user = $this->getUser();
-        $user = $user->getRegisteredUser();
-
-        if ($user !== null) {
-            /** @var RegisteredUser */
-            $rome = $user->getRome();
-            $homeCityCoordinate = $geocode->getCoordinates($user->getCity());
-            $workCityCoordinate = $geocode->getCoordinates($user->getCityJob());
-            $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
-        };
-
-        $userData = [
-            'homeCity' => $homeCityCoordinate,
-            'workCity' => $workCityCoordinate,
-            'tripSummary1' => $tripSummary1,
-        ];
-        $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
-
-        $regUsersDatas = $this->regUsersDatas(
-            $tripSummary1,
-            $workCityCoordinate,
-            $homeCityCoordinate,
-            $usersByRome,
-            $geocode,
-            $direction
-        );
-
-        usort($regUsersDatas, function ($first, $last) {
-            return $last['timeGained'] <=> $first['timeGained'];
-        });
-
-
-
-        return $this->render('permutsearch/index.html.twig', [
-            'userData' => $userData,
-            'regUsersData' => $regUsersDatas
-        ]);
+        return $this->render('permutsearch/index.html.twig');
     }
 
 
@@ -119,5 +75,57 @@ class PermutSearchController extends AbstractController
         };
 
         return $regUsersDatas;
+    }
+
+    /**
+     * @Route("permutsearchAjax", name="permutsearchAjax")
+     */
+    public function indexAjax(RegisteredUserRepository $regUserRepo, Direction $direction, Geocode $geocode): Response
+    {
+        $regUsersDatas = [];
+        $tripSummary1 = [];
+        $homeCityCoordinate = [];
+        $workCityCoordinate = [];
+        $rome = new Rome();
+        $user = new User();
+
+        /** @var User */
+        $user = $this->getUser();
+        $user = $user->getRegisteredUser();
+
+        if ($user !== null) {
+            /** @var RegisteredUser */
+            $rome = $user->getRome();
+            $homeCityCoordinate = $geocode->getCoordinates($user->getCity());
+            $workCityCoordinate = $geocode->getCoordinates($user->getCityJob());
+            $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
+        };
+
+        $userData = [
+            'homeCity' => $homeCityCoordinate,
+            'workCity' => $workCityCoordinate,
+            'tripSummary1' => $tripSummary1,
+        ];
+        $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
+
+        $regUsersDatas = $this->regUsersDatas(
+            $tripSummary1,
+            $workCityCoordinate,
+            $homeCityCoordinate,
+            $usersByRome,
+            $geocode,
+            $direction
+        );
+
+        usort($regUsersDatas, function ($first, $last) {
+            return $last['timeGained'] <=> $first['timeGained'];
+        });
+
+
+
+        return $this->render('permutsearch/permut.html.twig', [
+            'userData' => $userData,
+            'regUsersData' => $regUsersDatas
+        ]);
     }
 }
