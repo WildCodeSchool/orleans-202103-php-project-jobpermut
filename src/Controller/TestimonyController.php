@@ -31,6 +31,30 @@ class TestimonyController extends AbstractController
     }
 
     /**
+     * @Route("/new", name="new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $testimony = new Testimony();
+        $form = $this->createForm(TestimonyType::class, $testimony);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $testimony->setCreatedAt(new DateTime());
+            $entityManager->persist($testimony);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('testimony_index');
+        }
+
+        return $this->render('testimony/new.html.twig', [
+            'testimony' => $testimony,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(Testimony $testimony): Response
