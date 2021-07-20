@@ -61,8 +61,12 @@ class ProfileController extends AbstractController
      * @ParamConverter("user", class="App\Entity\User"),
      * options={"mapping": {"username": "username"}})
      */
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, Geocode $geocode): Response
-    {
+    public function edit(
+        Request $request,
+        User $user,
+        EntityManagerInterface $entityManager,
+        Geocode $geocode
+    ): Response {
         if ($user !== $this->getUser()) {
             return new RedirectResponse('/error403');
         }
@@ -76,11 +80,10 @@ class ProfileController extends AbstractController
             $address = true;
 
             if (!$user->getRegisteredUser()) {
-
                 $registeredUser->setUser($user);
                 $entityManager->persist($registeredUser);
-
             } else {
+                /** @var RegisteredUser */
                 $registeredUser = $user->getRegisteredUser();
             }
 
@@ -98,7 +101,7 @@ class ProfileController extends AbstractController
             }
 
 
-            if($address) {
+            if ($address) {
                 $entityManager->flush();
                 $this->addFlash('success', 'Votre profil a bien été modifié.');
 
