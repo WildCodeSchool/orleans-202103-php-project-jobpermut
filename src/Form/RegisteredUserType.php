@@ -24,7 +24,7 @@ class RegisteredUserType extends AbstractType
         $builder
             ->add('firstname', TextType::class, ['attr' => ['placeholder' => 'John']])
             ->add('lastname', TextType::class, ['attr' => ['placeholder' => 'Doe']])
-            ->add('phone', TextType::class, ['attr' => ['placeholder' => '06 56 86 98 09']])
+            ->add('phone', TextType::class, ['attr' => ['placeholder' => '06 56 86 98 09'], 'required' => false ])
             ->add('city', TextType::class, ['attr' => ['placeholder' => 'Orléans']])
             ->add('cityJob', TextType::class, ['attr' => ['placeholder' => 'Tours']])
             ->add('rome', EntityType::class, [

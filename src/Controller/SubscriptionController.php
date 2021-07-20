@@ -124,7 +124,6 @@ class SubscriptionController extends AbstractController
             }
 
             $subscription->setUpdatedAt(new DateTimeImmutable());
-            $entityManager->persist($subscription);
             $entityManager->flush();
 
             return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
