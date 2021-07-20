@@ -30,7 +30,7 @@ class SubscriptionFixtures extends Fixture
             $subscription->setSubscriptionAt($this->faker->dateTimeBetween('-2 week', 'now'));
             $subscription->setCurriculum('cv' . $i . 'pdf');
             $manager->persist($subscription);
-            copy(self::CV['source'], self::CV['destination'] . 'cv' . $i . 'pdf');
+            copy(self::CV['source'], self::CV['destination'] . 'cv' . $i . '.pdf');
             $this->addReference('subscription_' . $i, $subscription);
         }
 

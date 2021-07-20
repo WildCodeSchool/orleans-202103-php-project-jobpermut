@@ -31,7 +31,7 @@ class RegisteredUser
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private string $phone;
+    private ?string $phone = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -64,7 +64,7 @@ class RegisteredUser
      * @ORM\Column(type="string", length=255)
      * @ORM\JoinColumn(nullable=true)
      */
-    private string $streetNumber;
+    private ?string $streetNumber = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -80,7 +80,7 @@ class RegisteredUser
      * @ORM\Column(type="string", length=255)
      * @ORM\JoinColumn(nullable=true)
      */
-    private string $jobStreetNumber;
+    private ?string $jobStreetNumber = null;
 
     /**
      * @ORM\Column(type="string", length=255)

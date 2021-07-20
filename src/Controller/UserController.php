@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
- * @Route("admin/user", name="user_")
+ * @Route("admin/utilisateur", name="user_")
  * @IsGranted("ROLE_ADMIN")
  */
 class UserController extends AbstractController

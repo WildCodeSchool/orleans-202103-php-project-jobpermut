@@ -14,7 +14,10 @@
             Gestion des commentaires</h1>
         <h2 class="h3 text-center py-1">Supprimer ou accéder aux commentaires</h2>
     </div>
-    <a href="{{ path('admin_index') }}" class="btn btn-primary m-2">Accueil</a>
+    <div class="d-flex justify-content-between">
+        <a href="{{ path('admin_index') }}" class="btn btn-primary m-2">Accueil</a>
+        <a href="{{ path('testimony_new') }}" class="btn btn-success m-2">Nouveau</a>
+    </div>
     <table class="table table-hover">
         <thead class="table-dark">
             <tr>
