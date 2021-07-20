@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use LogicException;
 use App\Entity\Rome;
 use App\Entity\User;
+use RuntimeException;
 use App\Service\Geocode;
 use App\Service\Direction;
 use App\Entity\RegisteredUser;
@@ -59,31 +61,53 @@ class ProfileController extends AbstractController
      * @ParamConverter("user", class="App\Entity\User"),
      * options={"mapping": {"username": "username"}})
      */
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $entityManager, Geocode $geocode): Response
     {
         if ($user !== $this->getUser()) {
             return new RedirectResponse('/error403');
         }
 
         $registeredUser = new RegisteredUser();
-        $registeredUser->setUser($user);
 
         $form = $this->createForm(RegisteredUserType::class, $user->getRegisteredUser() ?? $registeredUser);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $address = true;
+
             if (!$user->getRegisteredUser()) {
+
+                $registeredUser->setUser($user);
                 $entityManager->persist($registeredUser);
+
+            } else {
+                $registeredUser = $user->getRegisteredUser();
             }
 
-            $entityManager->flush();
-            $this->addFlash('success', 'Votre profil a bien été modifié.');
-
-            if ($request->get('premium')) {
-                return $this->redirectToRoute('subscription_new');
+            try {
+                $geocode->getCoordinates($registeredUser->getCity());
+                $geocode->getCoordinates($registeredUser->getCityJob());
+            } catch (LogicException $e) {
+                $exception = $e->getMessage();
+                $this->addFlash('warning', $exception);
+                $address = false;
+            } catch (RuntimeException $e) {
+                $exception = $e->getMessage();
+                $this->addFlash('warning', $exception);
+                $address = false;
             }
 
-            return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
+
+            if($address) {
+                $entityManager->flush();
+                $this->addFlash('success', 'Votre profil a bien été modifié.');
+
+                if ($request->get('premium')) {
+                    return $this->redirectToRoute('subscription_new');
+                }
+
+                return $this->redirectToRoute('profile_show', ['username' => $user->getUsername()]);
+            }
         }
 
         return $this->render('profile/edit.html.twig', [
