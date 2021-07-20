@@ -158,7 +158,7 @@
 			{% endfor %}
 		</div>
 		{% if not is_granted('ROLE_USER') %}
-			<a href="#" class="btn btn-lg btn-warning mx-auto enter-site">Faîtes comme eux !</a>
+			<a href="#" class="btn btn-lg btn-warning mx-auto enter-site">Faites comme eux !</a>
 		{% else %}
 			<a href="{{ path('permutsearch') }}" class="btn btn-lg btn-warning mx-auto">Permutez !</a>
 		{% endif %}
