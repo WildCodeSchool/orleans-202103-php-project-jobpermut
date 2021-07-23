@@ -25,6 +25,7 @@ class PermutSearchController extends AbstractController
         $tripSummary1 = [];
         $homeCityCoordinate = [];
         $workCityCoordinate = [];
+        $userData = [];
         $rome = new Rome();
         $user = new User();
 
@@ -35,30 +36,45 @@ class PermutSearchController extends AbstractController
         if ($user !== null) {
             /** @var RegisteredUser */
             $rome = $user->getRome();
-            $homeCityCoordinate = $geocode->getCoordinates($user->getCity());
-            $workCityCoordinate = $geocode->getCoordinates($user->getCityJob());
-            $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
+            try {
+                $homeCityCoordinate = $geocode->getCoordinates($user->getCity());
+                $workCityCoordinate = $geocode->getCoordinates($user->getCityJob());
+            } catch (LogicException $e) {
+                $exception = $e->getMessage();
+                $this->addFlash('geocode', $exception);
+            } catch (RuntimeException $e) {
+                $exception = $e->getMessage();
+                $this->addFlash('geocode', $exception);
+            }
+
+            try {
+                $tripSummary1 = $direction->tripSummary($homeCityCoordinate, $workCityCoordinate);
+                $userData = [
+                    'homeCity' => $homeCityCoordinate,
+                    'workCity' => $workCityCoordinate,
+                    'tripSummary1' => $tripSummary1,
+                ];
+
+                $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
+
+                $regUsersDatas = $this->regUsersDatas(
+                    $tripSummary1,
+                    $workCityCoordinate,
+                    $homeCityCoordinate,
+                    $usersByRome,
+                    $geocode,
+                    $direction
+                );
+
+                usort($regUsersDatas, function ($first, $last) {
+                    return $last['timeGained'] <=> $first['timeGained'];
+                });
+
+            } catch (RuntimeException $e) {
+                $exception = $e->getMessage();
+                $this->addFlash('warning', $exception);
+            }
         };
-
-        $userData = [
-            'homeCity' => $homeCityCoordinate,
-            'workCity' => $workCityCoordinate,
-            'tripSummary1' => $tripSummary1,
-        ];
-        $usersByRome = $regUserRepo->findby(['rome' => $rome], [], 5);
-
-        $regUsersDatas = $this->regUsersDatas(
-            $tripSummary1,
-            $workCityCoordinate,
-            $homeCityCoordinate,
-            $usersByRome,
-            $geocode,
-            $direction
-        );
-
-        usort($regUsersDatas, function ($first, $last) {
-            return $last['timeGained'] <=> $first['timeGained'];
-        });
 
         return $this->render('permutsearch/index.html.twig', [
             'userData' => $userData,
@@ -95,11 +111,11 @@ class PermutSearchController extends AbstractController
                     $geocode,
                     $direction
                 );
-                $userHomeCoordinates = $regUserData['userHomeCoordinates'];
-                $userWorkCoordinates = $regUserData['userWorkCoordinates'];
-                $tripSummary2 = $regUserData['tripSummary2'] ;
-                $tripSummary3 = $regUserData['tripSummary3'] ;
-                $tripSummary4 = $regUserData['tripSummary4'];
+                $userHomeCoordinates = $regUserData['userHomeCoordinates'] ?? [];
+                $userWorkCoordinates = $regUserData['userWorkCoordinates'] ?? [];
+                $tripSummary2 = $regUserData['tripSummary2'] ?? [];
+                $tripSummary3 = $regUserData['tripSummary3'] ?? [];
+                $tripSummary4 = $regUserData['tripSummary4'] ?? [];
 
                 $duration1 = 0;
                 $duration2 = 0;
@@ -163,19 +179,18 @@ class PermutSearchController extends AbstractController
             $tripSummary2 = $direction->tripSummary($homeCityCoordinate, $userWorkCoordinates);
             $tripSummary3 = $direction->tripSummary($userHomeCoordinates, $userWorkCoordinates);
             $tripSummary4 = $direction->tripSummary($userHomeCoordinates, $workCityCoordinate);
+            $regUserData = [
+                'userHomeCoordinates' => $userHomeCoordinates,
+                'userWorkCoordinates' => $userWorkCoordinates,
+                'tripSummary2' => $tripSummary2,
+                'tripSummary3' => $tripSummary3,
+                'tripSummary4' => $tripSummary4,
+    
+            ];
         } catch (RuntimeException $e) {
             $exception = $e->getMessage();
             $this->addFlash('warning', $exception);
         }
-
-        $regUserData = [
-            'userHomeCoordinates' => $userHomeCoordinates,
-            'userWorkCoordinates' => $userWorkCoordinates,
-            'tripSummary2' => $tripSummary2,
-            'tripSummary3' => $tripSummary3,
-            'tripSummary4' => $tripSummary4,
-
-        ];
 
         return $regUserData;
     }

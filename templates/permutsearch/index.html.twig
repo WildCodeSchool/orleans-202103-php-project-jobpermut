@@ -22,11 +22,13 @@
             <h1 class="h1 text-center text-dark">Permut Search</h1>
             <h2 class="h2 text-center text-dark">Retrouvez vos différentes permutations potentielles</h2>
         </header>
-        {% if app.user.registeredUser %}
-            <input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
-        {% else %}
-            {% set profile = false %}
-            <div class="alert alert-danger">Votre profil n'est pas complet.</div>
+        {% if userData %}
+            {% if app.user.registeredUser %}
+                <input type="hidden" id="user-data" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
+            {% else %}
+                {% set profile = false %}
+                <div class="alert alert-danger">Votre profil n'est pas complet.</div>
+            {% endif %}
         {% endif %}
         <div>
             {% for reguser in regUsersData %}
@@ -112,8 +114,10 @@
                     </div>
                 {% endif %}
             {% else %}
-                {% if profile is not defined %}
-                    <div class="alert alert-warning">Aucun utilisateur ne match avec votre profil</div>
+                {% if regUsersData %}
+                    {% if profile is not defined %}
+                        <div class="alert alert-warning">Aucun utilisateur ne match avec votre profil</div>
+                    {% endif %}
                 {% endif %}
             {% endfor %}
         </div>

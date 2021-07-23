@@ -3,8 +3,10 @@
 namespace App\Service;
 
 use Exception;
+use RuntimeException;
 use App\Service\FormatDuration;
 use Symfony\Component\HttpClient\HttpClient;
+
 
 class Direction
 {
@@ -51,40 +53,45 @@ class Direction
 
             return $content;
         }
-        throw new Exception('Le service est temporairement indisponible');
+        throw new RuntimeException('Le service est temporairement indisponible');
     }
 
     public function tripSummary(?array $firstCoordinate, ?array $secondCoordinate): ?array
     {
         $durationCalc = new FormatDuration();
+        $summary = [];
+        try {
+            $trip = $this->getDirection($firstCoordinate, $secondCoordinate);
+            assert($trip !== null);
+            if (empty($trip['properties']['summary']['duration'])) {
+                $durationToGo = 0;
+            } else {
+                $durationToGo = $trip['properties']['summary']['duration'];
+            }
+            $duration = intval(strval(($durationToGo * 2)));
+            $duration = $durationCalc->duration($duration);
+            if (empty($trip['properties']['summary']['distance'])) {
+                $distanceToGo = 0;
+            } else {
+                $distanceToGo = $trip['properties']['summary']['distance'];
+            }
+            $distance = number_format((intval(round($distanceToGo * 2) / 1000)), 0, '', ' ');
 
-        $trip = $this->getDirection($firstCoordinate, $secondCoordinate);
-        assert($trip !== null);
-        if (empty($trip['properties']['summary']['duration'])) {
-            $durationToGo = 0;
-        } else {
-            $durationToGo = $trip['properties']['summary']['duration'];
+            $annualDuration = intval(strval(302 * ($durationToGo * 2)));
+            $annualDuration = $durationCalc->duration($annualDuration);
+
+            $annualDistance = number_format((302 * (intval(round($distanceToGo * 2) / 1000))), 0, '', ' ');
+
+            $summary = array(
+                'duration' => $duration,
+                'distance' => $distance,
+                'annualDuration' => $annualDuration,
+                'annualDistance' => $annualDistance,
+            );
+
+        } catch (RuntimeException $e) {
+            throw new RuntimeException('Le service est temporairement indisponible');
         }
-        $duration = intval(strval(($durationToGo * 2)));
-        $duration = $durationCalc->duration($duration);
-        if (empty($trip['properties']['summary']['distance'])) {
-            $distanceToGo = 0;
-        } else {
-            $distanceToGo = $trip['properties']['summary']['distance'];
-        }
-        $distance = number_format((intval(round($distanceToGo * 2) / 1000)), 0, '', ' ');
-
-        $annualDuration = intval(strval(302 * ($durationToGo * 2)));
-        $annualDuration = $durationCalc->duration($annualDuration);
-
-        $annualDistance = number_format((302 * (intval(round($distanceToGo * 2) / 1000))), 0, '', ' ');
-
-        $summary = array(
-            'duration' => $duration,
-            'distance' => $distance,
-            'annualDuration' => $annualDuration,
-            'annualDistance' => $annualDistance,
-        );
 
         return $summary;
     }
