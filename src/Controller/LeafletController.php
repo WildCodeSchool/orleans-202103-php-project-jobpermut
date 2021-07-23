@@ -29,6 +29,7 @@ class LeafletController extends AbstractController
         $firstCoordinate[] = $firstEnd;
         $secondCoordinate[] = $secondStart;
         $secondCoordinate[] = $secondEnd;
+        $path = [];
 
         try {
             $path = $direction->getDirection($firstCoordinate, $secondCoordinate);
