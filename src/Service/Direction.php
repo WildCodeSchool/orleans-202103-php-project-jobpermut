@@ -7,7 +7,6 @@ use RuntimeException;
 use App\Service\FormatDuration;
 use Symfony\Component\HttpClient\HttpClient;
 
-
 class Direction
 {
     private string $key;
@@ -88,7 +87,6 @@ class Direction
                 'annualDuration' => $annualDuration,
                 'annualDistance' => $annualDistance,
             );
-
         } catch (RuntimeException $e) {
             throw new RuntimeException('Le service est temporairement indisponible');
         }

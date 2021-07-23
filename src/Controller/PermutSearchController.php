@@ -69,7 +69,6 @@ class PermutSearchController extends AbstractController
                 usort($regUsersDatas, function ($first, $last) {
                     return $last['timeGained'] <=> $first['timeGained'];
                 });
-
             } catch (RuntimeException $e) {
                 $exception = $e->getMessage();
                 $this->addFlash('warning', $exception);
@@ -185,7 +184,6 @@ class PermutSearchController extends AbstractController
                 'tripSummary2' => $tripSummary2,
                 'tripSummary3' => $tripSummary3,
                 'tripSummary4' => $tripSummary4,
-    
             ];
         } catch (RuntimeException $e) {
             $exception = $e->getMessage();
