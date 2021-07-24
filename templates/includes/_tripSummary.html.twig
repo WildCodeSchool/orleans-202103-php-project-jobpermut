@@ -5,7 +5,7 @@
         {% set hours = '' %}
     {% endif %}
     <h2 class="text-warning text-center h1 mb-4">Evaluation de votre trajet</h2>
-    <h3 class="h3 fw-light text-center mb-3">Vous faites en moyenne<br>
+    <p class="fw-light text-center mb-3">Vous faites en moyenne<br>
         <span class="text-primary fw-bold">{{ app.request.get('tripSummary').distance }}
             kilomètres</span>
         <span class="text-primary fw-bold">par jour</span>,
@@ -19,8 +19,6 @@
         </span>
         <br>
         passés dans votre voiture.
-    </h3>
-    <h3 class="h3 fw-light text-center">
         Cela équivaut à<br><span class="text-primary fw-bold">{{ app.request.get('tripSummary').annualDistance }}
             kilomètres</span>
         <span class="text-primary fw-bold">par an</span>,
@@ -37,7 +35,13 @@
         </span>
         <br>
         passés dans votre voiture.
-    </h3>
+        <br>
+        <br>
+        <span class="text-primary fw-bold">Réduisez ce temps perdu!</span>
+        <br>
+        Echangez votre emploi<br>avec une personne
+        qui exerce le même métier que vous!
+    </p>
     <div class="d-flex justify-content-center mt-4">
         <a href="{{ path("permutsearch") }}" class="btn btn-lg btn-warning w-50 {{ app.user ? '' : 'enter-site' }}">Permutez !</a>
     </div>

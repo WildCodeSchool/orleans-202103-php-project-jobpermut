@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use RuntimeException;
 use App\Service\Direction;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -28,7 +29,15 @@ class LeafletController extends AbstractController
         $firstCoordinate[] = $firstEnd;
         $secondCoordinate[] = $secondStart;
         $secondCoordinate[] = $secondEnd;
+        $path = [];
 
-        return $this->json($direction->getDirection($firstCoordinate, $secondCoordinate));
+        try {
+            $path = $direction->getDirection($firstCoordinate, $secondCoordinate);
+        } catch (RuntimeException $e) {
+            $exception = $e->getMessage();
+            $this->addFlash('warning', $exception);
+        }
+
+        return $this->json($path);
     }
 }

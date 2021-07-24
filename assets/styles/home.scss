@@ -63,11 +63,15 @@ header {
 
     .visitorForm {
         width: 30vw;
-        height: 100vh;
+        height: 120vh;
     }
 
     h3 {
         font-family: $font-p;
+    }
+
+    p {
+        font-size: 20px;
     }
 
     #map {
