@@ -1,0 +1,21 @@
+{% extends "layout.html.twig" %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block title %}
+    {{ parent() }}
+    - Site indisponible
+{% endblock %}
+
+{% block body %}
+    <main class="p-md-5 p-4">
+        <div class="p-md-5 pd-3">
+            <h1 class="h1 text-danger">Erreur 500 - Site temporairement indisponible</h1>
+            <h2 class="h3">Le site est actuellement indisponible. Merci de réessayer ultérieurement.</h2>
+            <p>Si le problème persiste, merci de contacter l'administrateur du site.</p>
+        </div>
+    </main>
+{% endblock %}
