@@ -8,7 +8,8 @@ const NbCard = document.getElementsByClassName('permut-card').length + 1;
 const userData = document.querySelector('#user-data');
 const userDataValues = userData.value.split('/');
 for (let p = 1; p < NbCard; p += 1) {
-    const btn = document.getElementById(`button-${p}`);
+    const btnLg = document.getElementById(`button-${p}-a`);
+    const btnSm = document.getElementById(`button-${p}-b`);
     const regUserData = document.querySelector(`#reguser-data-${p}`);
     const regUserDataValues = regUserData.value.split('/');
     const iMap = function initMap(
@@ -175,7 +176,20 @@ for (let p = 1; p < NbCard; p += 1) {
             });
     };
 
-    btn.onclick = function () {
+    btnLg.onclick = function () {
+        iMap(
+            userDataValues[0],
+            userDataValues[1],
+            userDataValues[2],
+            userDataValues[3],
+            regUserDataValues[0],
+            regUserDataValues[1],
+            regUserDataValues[2],
+            regUserDataValues[3],
+        );
+    };
+
+    btnSm.onclick = function () {
         iMap(
             userDataValues[0],
             userDataValues[1],
