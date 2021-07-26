@@ -44,7 +44,7 @@
                                                     {% endif %}
                                                 </div>
                                                 {% if app.user.registeredUser.subscription %}
-                                                    <a href="{{ path('like', {user: reguser.registeredUser.id}) }}" class="heart">
+                                                    <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
                                                         <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-sm ms-3"></i>
                                                     </a>
                                                 {% endif %}
@@ -86,7 +86,7 @@
                                         <a id="button-{{ loop.index }}" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-lg mb-md-0 mb-2">Voir plus</a>
                                         <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-lg ms-md-3 mb-2 mb-md-0 ms-0">Voir le profil</a>
                                         {% if app.user.registeredUser.subscription %}
-                                            <a href="{{ path('like', {user: reguser.registeredUser.id}) }}" class="heart">
+                                            <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
                                                 <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
                                             </a>
                                         {% endif %}
@@ -150,7 +150,7 @@
                                                     {% endif %}
                                                 </div>
                                                 {% if app.user.registeredUser.subscription %}
-                                                    <a href="{{ path('like', {user: reguser.registeredUser.id}) }}" class="heart">
+                                                    <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
                                                         <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-sm ms-3"></i>
                                                     </a>
                                                 {% endif %}
@@ -192,7 +192,7 @@
                                         <a id="button-{{ loop.index }}" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-lg mb-md-0 mb-2">Voir plus</a>
                                         <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-lg ms-md-3 mb-2 mb-md-0 ms-0">Voir le profil</a>
                                         {% if app.user.registeredUser.subscription %}
-                                            <a href="{{ path('like', {user: reguser.registeredUser.id}) }}" class="heart">
+                                            <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
                                                 <i class="{{ app.user.getOneUserLike(reguser.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
                                             </a>
                                         {% endif %}

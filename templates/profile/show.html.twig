@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 {% if app.user is not empty and app.user.id != user.id and app.user.registeredUser and app.user.registeredUser.subscription %}
-                    <a href="{{ path('like', {user: user.registeredUser.id}) }}" class="heart">
+                    <a href="{{ path('like', {user: user.id}) }}" class="heart">
                         <i class="{{ app.user.getOneUserLike(user.registeredUser.user) ? 'fas fa-heart text-danger' : 'far fa-heart text-white' }} heart-md ms-3"></i>
                     </a>
                 {% endif %}
