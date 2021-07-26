@@ -37,8 +37,13 @@
         .btn {
             border-color: $warning;
 
+            @media screen and (max-width: 768px) {
+                width: 50%;
+                margin-top: 24px;
+            }
+
             @media screen and (max-width: 430px) {
-                display: none;
+                width: 100%;
             }
         }
     }
