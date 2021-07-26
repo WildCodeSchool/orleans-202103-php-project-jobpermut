@@ -6,7 +6,7 @@ use App\Entity\Testimony;
 use LogicException;
 use RuntimeException;
 use App\Service\Geocode;
-
+use App\Entity\VisitorTrip;
 use App\Form\VisitorTripType;
 use App\Repository\TestimonyRepository;
 use App\Service\Direction;
