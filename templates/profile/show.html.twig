@@ -71,7 +71,8 @@
                         <p class="m-0 p-0">{{ user.registeredUser.user.email ?? "Non renseigné" }}</p>
                     </div>
                 </div>
-                {% if user.registeredUser.subscription is defined and user.registeredUser.subscription is not null %}
+                {% if app.user and app.user.registeredUser.subscription is defined and app.user.registeredUser.subscription is not null %}
+                    {% if user.registeredUser.subscription is defined and user.registeredUser.subscription is not null %}
                     <div class="mt-5 ms-1">
                         <div class="d-flex flex-direction-column align-items-center mb-3" title="Fonction">
                             <i class="fas fa-wrench me-3"></i>
@@ -103,10 +104,11 @@
                             <a class="btn btn-sm btn-light mb-5" href="{{ path('subscription_edit', {subscription: user.registeredUser.subscription.id}) }}">Modifier mon compte premium</a>
                         {% endif %}
                     </div>
-                {% else %}
-                    <a href="{{ path('subscription_new') }}" class="btn btn-warning mb-4">
-                        <i class="fas fa-crown me-2"></i>Devenir Premium</a>
                 {% endif %}
+            {% else %}
+                 <a href="{{ path('subscription_new') }}" class="btn btn-warning mb-4">
+                        <i class="fas fa-crown me-2"></i>Devenir Premium</a>
+            {% endif %}
             </div>
             {% if userData %}
                 <input type="hidden" id="userData" value="{{ userData.homeCity.0 ~ '/' ~ userData.homeCity.1 ~ '/' ~ userData.workCity.0 ~ '/' ~ userData.workCity.1 }}">
