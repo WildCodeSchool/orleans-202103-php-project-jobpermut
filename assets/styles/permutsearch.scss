@@ -1,6 +1,11 @@
 @import 'variables';
 @import '~leaflet/dist/leaflet.css';
 
+
+.heart{
+    text-decoration: none;
+}
+
 .ajax {
     height: 40vh;
 }

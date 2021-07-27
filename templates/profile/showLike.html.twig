@@ -72,7 +72,7 @@
                                                 </h5>
                                             </div>
                                             <div class="d-flex flex-md-row flex-column mt-4">
-                                                <a id="button-{{ loop.index }}" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-sm me-md-2 me-0 mb-3 mb-md-0">Voir plus</a>
+                                                <a id="button-{{ loop.index }}-a" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-sm me-md-2 me-0 mb-3 mb-md-0">Voir plus</a>
                                                 <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-sm">Voir le profil</a>
                                             </div>
                                         </div>
@@ -83,7 +83,7 @@
                                             {{ reguser.timeGained }}
                                             min
                                         </div>
-                                        <a id="button-{{ loop.index }}" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-lg mb-md-0 mb-2">Voir plus</a>
+                                        <a id="button-{{ loop.index }}-b" data-bs-toggle="collapse" href="#collapse-main-{{ loop.index }}" role="button" aria-expanded="false" aria-controls="collapseExample" class="btn btn-outline-light btn-card-lg mb-md-0 mb-2">Voir plus</a>
                                         <a href="{{ path("profile_show", {username: reguser.registeredUser.user.username}) }}" class="btn btn-warning btn-card-lg ms-md-3 mb-2 mb-md-0 ms-0">Voir le profil</a>
                                         {% if app.user.registeredUser.subscription %}
                                             <a href="{{ path('like', {user: reguser.registeredUser.user.id}) }}" class="heart">
