@@ -17,8 +17,7 @@ class MatchController extends AbstractController
     {
         /** @var User */
         $user = $this->getUser();
-
-        $matchs = $matchRepo->findBy(['userLiker' => $user]);
+        $matchs = $matchRepo->findByUser($user);
 
         return $this->render('match/index.html.twig', [
             'matchs' => $matchs,
