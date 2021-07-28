@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\MatchByLike;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method MatchByLike|null find($id, $lockMode = null, $lockVersion = null)
@@ -22,19 +23,19 @@ class MatchByLikeRepository extends ServiceEntityRepository
     // /**
     //  * @return MatchByLike[] Returns an array of MatchByLike objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByUser(User $user): array
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('m.id', 'ASC')
-            ->setMaxResults(10)
+            ->andWhere('m.userLiker = :val')
+            ->setParameter('val', $user)
+            ->orWhere('m.userLiked = :val')
+            ->setParameter('val', $user)
+            ->orderBy('m.matchedAt', 'ASC')
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
     /*
     public function findOneBySomeField($value): ?MatchByLike
