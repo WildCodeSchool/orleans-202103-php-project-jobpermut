@@ -104,11 +104,9 @@ class LikeController extends AbstractController
     public function matchCount(MatchByLikeRepository $matchRepo): Response
     {
         /** @var User */
-        $userLiker = $this->getUser();
+        $user = $this->getUser();
 
-        $match = $matchRepo->findBy([
-            'userLiker' => $userLiker
-        ]);
+        $match = $matchRepo->findByUser($user);
 
         $matchCount = count($match);
 
